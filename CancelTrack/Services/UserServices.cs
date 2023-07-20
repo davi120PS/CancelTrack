@@ -1,4 +1,5 @@
 ﻿using CancelTrack.Context;
+using CancelTrack.Entities;
 using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace CancelTrack.Services
 {
     public class UserServices
     {
-        public void AddUser(Usuarios request)
+        /*public void AddUser(Usuarios request)
         {
             try
             {
@@ -31,7 +32,7 @@ namespace CancelTrack.Services
 							Name = request.Name,
 							UserName = request.UserName,
 							Password = request.Password
-						};*/
+						};
                     }
                 }
             }
@@ -129,6 +130,22 @@ namespace CancelTrack.Services
             catch (Exception ex)
             {
                 throw new Exception("ERROR: " + ex.Message);
+            }
+        }*/
+        public List<Producto> GetProducto()
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    List<Producto> usuarios = _context.Producto.ToList();
+                    return usuarios;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Error " + ex.Message);
             }
         }
     }
