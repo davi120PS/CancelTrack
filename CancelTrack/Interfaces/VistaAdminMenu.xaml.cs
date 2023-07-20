@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace CancelTrack.Interfaces
 {
     /// <summary>
-    /// Lógica de interacción para VistaVendedor.xaml
+    /// Lógica de interacción para VistaAdminMenu.xaml
     /// </summary>
-    public partial class VistaMostrador : Window
+    public partial class VistaAdminMenu : Window
     {
-        public VistaMostrador()
+        public VistaAdminMenu()
         {
             InitializeComponent();
         }

@@ -1,11 +1,11 @@
-﻿<Window x:Class="CancelTrack.Interfaces.VistaVendedor"
+﻿<Window x:Class="CancelTrack.Interfaces.VistaMostrador"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.Interfaces"
         mc:Ignorable="d"
-        Title="VistaVendedor" Height="1080" Width="1920">
+        Title="VistaMostrador" Height="1080" Width="1920">
     <Grid Margin="0,0,10,-1">
         <Label FontSize="50" Content="Bienvenido al sistema" HorizontalAlignment="Center" Height="100" Margin="0,10,0,0" VerticalAlignment="Top" Width="555"/>
         <Label Content="ID Cliente" HorizontalAlignment="Left" Height="23" Margin="47,88,0,0" VerticalAlignment="Top" Width="67"/>
@@ -97,5 +97,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        </Grid>
+    </Grid>
 </Window>

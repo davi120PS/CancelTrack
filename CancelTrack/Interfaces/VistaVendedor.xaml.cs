@@ -17,9 +17,9 @@ namespace CancelTrack.Interfaces
     /// <summary>
     /// Lógica de interacción para VistaVendedor.xaml
     /// </summary>
-    public partial class VistaMostrador : Window
+    public partial class VistaVendedor : Window
     {
-        public VistaMostrador()
+        public VistaVendedor()
         {
             InitializeComponent();
         }
