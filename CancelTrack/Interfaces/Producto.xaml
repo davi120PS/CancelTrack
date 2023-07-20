@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.Interfaces"
         mc:Ignorable="d"
-        Title="Producto" Height="450" Width="800">
+        Title="Producto" Height="720" Width="1280">
     <Grid>
         <DataGrid x:Name="UserTable" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="92,118,92,42" SelectionChanged="UserTable_SelectionChanged">
             <DataGrid.Columns>
@@ -19,5 +19,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Content="Producto" HorizontalAlignment="Center" Margin="0,39,0,0" VerticalAlignment="Top" FontSize="36" FontFamily="Cascadia Code"/>
+        <Button Content="Ventas Productos" HorizontalAlignment="Left" Margin="1051,73,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
