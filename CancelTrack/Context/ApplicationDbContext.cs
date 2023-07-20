@@ -16,6 +16,7 @@ namespace CancelTrack.Context
         }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Empleado> Empleado { get; set; }
+        public DbSet<Puesto> Puesto { get; set; }
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Venta> Venta { get; set; }

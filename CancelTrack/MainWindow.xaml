@@ -8,23 +8,21 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF4A9D6A" Offset="1"/>
-                <GradientStop Color="#FF2E9AED" Offset="0.067"/>
-                <GradientStop Color="#FF479C73" Offset="0.82"/>
-                <GradientStop Color="#FF479C71" Offset="0.98"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="/Images/AluminioFondo3.jpg"/>
         </Grid.Background>
-        <Label Content="CANCELTRACK" HorizontalAlignment="Left" Height="95" Margin="147,61,0,0" VerticalAlignment="Top" Width="555" FontSize="72" FontFamily="Goudy Old Style" FontWeight="Bold"/>
+        <Label Content="CANCELTRACK" HorizontalAlignment="Left" Height="129" Margin="147,58,0,0" VerticalAlignment="Top" Width="555" FontSize="72" FontFamily="Javanese Text" FontWeight="Bold">
+            <Label.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF00D6FF" Offset="0"/>
+                    <GradientStop Color="#FF193F46" Offset="1"/>
+                </LinearGradientBrush>
+            </Label.Foreground>
+        </Label>
         <Label Content="Matricula" HorizontalAlignment="Left" Height="40" Margin="350,187,0,0" VerticalAlignment="Top" Width="85" FontSize="18"/>
-        <TextBox x:Name="txtUserName" FontSize="15" HorizontalAlignment="Left" Height="29" Margin="335,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="122" Background="#FF2EC8E2"/>
+        <TextBox x:Name="txtUserName" FontSize="15" HorizontalAlignment="Left" Height="29" Margin="335,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="122" Background="White"/>
         <Label Content="Contraseña" HorizontalAlignment="Left" Height="40" Margin="342,251,0,0" VerticalAlignment="Top" Width="100" FontSize="18"/>
-        <PasswordBox x:Name="txtPassword" FontSize="15" HorizontalAlignment="Left" Margin="336,289,0,0" VerticalAlignment="Top" Width="120" Background="#FF2EC8E2"/>
-        <Button x:Name="btnLogin" Content="Button" HorizontalAlignment="Left" Height="41" Margin="329,342,0,0" Width="136" BorderBrush="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" VerticalAlignment="Top" Click="btnLogin_Click">
-            <Button.Background>
-                <ImageBrush/>
-            </Button.Background>
-        </Button>
+        <PasswordBox x:Name="txtPassword" FontSize="15" HorizontalAlignment="Left" Margin="336,289,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
+        <Button x:Name="btnLogin" Content="Ingresar" HorizontalAlignment="Left" Height="41" Margin="329,342,0,0" Width="136" VerticalAlignment="Top" Click="btnLogin_Click" Background="#FFAFB7C3"/>
 
     </Grid>
 </Window>

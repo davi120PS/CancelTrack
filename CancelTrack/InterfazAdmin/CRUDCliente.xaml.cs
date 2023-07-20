@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CancelTrack.Interfaces
+namespace CancelTrack.InterfazAdmin
 {
     /// <summary>
-    /// Lógica de interacción para VistaAdmin.xaml
+    /// Lógica de interacción para CRUDCliente.xaml
     /// </summary>
-    public partial class VistaAdmin : Window
+    public partial class CRUDCliente : Window
     {
-        public VistaAdmin()
+        public CRUDCliente()
         {
             InitializeComponent();
         }

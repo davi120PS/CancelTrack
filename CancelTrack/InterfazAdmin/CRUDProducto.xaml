@@ -1,0 +1,56 @@
+﻿<Window x:Class="CancelTrack.InterfazAdmin.CRUDProducto"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
+        mc:Ignorable="d"
+        Title="CRUDProducto" Height="607" Width="1066">
+    <Grid>
+        <Label FontSize="50" Content="Productos" HorizontalAlignment="Left" Height="100" Margin="444,23,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="ID Producto" HorizontalAlignment="Left" Height="23" Margin="27,113,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="txtPKProducto" HorizontalAlignment="Left" Height="18" Margin="25,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" IsEnabled="False"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="25,158,0,0" VerticalAlignment="Top" Width="176"/>
+        <TextBox x:Name="txtNombreProd" HorizontalAlignment="Left" Height="23" Margin="25,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="27" Margin="25,213,0,0" VerticalAlignment="Top" Width="102"/>
+        <ComboBox x:Name="CbxFKProv" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="25,241,0,0" VerticalAlignment="Top" Width="102" Height="20"/>
+        <Label Content="Descripcion" HorizontalAlignment="Left" Height="27" Margin="26,268,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="txtDescripcionProd" HorizontalAlignment="Left" Height="22" Margin="25,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Precio" HorizontalAlignment="Left" Height="27" Margin="27,323,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="txtPrecioProd" HorizontalAlignment="Left" Height="20" Margin="27,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Cantidad en Inventario" HorizontalAlignment="Left" Height="26" Margin="27,379,0,0" VerticalAlignment="Top" Width="134"/>
+        <TextBox x:Name="txtCantInvenProd" HorizontalAlignment="Left" Height="22" Margin="27,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Button x:Name="BtnAddProd" Content="Agregar" HorizontalAlignment="Left" Height="38" Margin="32,455,0,0" VerticalAlignment="Top" Width="95" Background="#FF96E486" FontSize="20"/>
+        <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="171,131,119,91">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
+                <DataGridTextColumn Header="ID Proveedor" Binding="{Binding FKProveedor}" />
+                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" />
+                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" />
+                <DataGridTextColumn Header="CantidadInvent" Binding="{Binding CantidadInventario}" />
+                <DataGridTemplateColumn Header="Select">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Select" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Editar">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edit" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

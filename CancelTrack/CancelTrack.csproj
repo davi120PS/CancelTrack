@@ -8,12 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AluminioFondo.jpg" />
+    <None Remove="Images\AluminioFondo2.jpg" />
+    <None Remove="Images\AluminioFondo3.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AluminioFondo.jpg" />
+    <Resource Include="Images\AluminioFondo2.jpg" />
+    <Resource Include="Images\AluminioFondo3.jpg" />
   </ItemGroup>
 
 </Project>

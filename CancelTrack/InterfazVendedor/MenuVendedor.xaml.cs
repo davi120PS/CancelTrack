@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CancelTrack.Interfaces
+namespace CancelTrack.InterfazVendedor
 {
     /// <summary>
-    /// Lógica de interacción para VistaAdminMenu.xaml
+    /// Lógica de interacción para MenuVendedor.xaml
     /// </summary>
-    public partial class VistaAdminMenu : Window
+    public partial class MenuVendedor : Window
     {
-        public VistaAdminMenu()
+        public MenuVendedor()
         {
             InitializeComponent();
         }

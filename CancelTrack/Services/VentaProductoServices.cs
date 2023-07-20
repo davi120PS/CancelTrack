@@ -1,6 +1,6 @@
 ﻿using CancelTrack.Context;
 using CancelTrack.Entities;
-using MySqlX.XDevAPI.Relational;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,10 @@ using System.Windows;
 
 namespace CancelTrack.Services
 {
-    public class UserServices
+    public class VentaProductoServices
     {
-        /*public void AddUser(Usuarios request)
+        #region ADD
+        public void Add(Empleado request)
         {
             try
             {
@@ -20,19 +21,22 @@ namespace CancelTrack.Services
                 {
                     using (var _context = new ApplicationDbContext())
                     {
-                        Usuarios res = new Usuarios();
-                        res.Name = request.Name;
-                        res.UserName = request.UserName;
-                        res.Password = request.Password;
-                        res.FKRol = request.FKRol;
-                        _context.Usuarios.Add(res);
+                        Empleado res = new Empleado();
+                        res.Nombre = request.Nombre;
+                        res.Apellido = request.Apellido;
+                        res.Matricula = request.Matricula;
+                        res.Contraseña = request.Contraseña;
+                        res.Puestos = request.Puestos;
+                        res.Telefono = request.Telefono;
+                        res.Correo = request.Correo;
+                        _context.Empleado.Add(res);
                         _context.SaveChanges();
                         /*Usuarios res = new Usuarios()
 						{
 							Name = request.Name,
 							UserName = request.UserName,
 							Password = request.Password
-						};
+						};*/
                     }
                 }
             }
@@ -41,20 +45,24 @@ namespace CancelTrack.Services
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
         }
-        public void Update(Usuarios request)//recibe todos los datos del empleado
+        #endregion
+        #region UPDATE
+        public void Update(Empleado request)//recibe todos los datos del empleado
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Usuarios update = _context.Usuarios.Find(request.PKUser);
-                    update.Name = request.Name;
-                    update.UserName = request.UserName;
-                    update.Password = request.Password;
-                    update.FKRol = request.FKRol;
+                    Empleado update = _context.Empleado.Find(request.PKEmpleado);
+                    update.Nombre = request.Nombre;
+                    update.Apellido = request.Apellido;
+                    update.Contraseña = request.Contraseña;
+                    update.FKPuesto = request.FKPuesto;
+                    update.Telefono = request.Telefono;
+                    update.Correo = request.Correo;
 
                     //_context.Entry(update).State = EntityState.Modified;
-                    _context.Usuarios.Update(update);
+                    _context.Empleado.Update(update);
                     _context.SaveChanges();
                 }
             }
@@ -63,13 +71,15 @@ namespace CancelTrack.Services
                 throw new Exception("Sucedió un error" + ex.Message);
             }
         }
-        public void DeleteUser(int UserId)
+        #endregion
+        #region DELETE
+        public void Delete(int EmpleadoId)
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Usuarios usuario = _context.Usuarios.Find(UserId);
+                    Empleado usuario = _context.Empleado.Find(EmpleadoId);
                     if (usuario != null)
                     {
                         _context.Remove(usuario);
@@ -87,13 +97,14 @@ namespace CancelTrack.Services
                 throw new Exception("ERROR: " + ex.Message);
             }
         }
-        public List<Usuarios> GetUsers()
+        #endregion
+        public List<Empleado> GetEmpleados()
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Usuarios> usuarios = _context.Usuarios.Include(x => x.Roles).ToList();
+                    List<Empleado> usuarios = _context.Empleado.Include(x => x.Puestos).ToList();
                     return usuarios;
                 }
             }
@@ -102,50 +113,19 @@ namespace CancelTrack.Services
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
         }
-        public List<Rol> GetRoles()
+        public List<Puesto> GetPuestos()
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Rol> roles = _context.Rol.ToList();
+                    List<Puesto> roles = _context.Puesto.ToList();
                     return roles;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception("Ocurrió un error " + ex.Message);
-            }
-        }
-        public Usuarios Login(string UserName, string Password)
-        {
-            try
-            {
-                using (var _context = new ApplicationDbContext())
-                {
-                    var usuario = _context.Usuarios.Include(y => y.Roles).FirstOrDefault(x => x.UserName == UserName && x.Password == Password);
-                    return usuario;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("ERROR: " + ex.Message);
-            }
-        }*/
-        public List<Producto> GetProducto()
-        {
-            try
-            {
-                using (var _context = new ApplicationDbContext())
-                {
-                    List<Producto> usuarios = _context.Producto.ToList();
-                    return usuarios;
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("Error " + ex.Message);
             }
         }
     }

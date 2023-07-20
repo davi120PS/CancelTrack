@@ -1,13 +1,13 @@
-﻿<Window x:Class="CancelTrack.Interfaces.VistaVendedor"
+﻿<Window x:Class="CancelTrack.InterfazVendedor.VistaVendedor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CancelTrack.Interfaces"
+        xmlns:local="clr-namespace:CancelTrack.InterfazVendedor"
         mc:Ignorable="d"
         Title="VistaVendedor" Height="720" Width="1280">
     <Grid Margin="0,0,10,-1">
-        <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Center" Height="91" Margin="0,41,0,0" VerticalAlignment="Top" Width="758"/>
+        <Label FontSize="72" Content="Bienvenido al sistema Vendedor" HorizontalAlignment="Left" Height="91" Margin="124,62,0,0" VerticalAlignment="Top" Width="1032"/>
         <Button Content="Clientes" HorizontalAlignment="Center" Height="109" Margin="0,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48"/>
         <Button Content="Productos" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48"/>
         <Button Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0"/>

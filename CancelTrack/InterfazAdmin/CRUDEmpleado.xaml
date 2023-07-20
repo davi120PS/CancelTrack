@@ -1,0 +1,54 @@
+﻿<Window x:Class="CancelTrack.InterfazAdmin.CRUDEmpleado"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
+        mc:Ignorable="d"
+        Title="CRUDEmpleado" Height="607" Width="1066">
+    <Grid>
+        <Label FontSize="50" Content="Empleados" HorizontalAlignment="Left" Height="100" Margin="444,23,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="ID Empleado" HorizontalAlignment="Left" Height="25" Margin="61,75,0,0" VerticalAlignment="Top" Width="78"/>
+        <TextBox x:Name="txtPKEmpleado" HorizontalAlignment="Left" Height="18" Margin="61,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" IsEnabled="False"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="61,122,0,0" VerticalAlignment="Top" Width="64"/>
+        <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="23" Margin="61,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Apellido" HorizontalAlignment="Left" Height="27" Margin="61,177,0,0" VerticalAlignment="Top" Width="63"/>
+        <TextBox x:Name="txtApellido" HorizontalAlignment="Left" Height="20" Margin="61,204,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Matricula" HorizontalAlignment="Left" Height="26" Margin="61,233,0,0" VerticalAlignment="Top" Width="62"/>
+        <TextBox x:Name="txtMatricula" HorizontalAlignment="Left" Height="22" Margin="61,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Contraseña" HorizontalAlignment="Left" Height="27" Margin="63,279,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="txtContraseña" HorizontalAlignment="Left" Height="20" Margin="63,308,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Puesto" HorizontalAlignment="Left" Height="27" Margin="61,330,0,0" VerticalAlignment="Top" Width="102"/>
+        <ComboBox x:Name="CbxPuesto" HorizontalAlignment="Left" Height="20" Margin="60,357,0,0" VerticalAlignment="Top" Width="104"/>
+        <Label Content="Telefono" HorizontalAlignment="Left" Height="27" Margin="62,380,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="20" Margin="62,407,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Label Content="Correo" HorizontalAlignment="Left" Height="26" Margin="62,436,0,0" VerticalAlignment="Top" Width="102"/>
+        <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="22" Margin="62,462,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="38" Margin="62,507,0,0" VerticalAlignment="Top" Width="95" Background="#FF96E486" FontSize="20" Click="BtnAddEmp_Click"/>
+        <DataGrid x:Name="TablaEmpleado" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="209,137,59,88">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding PKCliente}" />
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
+                <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" />
+                <DataGridTextColumn Header="Matricula" Binding="{Binding Matricula}" />
+                <DataGridTextColumn Header="Contraseña" Binding="{Binding Contraseña}" />
+                <DataGridTextColumn Header="Telefono" Binding="{Binding Telefono}" />
+                <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" />
+                <DataGridTemplateColumn Header="Select">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Select" Click="EditItem"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Delete">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Delete" Click="BtnDelete_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

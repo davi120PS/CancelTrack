@@ -1,4 +1,5 @@
-﻿using CancelTrack.Interfaces;
+﻿using CancelTrack.InterfazVendedor;
+using CancelTrack.InterfazAdmin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,16 +27,12 @@ namespace CancelTrack
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            VistaVendedor interfaz = new VistaVendedor();
-            interfaz.Show();
-            Close();
-        }
-        UserServices services = new UserServices();
+        EmpleadoServices services = new EmpleadoServices();
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            MenuAdmin sistema = new MenuAdmin();
+            sistema.Show();
+            Close();/*
             string user = txtUserName.Text;
             string pass = txtPassword.Password;
             //Usuarios response = services.Login(user, pass);
@@ -45,16 +42,15 @@ namespace CancelTrack
             {
                 if (response != null)
                 {
-                    if (response.Roles.Name == "SA")
+                    if (response.Puestos.Nombre == "Admin")
                     {
-                        VistaVendedor sistema = new VistaVendedor();
+                        MenuAdmin sistema = new MenuAdmin();
                         sistema.Show();
                         Close();
                     }
-
-                    if (response.Roles.Name == "Admin")
+                    if (response.Puestos.Nombre == "Vendedor")
                     {
-                        VistaAdmin sistema = new VistaAdmin();
+                        VistaVendedor sistema = new VistaVendedor();
                         sistema.Show();
                         Close();
                     }
@@ -63,7 +59,7 @@ namespace CancelTrack
             else
             {
                 MessageBox.Show("Ingresa los datos");
-            }
+            }*/
         }
     }
 }

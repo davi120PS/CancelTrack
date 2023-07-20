@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CancelTrack.Interfaces
+namespace CancelTrack.InterfazVendedor
 {
     /// <summary>
     /// Lógica de interacción para Producto.xaml
@@ -25,13 +25,14 @@ namespace CancelTrack.Interfaces
             InitializeComponent();
             GetProductoTable();
         }
-        UserServices services = new UserServices();
+        EmpleadoServices services = new EmpleadoServices();
         private void UserTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
         }
         public void GetProductoTable()
         {
-            UserTable.ItemsSource = services.GetProducto();
+            //UserTable.ItemsSource = services.GetProducto();
         }
     }
 }
