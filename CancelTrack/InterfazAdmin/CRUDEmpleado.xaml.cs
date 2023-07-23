@@ -11,8 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CancelTrack.Context;
 using CancelTrack.Entities;
 using CancelTrack.Services;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace CancelTrack.InterfazAdmin
 {
@@ -27,36 +29,44 @@ namespace CancelTrack.InterfazAdmin
             GetEmpleadosTable();
             GetPuesto();
         }
+        static int estado = 0;
         EmpleadoServices services = new EmpleadoServices();
         private void BtnAddEmp_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKEmpleado.Text == "")
             {
-                Empleado usuario = new Empleado();
-                usuario.Nombre = txtNombre.Text;
-                usuario.Apellido = txtApellido.Text;
-                usuario.Matricula = txtMatricula.Text;
-                usuario.Contraseña = txtContraseña.Text;
-                usuario.Telefono = int.Parse(txtTelefono.Text);
-                usuario.Correo = txtCorreo.Text;
-                usuario.FKPuesto = int.Parse(CbxPuesto.SelectedValue.ToString());
+                if (txtNombre.Text != "" || txtApellido.Text != "" || txtMatricula.Text != "" || txtContraseña.Text != "" || txtTelefono.Text != "" || txtCorreo.Text != "" || CbxPuesto.SelectedValue != null)
+                {
+                    Empleado empleado = new Empleado();
+                    empleado.Nombre = txtNombre.Text;
+                    empleado.Apellido = txtApellido.Text;
+                    empleado.Matricula = txtMatricula.Text;
+                    empleado.Contraseña = txtContraseña.Text;
+                    empleado.Telefono = int.Parse(txtTelefono.Text);
+                    empleado.Correo = txtCorreo.Text;
+                    //empleado.Estado = 1;
+                    empleado.FKPuesto = int.Parse(CbxPuesto.SelectedValue.ToString());
 
-                services.Add(usuario);
-                MessageBox.Show("Usuario registrado");
-                txtNombre.Clear();
-                txtApellido.Clear();
-                txtMatricula.Clear();
-                txtContraseña.Clear();
-                txtTelefono.Clear();
-                txtCorreo.Clear();
-                txtPKEmpleado.Clear();
-                CbxPuesto.SelectedItem = null;
-                GetEmpleadosTable();
+                    services.Add(empleado);
+                    MessageBox.Show("Empleado registrado");
+
+                    txtPKEmpleado.Clear();
+                    txtNombre.Clear();
+                    txtApellido.Clear();
+                    txtMatricula.Clear();
+                    txtContraseña.Clear();
+                    txtTelefono.Clear();
+                    txtCorreo.Clear();
+                    CbxPuesto.SelectedItem = null;
+                    GetEmpleadosTable();
+                }
+                else
+                    MessageBox.Show("Faltan datos por llenar");
             }
             else
             {
                 int Id = Convert.ToInt32(txtPKEmpleado.Text);
-                Empleado usuario = new Empleado()
+                Empleado empleado = new Empleado()
                 {
                     PKEmpleado = Id,
                     Nombre = txtNombre.Text,
@@ -65,19 +75,94 @@ namespace CancelTrack.InterfazAdmin
                     Contraseña = txtContraseña.Text,
                     Telefono = int.Parse(txtTelefono.Text),
                     Correo = txtCorreo.Text,
+                    Estado = 1,
                     FKPuesto = int.Parse(CbxPuesto.SelectedValue.ToString())
                 };
-                services.Update(usuario);
-                MessageBox.Show("Usuario actualizado");
+                services.Update(empleado);
+                MessageBox.Show("Empleado actualizado");
                 GetEmpleadosTable();
+                txtPKEmpleado.Clear();
                 txtNombre.Clear();
                 txtApellido.Clear();
                 txtMatricula.Clear();
                 txtContraseña.Clear();
                 txtTelefono.Clear();
                 txtCorreo.Clear();
-                txtPKEmpleado.Clear();
                 CbxPuesto.SelectedItem = null;
+            }
+        }
+        public void EditItem(object sender, RoutedEventArgs e)
+        {
+            Empleado empleados = new Empleado();
+            empleados = (sender as FrameworkElement).DataContext as Empleado;
+            txtPKEmpleado.Text = empleados.PKEmpleado.ToString();
+            txtNombre.Text = empleados.Nombre.ToString();
+            txtApellido.Text = empleados.Apellido.ToString();
+            txtMatricula.Text = empleados.Matricula.ToString();
+            txtContraseña.Text = empleados.Contraseña.ToString();
+            txtTelefono.Text = empleados.Telefono.ToString();
+            txtCorreo.Text = empleados.Correo.ToString();
+            CbxPuesto.SelectedValue = empleados.FKPuesto.ToString();
+        }
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtPKEmpleado.Text == "")
+            {
+                MessageBox.Show("Selecciona un usuario");
+            }
+            else
+            {
+                int userId = Convert.ToInt32(txtPKEmpleado.Text);
+                Empleado empleados = new Empleado();
+                empleados.PKEmpleado = userId;
+                services.Delete(userId);
+                MessageBox.Show("Usuario Eliminado");
+                GetEmpleadosTable();
+            }
+        }
+
+        private void BtnDarBaja_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (txtPKEmpleado.Text == "")
+                {
+                    MessageBox.Show("Selecciona un usuario");
+                }
+                else
+                {
+                    using (var _context = new ApplicationDbContext())
+                    {
+                        int Id = Convert.ToInt32(txtPKEmpleado.Text);
+                        Empleado empleado = new Empleado()
+                        {
+                            PKEmpleado = Id,
+                            Nombre = txtNombre.Text,
+                            Apellido = txtApellido.Text,
+                            Matricula = txtMatricula.Text,
+                            Contraseña = txtContraseña.Text,
+                            Telefono = int.Parse(txtTelefono.Text),
+                            Correo = txtCorreo.Text,
+                            Estado = 0,
+                            FKPuesto = int.Parse(CbxPuesto.SelectedValue.ToString())
+                        };
+                        services.Update(empleado);
+                        MessageBox.Show("Empleado dado de baja");
+                        GetEmpleadosTable();
+                        txtPKEmpleado.Clear();
+                        txtNombre.Clear();
+                        txtApellido.Clear();
+                        txtMatricula.Clear();
+                        txtContraseña.Clear();
+                        txtTelefono.Clear();
+                        txtCorreo.Clear();
+                        CbxPuesto.SelectedItem = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Sucedió un error" + ex.Message);
             }
         }
         public void GetEmpleadosTable()
@@ -89,6 +174,32 @@ namespace CancelTrack.InterfazAdmin
             CbxPuesto.ItemsSource = services.GetPuestos();
             CbxPuesto.DisplayMemberPath = "Nombre";
             CbxPuesto.SelectedValuePath = "PKPuesto";
+        }
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MenuAdmin admin = new MenuAdmin();
+            admin.Show();
+            Close();
+        }
+
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                txtPKEmpleado.Clear();
+                txtNombre.Clear();
+                txtApellido.Clear();
+                txtMatricula.Clear();
+                txtContraseña.Clear();
+                txtTelefono.Clear();
+                txtCorreo.Clear();
+                CbxPuesto.SelectedValue = null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("ERROR: " + ex.Message);
+            }
         }
     }
 }

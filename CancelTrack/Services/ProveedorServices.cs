@@ -13,7 +13,7 @@ namespace CancelTrack.Services
     public class ProveedorServices
     {
         #region ADD
-        public void Add(Empleado request)
+        public void Add(Proveedor request)
         {
             try
             {
@@ -21,22 +21,13 @@ namespace CancelTrack.Services
                 {
                     using (var _context = new ApplicationDbContext())
                     {
-                        Empleado res = new Empleado();
+                        Proveedor res = new Proveedor();
                         res.Nombre = request.Nombre;
-                        res.Apellido = request.Apellido;
-                        res.Matricula = request.Matricula;
-                        res.Contraseña = request.Contraseña;
-                        res.Puestos = request.Puestos;
+                        res.Direccion = request.Direccion;
                         res.Telefono = request.Telefono;
                         res.Correo = request.Correo;
-                        _context.Empleado.Add(res);
+                        _context.Proveedor.Add(res);
                         _context.SaveChanges();
-                        /*Usuarios res = new Usuarios()
-						{
-							Name = request.Name,
-							UserName = request.UserName,
-							Password = request.Password
-						};*/
                     }
                 }
             }
@@ -47,22 +38,20 @@ namespace CancelTrack.Services
         }
         #endregion
         #region UPDATE
-        public void Update(Empleado request)//recibe todos los datos del empleado
+        public void Update(Proveedor request)//recibe todos los datos del Proveedor
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Empleado update = _context.Empleado.Find(request.PKEmpleado);
+                    Proveedor update = _context.Proveedor.Find(request.PKProveedor);
                     update.Nombre = request.Nombre;
-                    update.Apellido = request.Apellido;
-                    update.Contraseña = request.Contraseña;
-                    update.FKPuesto = request.FKPuesto;
+                    update.Direccion = request.Direccion;
                     update.Telefono = request.Telefono;
                     update.Correo = request.Correo;
 
                     //_context.Entry(update).State = EntityState.Modified;
-                    _context.Empleado.Update(update);
+                    _context.Proveedor.Update(update);
                     _context.SaveChanges();
                 }
             }
@@ -73,16 +62,16 @@ namespace CancelTrack.Services
         }
         #endregion
         #region DELETE
-        public void Delete(int EmpleadoId)
+        public void Delete(int ProveedorId)
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Empleado usuario = _context.Empleado.Find(EmpleadoId);
-                    if (usuario != null)
+                    Proveedor proveedor = _context.Proveedor.Find(ProveedorId);
+                    if (proveedor != null)
                     {
-                        _context.Remove(usuario);
+                        _context.Remove(proveedor);
                         _context.SaveChanges();
                     }
                     else
@@ -98,29 +87,14 @@ namespace CancelTrack.Services
             }
         }
         #endregion
-        public List<Empleado> GetEmpleados()
+        public List<Proveedor> GetProveedores()
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Empleado> usuarios = _context.Empleado.Include(x => x.Puestos).ToList();
-                    return usuarios;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocurrió un error " + ex.Message);
-            }
-        }
-        public List<Puesto> GetPuestos()
-        {
-            try
-            {
-                using (var _context = new ApplicationDbContext())
-                {
-                    List<Puesto> roles = _context.Puesto.ToList();
-                    return roles;
+                    List<Proveedor> proveedores = _context.Proveedor.ToList();
+                    return proveedores;
                 }
             }
             catch (Exception ex)

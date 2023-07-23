@@ -101,8 +101,8 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Cliente> usuarios = _context.Cliente.Include(x => x.Nombre).ToList();
-                    return usuarios;
+                    List<Cliente> cliente = _context.Cliente.ToList();
+                    return cliente;
                 }
             }
             catch (Exception ex)

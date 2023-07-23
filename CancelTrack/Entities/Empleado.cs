@@ -16,9 +16,10 @@ namespace CancelTrack.Entities
         public string Apellido { get; set; }
         public string Matricula { get; set; }
         public string Contraseña { get; set; }
-        [ForeignKey("Puesto")] public int? FKPuesto { get; set; }//El signo de interrogacion en "int?" dice que puede o no llevar un valor
+        [ForeignKey("Puestos")] public int? FKPuesto { get; set; }//El signo de interrogacion en "int?" dice que puede o no llevar un valor
         public Puesto Puestos { get; set; }
         public int Telefono { get; set; }
         public string Correo { get; set; }
+        public int Estado { get; set; }
     }
 }

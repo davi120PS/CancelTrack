@@ -10,11 +10,11 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Images/AluminioFondo3.jpg"/>
         </Grid.Background>
-        <Label Content="CANCELTRACK" HorizontalAlignment="Left" Height="129" Margin="147,58,0,0" VerticalAlignment="Top" Width="555" FontSize="72" FontFamily="Javanese Text" FontWeight="Bold">
+        <Label Content="CANCELTRACK" HorizontalAlignment="Center" Height="118" Margin="0,58,0,0" VerticalAlignment="Top" Width="476" FontSize="90" FontWeight="Bold" FontFamily="squealer">
             <Label.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF00D6FF" Offset="0"/>
-                    <GradientStop Color="#FF193F46" Offset="1"/>
+                    <GradientStop Color="#FF530101" Offset="0.126"/>
+                    <GradientStop Color="#FF726B0B" Offset="0.905"/>
                 </LinearGradientBrush>
             </Label.Foreground>
         </Label>

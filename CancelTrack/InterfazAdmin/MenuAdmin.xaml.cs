@@ -24,37 +24,51 @@ namespace CancelTrack.InterfazAdmin
             InitializeComponent();
         }
 
-        private void txtEmpleados_Click(object sender, RoutedEventArgs e)
+        private void BtnEmpleados_Click(object sender, RoutedEventArgs e)
         {
             CRUDEmpleado vista = new CRUDEmpleado();
             vista.Show();
             Close();
         }
 
-        private void txtClientes_Click(object sender, RoutedEventArgs e)
+        private void BtnClientes_Click(object sender, RoutedEventArgs e)
         {
             CRUDCliente vista = new CRUDCliente();
             vista.Show();
             Close();
         }
 
-        private void txtProductos_Click(object sender, RoutedEventArgs e)
+        private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
             CRUDProducto vista = new CRUDProducto();
             vista.Show();
             Close();
         }
 
-        private void txtVentas_Click(object sender, RoutedEventArgs e)
+        private void BtnVentas_Click(object sender, RoutedEventArgs e)
         {
             CRUDVenta vista = new CRUDVenta();
             vista.Show();
             Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void BtnSalir(object sender, RoutedEventArgs e)
         {
             MainWindow vista = new MainWindow();
+            vista.Show();
+            Close();
+        }
+
+        private void BtnProveedores_Click(object sender, RoutedEventArgs e)
+        {
+            CRUDProveedor vista = new CRUDProveedor();
+            vista.Show();
+            Close();
+        }
+
+        private void txtVentasProducto_Click(object sender, RoutedEventArgs e)
+        {
+            CRUDVentaProducto vista = new CRUDVentaProducto();
             vista.Show();
             Close();
         }

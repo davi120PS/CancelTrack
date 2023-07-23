@@ -67,6 +67,9 @@ namespace CancelTrack.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Estado")
+                        .HasColumnType("int");
+
                     b.Property<int?>("FKPuesto")
                         .HasColumnType("int");
 
@@ -78,15 +81,12 @@ namespace CancelTrack.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PuestosPKPuesto")
-                        .HasColumnType("int");
-
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
 
                     b.HasKey("PKEmpleado");
 
-                    b.HasIndex("PuestosPKPuesto");
+                    b.HasIndex("FKPuesto");
 
                     b.ToTable("Empleado");
                 });
@@ -104,14 +104,17 @@ namespace CancelTrack.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("FKProveedor")
+                    b.Property<int?>("FKProveedor")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Precio")
+                    b.Property<int>("PrecioCompra")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrecioVenta")
                         .HasColumnType("int");
 
                     b.HasKey("PKProducto");
@@ -138,9 +141,6 @@ namespace CancelTrack.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int>("PrecioProveedor")
-                        .HasColumnType("int");
 
                     b.Property<int>("Telefono")
                         .HasColumnType("int");
@@ -171,13 +171,13 @@ namespace CancelTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployeePKEmpleado")
+                    b.Property<int?>("FKCliente")
                         .HasColumnType("int");
 
-                    b.Property<int>("FKCliente")
+                    b.Property<int?>("FKEmpleado")
                         .HasColumnType("int");
 
-                    b.Property<int>("FKEmpleado")
+                    b.Property<int?>("FKVentaProducto")
                         .HasColumnType("int");
 
                     b.Property<int>("Total")
@@ -185,9 +185,11 @@ namespace CancelTrack.Migrations
 
                     b.HasKey("PKVenta");
 
-                    b.HasIndex("EmployeePKEmpleado");
-
                     b.HasIndex("FKCliente");
+
+                    b.HasIndex("FKEmpleado");
+
+                    b.HasIndex("FKVentaProducto");
 
                     b.ToTable("Venta");
                 });
@@ -201,20 +203,17 @@ namespace CancelTrack.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("FKProducto")
+                    b.Property<int?>("FKProducto")
                         .HasColumnType("int");
 
-                    b.Property<int>("FKVenta")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Precio")
+                    b.Property<int?>("FKVentas")
                         .HasColumnType("int");
 
                     b.HasKey("PKVentaProducto");
 
                     b.HasIndex("FKProducto");
 
-                    b.HasIndex("FKVenta");
+                    b.HasIndex("FKVentas");
 
                     b.ToTable("VentaProducto");
                 });
@@ -223,9 +222,7 @@ namespace CancelTrack.Migrations
                 {
                     b.HasOne("CancelTrack.Entities.Puesto", "Puestos")
                         .WithMany()
-                        .HasForeignKey("PuestosPKPuesto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKPuesto");
 
                     b.Navigation("Puestos");
                 });
@@ -234,47 +231,45 @@ namespace CancelTrack.Migrations
                 {
                     b.HasOne("CancelTrack.Entities.Proveedor", "Proveedor")
                         .WithMany()
-                        .HasForeignKey("FKProveedor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKProveedor");
 
                     b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Venta", b =>
                 {
-                    b.HasOne("CancelTrack.Entities.Empleado", "Employee")
+                    b.HasOne("CancelTrack.Entities.Cliente", "Clientes")
                         .WithMany()
-                        .HasForeignKey("EmployeePKEmpleado");
+                        .HasForeignKey("FKCliente");
 
-                    b.HasOne("CancelTrack.Entities.Cliente", "Cliente")
+                    b.HasOne("CancelTrack.Entities.Empleado", "Empleados")
                         .WithMany()
-                        .HasForeignKey("FKCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKEmpleado");
 
-                    b.Navigation("Cliente");
+                    b.HasOne("CancelTrack.Entities.VentaProducto", "VentaProductos")
+                        .WithMany()
+                        .HasForeignKey("FKVentaProducto");
 
-                    b.Navigation("Employee");
+                    b.Navigation("Clientes");
+
+                    b.Navigation("Empleados");
+
+                    b.Navigation("VentaProductos");
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.VentaProducto", b =>
                 {
-                    b.HasOne("CancelTrack.Entities.Cliente", "Cliente")
+                    b.HasOne("CancelTrack.Entities.Producto", "Productos")
                         .WithMany()
-                        .HasForeignKey("FKProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKProducto");
 
-                    b.HasOne("CancelTrack.Entities.Venta", "Venta")
+                    b.HasOne("CancelTrack.Entities.Venta", "Ventas")
                         .WithMany()
-                        .HasForeignKey("FKVenta")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKVentas");
 
-                    b.Navigation("Cliente");
+                    b.Navigation("Productos");
 
-                    b.Navigation("Venta");
+                    b.Navigation("Ventas");
                 });
 #pragma warning restore 612, 618
         }

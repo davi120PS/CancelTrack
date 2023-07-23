@@ -12,10 +12,11 @@ namespace CancelTrack.Entities
     {
         [Key] public int PKProducto { get; set; }
         public string Nombre { get; set; }
-        [ForeignKey("Proveedor")] public int FKProveedor { get; set; }
-        public Proveedor Proveedor { get; set; }
         public string Descripcion { get; set; }
-        public int Precio { get; set; }
+        [ForeignKey("Proveedor")] public int? FKProveedor { get; set; }
+        public Proveedor Proveedor { get; set; }
+        public int PrecioVenta { get; set; }
+        public int PrecioCompra { get; set; }
         public int CantidadInventario { get; set; }
     }
 }

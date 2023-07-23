@@ -39,7 +39,6 @@ namespace CancelTrack.Migrations
                     PKProveedor = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(type: "longtext", nullable: false),
-                    PrecioProveedor = table.Column<int>(type: "int", nullable: false),
                     Direccion = table.Column<string>(type: "longtext", nullable: false),
                     Telefono = table.Column<int>(type: "int", nullable: false),
                     Correo = table.Column<string>(type: "longtext", nullable: false)
@@ -71,9 +70,10 @@ namespace CancelTrack.Migrations
                     PKProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(type: "longtext", nullable: false),
-                    FKProveedor = table.Column<int>(type: "int", nullable: false),
                     Descripcion = table.Column<string>(type: "longtext", nullable: false),
-                    Precio = table.Column<int>(type: "int", nullable: false),
+                    FKProveedor = table.Column<int>(type: "int", nullable: true),
+                    PrecioVenta = table.Column<int>(type: "int", nullable: false),
+                    PrecioCompra = table.Column<int>(type: "int", nullable: false),
                     CantidadInventario = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -83,8 +83,7 @@ namespace CancelTrack.Migrations
                         name: "FK_Producto_Proveedor_FKProveedor",
                         column: x => x.FKProveedor,
                         principalTable: "Proveedor",
-                        principalColumn: "PKProveedor",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PKProveedor");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -99,19 +98,18 @@ namespace CancelTrack.Migrations
                     Matricula = table.Column<string>(type: "longtext", nullable: false),
                     Contraseña = table.Column<string>(type: "longtext", nullable: false),
                     FKPuesto = table.Column<int>(type: "int", nullable: true),
-                    PuestosPKPuesto = table.Column<int>(type: "int", nullable: false),
                     Telefono = table.Column<int>(type: "int", nullable: false),
-                    Correo = table.Column<string>(type: "longtext", nullable: false)
+                    Correo = table.Column<string>(type: "longtext", nullable: false),
+                    Estado = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empleado", x => x.PKEmpleado);
                     table.ForeignKey(
-                        name: "FK_Empleado_Puesto_PuestosPKPuesto",
-                        column: x => x.PuestosPKPuesto,
+                        name: "FK_Empleado_Puesto_FKPuesto",
+                        column: x => x.FKPuesto,
                         principalTable: "Puesto",
-                        principalColumn: "PKPuesto",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PKPuesto");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -121,9 +119,9 @@ namespace CancelTrack.Migrations
                 {
                     PKVenta = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FKCliente = table.Column<int>(type: "int", nullable: false),
-                    FKEmpleado = table.Column<int>(type: "int", nullable: false),
-                    EmployeePKEmpleado = table.Column<int>(type: "int", nullable: true),
+                    FKCliente = table.Column<int>(type: "int", nullable: true),
+                    FKEmpleado = table.Column<int>(type: "int", nullable: true),
+                    FKVentaProducto = table.Column<int>(type: "int", nullable: true),
                     Total = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -133,11 +131,10 @@ namespace CancelTrack.Migrations
                         name: "FK_Venta_Cliente_FKCliente",
                         column: x => x.FKCliente,
                         principalTable: "Cliente",
-                        principalColumn: "PKCliente",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PKCliente");
                     table.ForeignKey(
-                        name: "FK_Venta_Empleado_EmployeePKEmpleado",
-                        column: x => x.EmployeePKEmpleado,
+                        name: "FK_Venta_Empleado_FKEmpleado",
+                        column: x => x.FKEmpleado,
                         principalTable: "Empleado",
                         principalColumn: "PKEmpleado");
                 })
@@ -149,33 +146,30 @@ namespace CancelTrack.Migrations
                 {
                     PKVentaProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FKVenta = table.Column<int>(type: "int", nullable: false),
-                    FKProducto = table.Column<int>(type: "int", nullable: false),
-                    Cantidad = table.Column<int>(type: "int", nullable: false),
-                    Precio = table.Column<int>(type: "int", nullable: false)
+                    FKVentas = table.Column<int>(type: "int", nullable: true),
+                    FKProducto = table.Column<int>(type: "int", nullable: true),
+                    Cantidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VentaProducto", x => x.PKVentaProducto);
                     table.ForeignKey(
-                        name: "FK_VentaProducto_Cliente_FKProducto",
+                        name: "FK_VentaProducto_Producto_FKProducto",
                         column: x => x.FKProducto,
-                        principalTable: "Cliente",
-                        principalColumn: "PKCliente",
-                        onDelete: ReferentialAction.Cascade);
+                        principalTable: "Producto",
+                        principalColumn: "PKProducto");
                     table.ForeignKey(
-                        name: "FK_VentaProducto_Venta_FKVenta",
-                        column: x => x.FKVenta,
+                        name: "FK_VentaProducto_Venta_FKVentas",
+                        column: x => x.FKVentas,
                         principalTable: "Venta",
-                        principalColumn: "PKVenta",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "PKVenta");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Empleado_PuestosPKPuesto",
+                name: "IX_Empleado_FKPuesto",
                 table: "Empleado",
-                column: "PuestosPKPuesto");
+                column: "FKPuesto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Producto_FKProveedor",
@@ -183,14 +177,19 @@ namespace CancelTrack.Migrations
                 column: "FKProveedor");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venta_EmployeePKEmpleado",
-                table: "Venta",
-                column: "EmployeePKEmpleado");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Venta_FKCliente",
                 table: "Venta",
                 column: "FKCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Venta_FKEmpleado",
+                table: "Venta",
+                column: "FKEmpleado");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Venta_FKVentaProducto",
+                table: "Venta",
+                column: "FKVentaProducto");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VentaProducto_FKProducto",
@@ -198,25 +197,46 @@ namespace CancelTrack.Migrations
                 column: "FKProducto");
 
             migrationBuilder.CreateIndex(
-                name: "IX_VentaProducto_FKVenta",
+                name: "IX_VentaProducto_FKVentas",
                 table: "VentaProducto",
-                column: "FKVenta");
+                column: "FKVentas");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Venta_VentaProducto_FKVentaProducto",
+                table: "Venta",
+                column: "FKVentaProducto",
+                principalTable: "VentaProducto",
+                principalColumn: "PKVentaProducto");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Producto");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Empleado_Puesto_FKPuesto",
+                table: "Empleado");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Producto_Proveedor_FKProveedor",
+                table: "Producto");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Venta_Cliente_FKCliente",
+                table: "Venta");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Venta_Empleado_FKEmpleado",
+                table: "Venta");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Venta_VentaProducto_FKVentaProducto",
+                table: "Venta");
 
             migrationBuilder.DropTable(
-                name: "VentaProducto");
+                name: "Puesto");
 
             migrationBuilder.DropTable(
                 name: "Proveedor");
-
-            migrationBuilder.DropTable(
-                name: "Venta");
 
             migrationBuilder.DropTable(
                 name: "Cliente");
@@ -225,7 +245,13 @@ namespace CancelTrack.Migrations
                 name: "Empleado");
 
             migrationBuilder.DropTable(
-                name: "Puesto");
+                name: "VentaProducto");
+
+            migrationBuilder.DropTable(
+                name: "Producto");
+
+            migrationBuilder.DropTable(
+                name: "Venta");
         }
     }
 }

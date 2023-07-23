@@ -8,10 +8,12 @@
         Title="MenuAdmin" Height="697" Width="1280">
     <Grid Margin="0,0,10,0" Height="680" VerticalAlignment="Top">
         <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="282,87,0,0" VerticalAlignment="Top" Width="758"/>
-        <Button x:Name="txtClientes" Content="Clientes" HorizontalAlignment="Left" Height="104" Margin="662,261,0,0" VerticalAlignment="Top" Width="306" FontSize="48" Click="txtClientes_Click"/>
-        <Button x:Name="txtProductos" Content="Productos" HorizontalAlignment="Left" Height="104" Margin="334,400,0,0" VerticalAlignment="Top" Width="306" FontSize="48" Click="txtProductos_Click"/>
-        <Button x:Name="txtEmpleados" Content="Empleados" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="307" FontSize="48" Margin="338,261,0,0" Click="txtEmpleados_Click"/>
-        <Button x:Name="txtVentas" Content="Ventas" HorizontalAlignment="Left" Height="104" VerticalAlignment="Top" Width="306" FontSize="48" Margin="664,401,0,0" Click="txtVentas_Click"/>
-        <Button Content="Salir" FontSize="24" HorizontalAlignment="Left" Height="41" Margin="51,56,0,0" VerticalAlignment="Top" Width="184" Click="Button_Click_1"/>
+        <Button x:Name="txtClientes" Content="Clientes" HorizontalAlignment="Left" Height="81" Margin="655,261,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnClientes_Click"/>
+        <Button x:Name="txtProductos" Content="Productos" HorizontalAlignment="Left" Height="81" Margin="306,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProductos_Click"/>
+        <Button x:Name="txtProveedores" Content="Proveedores" HorizontalAlignment="Left" Height="81" Margin="655,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProveedores_Click"/>
+        <Button x:Name="txtEmpleados" Content="Empleados" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,261,0,0" Click="BtnEmpleados_Click"/>
+        <Button x:Name="txtVentas" Content="Ventas" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,452,0,0" Click="BtnVentas_Click"/>
+        <Button x:Name="txtVentasProducto" Content="VentaProducto" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="655,451,0,0" Click="txtVentasProducto_Click"/>
+        <Button Content="Salir" FontSize="24" HorizontalAlignment="Left" Height="41" Margin="51,56,0,0" VerticalAlignment="Top" Width="160" Click="BtnSalir"/>
     </Grid>
 </Window>

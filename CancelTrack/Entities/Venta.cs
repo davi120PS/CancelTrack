@@ -11,10 +11,12 @@ namespace CancelTrack.Entities
     public class Venta
     {
         [Key] public int PKVenta { get; set; }
-        [ForeignKey("Cliente")] public int FKCliente { get; set; }
-        public Cliente? Cliente { get; set; }
-        [ForeignKey("Empleado")] public int FKEmpleado { get; set; }
-        public Empleado? Employee { get; set; }
+        [ForeignKey("Clientes")] public int? FKCliente { get; set; }
+        public Cliente Clientes { get; set; }
+        [ForeignKey("Empleados")] public int? FKEmpleado { get; set; }
+        public Empleado Empleados { get; set; }
+        [ForeignKey("VentaProductos")] public int? FKVentaProducto { get; set; }
+        public VentaProducto VentaProductos { get; set; }
         public int Total { get; set; }
     }
 }

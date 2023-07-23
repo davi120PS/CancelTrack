@@ -8,45 +8,43 @@
         Title="CRUDProducto" Height="607" Width="1066">
     <Grid>
         <Label FontSize="50" Content="Productos" HorizontalAlignment="Left" Height="100" Margin="444,23,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="ID Producto" HorizontalAlignment="Left" Height="23" Margin="27,113,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="txtPKProducto" HorizontalAlignment="Left" Height="18" Margin="25,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" IsEnabled="False"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="25,158,0,0" VerticalAlignment="Top" Width="176"/>
-        <TextBox x:Name="txtNombreProd" HorizontalAlignment="Left" Height="23" Margin="25,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="27" Margin="25,213,0,0" VerticalAlignment="Top" Width="102"/>
-        <ComboBox x:Name="CbxFKProv" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="25,241,0,0" VerticalAlignment="Top" Width="102" Height="20"/>
-        <Label Content="Descripcion" HorizontalAlignment="Left" Height="27" Margin="26,268,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtDescripcionProd" HorizontalAlignment="Left" Height="22" Margin="25,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Precio" HorizontalAlignment="Left" Height="27" Margin="27,323,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtPrecioProd" HorizontalAlignment="Left" Height="20" Margin="27,350,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Cantidad en Inventario" HorizontalAlignment="Left" Height="26" Margin="27,379,0,0" VerticalAlignment="Top" Width="134"/>
-        <TextBox x:Name="txtCantInvenProd" HorizontalAlignment="Left" Height="22" Margin="27,405,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="BtnAddProd" Content="Agregar" HorizontalAlignment="Left" Height="38" Margin="32,455,0,0" VerticalAlignment="Top" Width="95" Background="#FF96E486" FontSize="20"/>
-        <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="171,131,119,91">
+        <Label Content="ID Producto" HorizontalAlignment="Left" Height="25" Margin="33,122,0,0" VerticalAlignment="Top" Width="128"/>
+        <TextBox x:Name="txtPKProducto" HorizontalAlignment="Left" Height="21" Margin="30,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsEnabled="False"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Height="39" Margin="30,172,0,0" VerticalAlignment="Top" Width="160"/>
+        <TextBox x:Name="txtNombreProd" HorizontalAlignment="Left" Height="25" Margin="30,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="30" Margin="30,286,0,0" VerticalAlignment="Top" Width="176"/>
+        <ComboBox x:Name="CbxFKProv" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="32,317,0,0" VerticalAlignment="Top" Width="176" Height="23"/>
+        <Label Content="Descripcion" HorizontalAlignment="Left" Height="29" Margin="30,231,0,0" VerticalAlignment="Top" Width="176"/>
+        <TextBox x:Name="txtDescripcionProd" HorizontalAlignment="Left" Height="25" Margin="29,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Label Content="Precio de Venta" HorizontalAlignment="Left" Height="31" Margin="38,344,0,0" VerticalAlignment="Top" Width="106"/>
+        <TextBox x:Name="txtPrecioVenta" HorizontalAlignment="Left" Height="22" Margin="32,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Label Content="Precio de Compra" HorizontalAlignment="Left" Height="31" Margin="34,399,0,0" VerticalAlignment="Top" Width="116"/>
+        <TextBox x:Name="txtPrecioCompra" HorizontalAlignment="Left" Height="22" Margin="34,436,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Label Content="Cantidad en Inventario" HorizontalAlignment="Left" Height="29" Margin="32,462,0,0" VerticalAlignment="Top" Width="135"/>
+        <TextBox x:Name="txtCantInvenProd" HorizontalAlignment="Left" Height="25" Margin="32,491,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
+        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
+        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="25,526,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="115,526,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
+        <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="229,150,39,77">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="ID Proveedor" Binding="{Binding FKProveedor}" />
                 <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" />
-                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" />
+                <DataGridTextColumn Header="ID Proveedor" Binding="{Binding Proveedor.Nombre}" />
+                <DataGridTextColumn Header="Precio de venta" Binding="{Binding PrecioVenta}" />
+                <DataGridTextColumn Header="Precio de compra" Binding="{Binding PrecioCompra}" />
                 <DataGridTextColumn Header="CantidadInvent" Binding="{Binding CantidadInventario}" />
                 <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Select" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Editar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" />
+                            <Button Content="Select" Click="EditItem"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete"/>
+                            <Button Content="Delete" Click="BtnDelete_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

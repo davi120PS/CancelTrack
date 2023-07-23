@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CancelTrack.Services;
+using CancelTrack.Context;
+using CancelTrack.Entities;
 
 namespace CancelTrack
 {
@@ -32,10 +34,10 @@ namespace CancelTrack
         {
             MenuAdmin sistema = new MenuAdmin();
             sistema.Show();
-            Close();/*
-            string user = txtUserName.Text;
+            Close();
+            /*string user = txtUserName.Text;
             string pass = txtPassword.Password;
-            //Usuarios response = services.Login(user, pass);
+
             var response = services.Login(user, pass);
 
             if (txtUserName.Text != "" && txtPassword.Password != "")
@@ -44,13 +46,30 @@ namespace CancelTrack
                 {
                     if (response.Puestos.Nombre == "Admin")
                     {
+                        try
+                        {
+                            using (var _context = new ApplicationDbContext())
+                            {
+                                Empleado empleado = new Empleado()
+                                {
+                                    Estado = 1
+                                };
+                                services.Update(empleado);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Sucedió un error" + ex.Message);
+                        }
+
                         MenuAdmin sistema = new MenuAdmin();
                         sistema.Show();
                         Close();
                     }
                     if (response.Puestos.Nombre == "Vendedor")
                     {
-                        VistaVendedor sistema = new VistaVendedor();
+
+                        MenuVendedor sistema = new MenuVendedor();
                         sistema.Show();
                         Close();
                     }

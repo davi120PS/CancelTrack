@@ -8,46 +8,37 @@
         Title="CRUDProveedor" Height="607" Width="1077">
     <Grid>
         <Label FontSize="50" Content="Proveedores" HorizontalAlignment="Left" Height="84" Margin="439,33,0,0" VerticalAlignment="Top" Width="288" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="23" Margin="75,123,0,0" VerticalAlignment="Top" Width="85"/>
-        <TextBox x:Name="txtPKProveedor" HorizontalAlignment="Left" Height="18" Margin="73,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" IsEnabled="False"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Height="34" Margin="73,168,0,0" VerticalAlignment="Top" Width="176"/>
-        <TextBox x:Name="txtNombreProv" HorizontalAlignment="Left" Height="23" Margin="73,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Precio Proveedor" HorizontalAlignment="Left" Height="27" Margin="73,223,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtPrecioProv" HorizontalAlignment="Left" Height="20" Margin="73,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Dirección" HorizontalAlignment="Left" Height="26" Margin="73,279,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtDireccionProv" HorizontalAlignment="Left" Height="22" Margin="73,305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Telefono" HorizontalAlignment="Left" Height="27" Margin="75,333,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtTelefonoProv" HorizontalAlignment="Left" Height="20" Margin="75,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Label Content="Correo" HorizontalAlignment="Left" Height="26" Margin="75,389,0,0" VerticalAlignment="Top" Width="102"/>
-        <TextBox x:Name="txtCorreoProv" HorizontalAlignment="Left" Height="22" Margin="75,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
-        <Button x:Name="BtnAddProv" Content="Agregar" HorizontalAlignment="Left" Height="38" Margin="73,475,0,0" VerticalAlignment="Top" Width="95" Background="#FF96E486" FontSize="20"/>
-
+        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="25" Margin="30,123,0,0" VerticalAlignment="Top" Width="142"/>
+        <TextBox x:Name="txtPKProveedor" HorizontalAlignment="Left" Height="20" Margin="27,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" IsEnabled="False"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Height="37" Margin="27,172,0,0" VerticalAlignment="Top" Width="112"/>
+        <TextBox x:Name="txtNombreProv" HorizontalAlignment="Left" Height="25" Margin="27,202,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
+        <Label Content="Dirección" HorizontalAlignment="Left" Height="29" Margin="27,232,0,0" VerticalAlignment="Top" Width="169"/>
+        <TextBox x:Name="txtDireccionProv" HorizontalAlignment="Left" Height="24" Margin="27,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169"/>
+        <Label Content="Telefono" HorizontalAlignment="Left" Height="30" Margin="30,290,0,0" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="txtTelefonoProv" HorizontalAlignment="Left" Height="22" Margin="30,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <Label Content="Correo" HorizontalAlignment="Left" Height="28" Margin="30,353,0,0" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="txtCorreoProv" HorizontalAlignment="Left" Height="24" Margin="30,381,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
+        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="25,422,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="115,422,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
         <DataGrid x:Name="TablaProveedor" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="221,143,141,111">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding PKCliente}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding PKProveedor}" />
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="PrecioProveedor" Binding="{Binding PrecioProveedor}" />
                 <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}" />
                 <DataGridTextColumn Header="Telefono" Binding="{Binding Telefono}" />
                 <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" />
                 <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Select" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Editar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" />
+                            <Button Content="Select" Click="EditItem"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete"/>
+                            <Button Content="Delete" Click="BtnDelete_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

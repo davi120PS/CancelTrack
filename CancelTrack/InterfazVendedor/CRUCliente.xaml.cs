@@ -1,5 +1,5 @@
 ﻿using CancelTrack.Entities;
-using CancelTrack.InterfazVendedor;
+using CancelTrack.InterfazAdmin;
 using CancelTrack.Services;
 using System;
 using System.Collections.Generic;
@@ -15,14 +15,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CancelTrack.InterfazAdmin
+namespace CancelTrack.InterfazVendedor
 {
     /// <summary>
-    /// Lógica de interacción para CRUDCliente.xaml
+    /// Lógica de interacción para CRUCliente.xaml
     /// </summary>
-    public partial class CRUDCliente : Window
+    public partial class CRUCliente : Window
     {
-        public CRUDCliente()
+        public CRUCliente()
         {
             InitializeComponent();
             GetClientesTable();
@@ -54,7 +54,9 @@ namespace CancelTrack.InterfazAdmin
                     txtCorreoCli.Clear();
                 }
                 else
+                {
                     MessageBox.Show("Faltan datos por llenar");
+                }
             }
             else
             {
@@ -78,22 +80,6 @@ namespace CancelTrack.InterfazAdmin
             txtDireccionCli.Clear();
             txtTelefonoCli.Clear();
             txtCorreoCli.Clear();
-        }
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtPKCliente.Text == "")
-            {
-                MessageBox.Show("Selecciona un cliente");
-            }
-            else
-            {
-                int Id = Convert.ToInt32(txtPKCliente.Text);
-                Cliente usuario = new Cliente();
-                usuario.PKCliente = Id;
-                services.Delete(Id);
-                MessageBox.Show("Cliente Eliminado");
-                GetClientesTable();
-            }
         }
         public void EditItem(object sender, RoutedEventArgs e)
         {

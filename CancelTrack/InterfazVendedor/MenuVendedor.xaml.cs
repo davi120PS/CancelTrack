@@ -23,5 +23,19 @@ namespace CancelTrack.InterfazVendedor
         {
             InitializeComponent();
         }
+
+        private void BtnCliente_Click(object sender, RoutedEventArgs e)
+        {
+            CRUCliente VendedorCliente = new CRUCliente();
+            VendedorCliente.Show();
+            Close();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow Login = new MainWindow();
+            Login.Show();
+            Close();
+        }
     }
 }

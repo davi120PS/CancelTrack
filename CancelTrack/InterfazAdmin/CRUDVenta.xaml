@@ -5,84 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
         mc:Ignorable="d"
-        Title="CRUDVenta" Height="883" Width="1140">
-    <Grid Margin="0,0,1,1">
-        <Label FontSize="50" Content="Ventas" HorizontalAlignment="Left" Height="100" Margin="483,26,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="ID Venta" HorizontalAlignment="Left" Height="27" Margin="86,129,0,0" VerticalAlignment="Top" Width="84"/>
-        <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Height="20" Margin="84,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="72" IsEnabled="False"/>
-        <Label Content="ID Cliente" HorizontalAlignment="Left" Height="31" Margin="85,186,0,0" VerticalAlignment="Top" Width="116"/>
-        <ComboBox x:Name="CbxFKCliente" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="85,218,0,0" VerticalAlignment="Top" Width="116" Height="23"/>
-        <Label Content="ID Empleado" HorizontalAlignment="Left" Height="32" Margin="84,244,0,0" VerticalAlignment="Top" Width="115"/>
-        <ComboBox x:Name="CbxFKEmpleado" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="84,277,0,0" VerticalAlignment="Top" Width="115" Height="23"/>
-        <Label Content="Total" HorizontalAlignment="Left" Height="31" Margin="85,308,0,0" VerticalAlignment="Top" Width="116"/>
-        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="25" Margin="84,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="115"/>
-        <Button x:Name="BtnAddProd" Content="Agregar" HorizontalAlignment="Left" Height="44" Margin="85,398,0,0" VerticalAlignment="Top" Width="108" Background="#FF96E486" FontSize="20"/>
-        <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="228,144,284,430">
+        Title="CRUDVenta" Height="532" Width="1086">
+    <Grid HorizontalAlignment="Left" Width="1084" Margin="0,0,0,-2">
+        <Label FontSize="50" Content="Ventas" HorizontalAlignment="Left" Height="100" Margin="526,14,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="ID Venta" HorizontalAlignment="Left" Height="28" Margin="31,123,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Height="21" Margin="28,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" IsEnabled="False"/>
+        <Label Content="ID Cliente" HorizontalAlignment="Left" Height="32" Margin="28,177,0,0" VerticalAlignment="Top" Width="173"/>
+        <ComboBox x:Name="CbxFKCliente" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="28,211,0,0" VerticalAlignment="Top" Width="173" Height="24"/>
+        <Label Content="ID Empleado" HorizontalAlignment="Left" Height="34" Margin="26,238,0,0" VerticalAlignment="Top" Width="172"/>
+        <ComboBox x:Name="CbxFKEmpleado" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="26,273,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
+        <Label Content="ID VentaProducto" HorizontalAlignment="Left" Height="34" Margin="28,302,0,0" VerticalAlignment="Top" Width="172"/>
+        <ComboBox x:Name="CbxFKVentaProducto" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="28,337,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
+        <Label Content="Total" HorizontalAlignment="Left" Height="33" Margin="29,363,0,0" VerticalAlignment="Top" Width="173"/>
+        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="26" Margin="27,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" IsEnabled="False"/>
+        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
+        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="24,432,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="116,432,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
+        <DataGrid x:Name="TablaVenta" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="235,120,67,51">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
-                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="ID Empleado" Binding="{Binding FKProveedor}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding PKVenta}" />
+                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Cliente.Nombre}" />
+                <DataGridTextColumn Header="ID Empleado" Binding="{Binding Empleados.Nombre}" />
+                <DataGridTextColumn Header="ID VentaProducto" Binding="{Binding VentaProductos.PKVentaProducto}" />
                 <DataGridTextColumn Header="Total" Binding="{Binding Descripcion}" />
                 <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Select" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Editar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" />
+                            <Button Content="Select" Click="EditItem"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Delete">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Delete"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Label Content="ID VentaProducto" HorizontalAlignment="Left" Height="23" Margin="85,466,0,0" VerticalAlignment="Top" Width="87"/>
-        <TextBox x:Name="txtPKVentaProducto" HorizontalAlignment="Left" Height="19" Margin="82,490,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" IsEnabled="False"/>
-        <Label Content="ID Venta" HorizontalAlignment="Left" Height="27" Margin="83,516,0,0" VerticalAlignment="Top" Width="121"/>
-        <ComboBox x:Name="CbxFKVenta" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="83,544,0,0" VerticalAlignment="Top" Width="121" Height="20"/>
-        <Label Content="ID Producto" HorizontalAlignment="Left" Height="28" Margin="82,567,0,0" VerticalAlignment="Top" Width="121"/>
-        <ComboBox x:Name="CbxFKProducto" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="82,596,0,0" VerticalAlignment="Top" Width="121" Height="20"/>
-        <Label Content="Cantidad" HorizontalAlignment="Left" Height="28" Margin="83,623,0,0" VerticalAlignment="Top" Width="121"/>
-        <TextBox x:Name="txtCantidadVP" HorizontalAlignment="Left" Height="22" Margin="82,651,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
-        <Label Content="Precio" HorizontalAlignment="Left" Height="28" Margin="85,683,0,0" VerticalAlignment="Top" Width="118"/>
-        <TextBox x:Name="txtPrecioVP" HorizontalAlignment="Left" Height="22" Margin="83,716,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
-        <Button x:Name="BtnAddProd_Copy" Content="Agregar" HorizontalAlignment="Left" Height="39" Margin="81,758,0,0" VerticalAlignment="Top" Width="113" Background="#FF96E486" FontSize="20"/>
-        <DataGrid x:Name="TablaProducto_Copy" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="223,476,200,40">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="ID Proveedor" Binding="{Binding FKProveedor}" />
-                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" />
-                <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" />
-                <DataGridTextColumn Header="CantidadInvent" Binding="{Binding CantidadInventario}" />
-                <DataGridTemplateColumn Header="Select">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Select" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Editar">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Edit" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete"/>
+                            <Button Content="Delete" Click="BtnDelete_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

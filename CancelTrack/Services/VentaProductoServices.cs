@@ -13,7 +13,7 @@ namespace CancelTrack.Services
     public class VentaProductoServices
     {
         #region ADD
-        public void Add(Empleado request)
+        public void Add(VentaProducto request)
         {
             try
             {
@@ -21,22 +21,11 @@ namespace CancelTrack.Services
                 {
                     using (var _context = new ApplicationDbContext())
                     {
-                        Empleado res = new Empleado();
-                        res.Nombre = request.Nombre;
-                        res.Apellido = request.Apellido;
-                        res.Matricula = request.Matricula;
-                        res.Contraseña = request.Contraseña;
-                        res.Puestos = request.Puestos;
-                        res.Telefono = request.Telefono;
-                        res.Correo = request.Correo;
-                        _context.Empleado.Add(res);
+                        VentaProducto res = new VentaProducto();
+                        res.Cantidad = request.Cantidad;
+                        res.FKProducto = request.FKProducto;
+                        _context.VentaProducto.Add(res);
                         _context.SaveChanges();
-                        /*Usuarios res = new Usuarios()
-						{
-							Name = request.Name,
-							UserName = request.UserName,
-							Password = request.Password
-						};*/
                     }
                 }
             }
@@ -47,22 +36,18 @@ namespace CancelTrack.Services
         }
         #endregion
         #region UPDATE
-        public void Update(Empleado request)//recibe todos los datos del empleado
+        public void Update(VentaProducto request)//recibe todos los datos del VentaProducto
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Empleado update = _context.Empleado.Find(request.PKEmpleado);
-                    update.Nombre = request.Nombre;
-                    update.Apellido = request.Apellido;
-                    update.Contraseña = request.Contraseña;
-                    update.FKPuesto = request.FKPuesto;
-                    update.Telefono = request.Telefono;
-                    update.Correo = request.Correo;
+                    VentaProducto update = _context.VentaProducto.Find(request.PKVentaProducto);
+                    update.Cantidad = request.Cantidad;
+                    update.FKProducto = request.FKProducto;
 
                     //_context.Entry(update).State = EntityState.Modified;
-                    _context.Empleado.Update(update);
+                    _context.VentaProducto.Update(update);
                     _context.SaveChanges();
                 }
             }
@@ -73,16 +58,16 @@ namespace CancelTrack.Services
         }
         #endregion
         #region DELETE
-        public void Delete(int EmpleadoId)
+        public void Delete(int VentaProductoId)
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Empleado usuario = _context.Empleado.Find(EmpleadoId);
-                    if (usuario != null)
+                    VentaProducto ventaProducto = _context.VentaProducto.Find(VentaProductoId);
+                    if (ventaProducto != null)
                     {
-                        _context.Remove(usuario);
+                        _context.Remove(ventaProducto);
                         _context.SaveChanges();
                     }
                     else
@@ -98,14 +83,14 @@ namespace CancelTrack.Services
             }
         }
         #endregion
-        public List<Empleado> GetEmpleados()
+        public List<VentaProducto> GetVentaProductos()
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Empleado> usuarios = _context.Empleado.Include(x => x.Puestos).ToList();
-                    return usuarios;
+                    List<VentaProducto> ventaProductos = _context.VentaProducto.Include(x => x.Productos).ToList();
+                    return ventaProductos;
                 }
             }
             catch (Exception ex)
@@ -113,14 +98,29 @@ namespace CancelTrack.Services
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
         }
-        public List<Puesto> GetPuestos()
+        public List<Producto> GetProductos()
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Puesto> roles = _context.Puesto.ToList();
-                    return roles;
+                    List<Producto> productos = _context.Producto.ToList();
+                    return productos;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocurrió un error " + ex.Message);
+            }
+        }
+        public List<Venta> GetVentas()
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    List<Venta> ventas = _context.Venta.ToList();
+                    return ventas;
                 }
             }
             catch (Exception ex)

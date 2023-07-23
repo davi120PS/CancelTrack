@@ -1,7 +1,7 @@
 ﻿using CancelTrack.Context;
 using CancelTrack.Entities;
 using Microsoft.EntityFrameworkCore;
-using MySqlX.XDevAPI.Relational;
+//using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace CancelTrack.Services
 {
     public class EmpleadoServices
     {
+        static int estado=0;
         #region LOGIN
         public Empleado Login(string UserName, string Password)
         {
@@ -44,17 +45,12 @@ namespace CancelTrack.Services
                         res.Apellido = request.Apellido;
                         res.Matricula = request.Matricula;
                         res.Contraseña = request.Contraseña;
-                        res.Puestos = request.Puestos;
                         res.Telefono = request.Telefono;
                         res.Correo = request.Correo;
+                        res.Estado = 1;
+                        res.FKPuesto = request.FKPuesto;
                         _context.Empleado.Add(res);
                         _context.SaveChanges();
-                        /*Usuarios res = new Usuarios()
-						{
-							Name = request.Name,
-							UserName = request.UserName,
-							Password = request.Password
-						};*/
                     }
                 }
             }
@@ -78,6 +74,7 @@ namespace CancelTrack.Services
                     update.FKPuesto = request.FKPuesto;
                     update.Telefono = request.Telefono;
                     update.Correo = request.Correo;
+                    update.Estado = request.Estado;
 
                     //_context.Entry(update).State = EntityState.Modified;
                     _context.Empleado.Update(update);
@@ -92,7 +89,7 @@ namespace CancelTrack.Services
         #endregion
         #region DELETE
         public void Delete(int EmpleadoId)
-        {
+        {           //AÑADIR BOTON Y FUNCION DAR DE BAJA para punto extra
             try
             {
                 using (var _context = new ApplicationDbContext())
@@ -122,8 +119,11 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Empleado> usuarios = _context.Empleado.Include(x => x.Puestos).ToList();
-                    return usuarios;
+                    List<Empleado> empleados = _context.Empleado
+                        .Where(e => e.Estado == 1) // Filtra por Estado = 1
+                        .Include(x => x.Puestos)
+                        .ToList();
+                    return empleados;
                 }
             }
             catch (Exception ex)
@@ -137,8 +137,8 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Puesto> roles = _context.Puesto.ToList();
-                    return roles;
+                    List<Puesto> puestos = _context.Puesto.ToList();
+                    return puestos;
                 }
             }
             catch (Exception ex)
