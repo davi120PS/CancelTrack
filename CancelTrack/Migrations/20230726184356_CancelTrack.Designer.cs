@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancelTrack.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230723025824_CancelTrack")]
+    [Migration("20230726184356_CancelTrack")]
     partial class CancelTrack
     {
         /// <inheritdoc />
@@ -50,6 +50,26 @@ namespace CancelTrack.Migrations
                     b.HasKey("PKCliente");
 
                     b.ToTable("Cliente");
+
+                    b.HasData(
+                        new
+                        {
+                            PKCliente = 1,
+                            Apellido = "Apellido",
+                            Correo = "correo1@gmail.com",
+                            Direccion = "Direccion 1",
+                            Nombre = "Cliente 1",
+                            Telefono = 2524
+                        },
+                        new
+                        {
+                            PKCliente = 2,
+                            Apellido = "Apellido",
+                            Correo = "correo1@gmail.com",
+                            Direccion = "Direccion 2",
+                            Nombre = "Cliente 2",
+                            Telefono = 3452
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Empleado", b =>
@@ -92,6 +112,32 @@ namespace CancelTrack.Migrations
                     b.HasIndex("FKPuesto");
 
                     b.ToTable("Empleado");
+
+                    b.HasData(
+                        new
+                        {
+                            PKEmpleado = 1,
+                            Apellido = "Peña",
+                            Contraseña = "123",
+                            Correo = "davi@gmail.com",
+                            Estado = 1,
+                            FKPuesto = 1,
+                            Matricula = "davi",
+                            Nombre = "David",
+                            Telefono = 1234
+                        },
+                        new
+                        {
+                            PKEmpleado = 2,
+                            Apellido = "user1",
+                            Contraseña = "s",
+                            Correo = "diego@gmail.com",
+                            Estado = 1,
+                            FKPuesto = 2,
+                            Matricula = "password1",
+                            Nombre = "Usuario 1",
+                            Telefono = 1234
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Producto", b =>
@@ -125,6 +171,38 @@ namespace CancelTrack.Migrations
                     b.HasIndex("FKProveedor");
 
                     b.ToTable("Producto");
+
+                    b.HasData(
+                        new
+                        {
+                            PKProducto = 1,
+                            CantidadInventario = 200,
+                            Descripcion = "Descripcion 1",
+                            FKProveedor = 1,
+                            Nombre = "Producto 1",
+                            PrecioCompra = 1500,
+                            PrecioVenta = 2000
+                        },
+                        new
+                        {
+                            PKProducto = 2,
+                            CantidadInventario = 200,
+                            Descripcion = "Descripcion 2",
+                            FKProveedor = 1,
+                            Nombre = "Producto 2",
+                            PrecioCompra = 2000,
+                            PrecioVenta = 2500
+                        },
+                        new
+                        {
+                            PKProducto = 3,
+                            CantidadInventario = 200,
+                            Descripcion = "Descripcion 3",
+                            FKProveedor = 2,
+                            Nombre = "Producto 3",
+                            PrecioCompra = 1800,
+                            PrecioVenta = 2200
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Proveedor", b =>
@@ -151,6 +229,24 @@ namespace CancelTrack.Migrations
                     b.HasKey("PKProveedor");
 
                     b.ToTable("Proveedor");
+
+                    b.HasData(
+                        new
+                        {
+                            PKProveedor = 1,
+                            Correo = "correo1@gmail.com",
+                            Direccion = "Direccion 1",
+                            Nombre = "Proveedor 1",
+                            Telefono = 2524
+                        },
+                        new
+                        {
+                            PKProveedor = 2,
+                            Correo = "correo1@gmail.com",
+                            Direccion = "Direccion 2",
+                            Nombre = "Proveedor 2",
+                            Telefono = 2524
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Puesto", b =>
@@ -180,9 +276,6 @@ namespace CancelTrack.Migrations
                     b.Property<int?>("FKEmpleado")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKVentaProducto")
-                        .HasColumnType("int");
-
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
@@ -192,33 +285,75 @@ namespace CancelTrack.Migrations
 
                     b.HasIndex("FKEmpleado");
 
-                    b.HasIndex("FKVentaProducto");
-
                     b.ToTable("Venta");
+
+                    b.HasData(
+                        new
+                        {
+                            PKVenta = 1,
+                            FKCliente = 1,
+                            FKEmpleado = 2,
+                            Total = 2000
+                        },
+                        new
+                        {
+                            PKVenta = 2,
+                            FKCliente = 1,
+                            FKEmpleado = 2,
+                            Total = 7500
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.VentaProducto", b =>
                 {
-                    b.Property<int>("PKVentaProducto")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cantidad")
+                    b.Property<int?>("FKVentas")
                         .HasColumnType("int");
 
                     b.Property<int?>("FKProducto")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKVentas")
+                    b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.HasKey("PKVentaProducto");
+                    b.Property<int>("PKVentaProducto")
+                        .HasColumnType("int");
+
+                    b.HasKey("FKVentas", "FKProducto");
 
                     b.HasIndex("FKProducto");
 
-                    b.HasIndex("FKVentas");
-
                     b.ToTable("VentaProducto");
+
+                    b.HasData(
+                        new
+                        {
+                            FKVentas = 1,
+                            FKProducto = 1,
+                            Cantidad = 1,
+                            PKVentaProducto = 1
+                        },
+                        new
+                        {
+                            FKVentas = 2,
+                            FKProducto = 2,
+                            Cantidad = 3,
+                            PKVentaProducto = 2
+                        });
+                });
+
+            modelBuilder.Entity("ProductoVenta", b =>
+                {
+                    b.Property<int>("ProductosPKProducto")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VentasPKVenta")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductosPKProducto", "VentasPKVenta");
+
+                    b.HasIndex("VentasPKVenta");
+
+                    b.ToTable("ProductoVenta");
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Empleado", b =>
@@ -249,30 +384,53 @@ namespace CancelTrack.Migrations
                         .WithMany()
                         .HasForeignKey("FKEmpleado");
 
-                    b.HasOne("CancelTrack.Entities.VentaProducto", "VentaProductos")
-                        .WithMany()
-                        .HasForeignKey("FKVentaProducto");
-
                     b.Navigation("Clientes");
 
                     b.Navigation("Empleados");
-
-                    b.Navigation("VentaProductos");
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.VentaProducto", b =>
                 {
                     b.HasOne("CancelTrack.Entities.Producto", "Productos")
-                        .WithMany()
-                        .HasForeignKey("FKProducto");
+                        .WithMany("VentaProductos")
+                        .HasForeignKey("FKProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CancelTrack.Entities.Venta", "Ventas")
-                        .WithMany()
-                        .HasForeignKey("FKVentas");
+                        .WithMany("VentaProductos")
+                        .HasForeignKey("FKVentas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Productos");
 
                     b.Navigation("Ventas");
+                });
+
+            modelBuilder.Entity("ProductoVenta", b =>
+                {
+                    b.HasOne("CancelTrack.Entities.Producto", null)
+                        .WithMany()
+                        .HasForeignKey("ProductosPKProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CancelTrack.Entities.Venta", null)
+                        .WithMany()
+                        .HasForeignKey("VentasPKVenta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CancelTrack.Entities.Producto", b =>
+                {
+                    b.Navigation("VentaProductos");
+                });
+
+            modelBuilder.Entity("CancelTrack.Entities.Venta", b =>
+                {
+                    b.Navigation("VentaProductos");
                 });
 #pragma warning restore 612, 618
         }

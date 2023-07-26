@@ -13,7 +13,6 @@ namespace CancelTrack.Services
 {
     public class EmpleadoServices
     {
-        static int estado=0;
         #region LOGIN
         public Empleado Login(string UserName, string Password)
         {

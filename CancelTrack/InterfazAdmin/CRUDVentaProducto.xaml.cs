@@ -28,6 +28,11 @@ namespace CancelTrack.InterfazAdmin
             GetVenta();
             GetProducto();
         }
+        public DataGrid TablaVentaProductoInstance
+        {
+            get { return TablaVentaProducto; }
+        }
+
         VentaProductoServices services = new VentaProductoServices();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -39,6 +44,7 @@ namespace CancelTrack.InterfazAdmin
                     VentaProducto ventaProducto = new VentaProducto();
                     ventaProducto.Cantidad = int.Parse(txtCantidadVP.Text);
                     ventaProducto.FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString());
+                    ventaProducto.FKVentas = int.Parse(CbxFKVenta.SelectedValue.ToString());
 
                     services.Add(ventaProducto);
 
@@ -61,7 +67,7 @@ namespace CancelTrack.InterfazAdmin
                 int Id = Convert.ToInt32(txtPKVentaProducto.Text);
                 VentaProducto ventaProducto = new VentaProducto()
                 {
-                    PKVentaProducto = Id,
+                    //PKVentaProducto = Id,
                     Cantidad = int.Parse(txtCantidadVP.Text),
                     FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString())
                 };

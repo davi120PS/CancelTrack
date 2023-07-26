@@ -13,7 +13,7 @@ namespace CancelTrack.Services
     public class VentaServices
     {
         #region ADD
-        public int Add(Venta request) // Modificamos el retorno para devolver la PKVenta generada
+        public void Add(Venta request) // Modificamos el retorno para devolver la PKVenta generada
         {
             try
             {
@@ -24,15 +24,11 @@ namespace CancelTrack.Services
                         Venta res = new Venta();
                         res.FKCliente = request.FKCliente;
                         res.FKEmpleado = request.FKEmpleado;
-                        res.FKVentaProducto = request.FKVentaProducto;
                         res.Total = request.Total;
                         _context.Venta.Add(res);
                         _context.SaveChanges();
-
-                        return res.PKVenta; // Devolvemos la PKVenta generada
                     }
                 }
-                return -1; // En caso de error
             }
             catch (Exception ex)
             {
@@ -92,25 +88,11 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    //List<Venta> ventas = _context.Venta.Include(x => x.Clientes).Include(x => x.Empleados.Estado == 1).Include(x => x.VentaProductos).ToList();
                     List<Venta> ventas = _context.Venta
                         .Include(x => x.Clientes)
                         .Include(x => x.Empleados) // Incluir Empleados sin filtrar por Estado
                         .Where(e => e.Empleados.Estado == 1) // Filtrar empleados por Estado
-                        .Include(x => x.VentaProductos).ToList();
-                    //List<Venta> ventas2 = _context.Venta.Include(x => x.Empleados).Where(e => e.Empleados.Estado == 1).ToList();
-                    /*List<Venta> ventas = _context.Venta
-                        .Include(x => x.Clientes)
-                        .Include(x => x.Empleados.Where(e => e.Estado == 1))
-                        .Include(x => x.VentaProductos)
-                        .ToList();*/
-
-                    /*// Filtrar los empleados con Estado = 1 antes de incluirlos en la lista
-                    foreach (var venta in ventas)
-                    {
-                        venta.Empleados = venta.Empleados.Where(e => e.Estado == 1).ToList();
-                    }*/
-
+                        .ToList(); 
                     return ventas;
                 }
             }

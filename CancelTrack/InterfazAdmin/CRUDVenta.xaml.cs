@@ -27,44 +27,39 @@ namespace CancelTrack.InterfazAdmin
             GetVentaTable();
             GetCliente();
             GetEmpleado();
-            GetVentaProducto();
+            //GetVentaProducto();
         }
         VentaServices services = new VentaServices();
-        VentaProductoServices VentaProductoServices = new VentaProductoServices();
+        CRUDVentaProducto TablaVentaProducto = new CRUDVentaProducto();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtTotalVen.Text == "")
             {
                 if (CbxFKCliente.SelectedValue != null || CbxFKEmpleado.SelectedValue != null)
                 {
-                    Venta venta = new Venta();
-                    venta.Total = int.Parse(txtTotalVen.Text);
-                    venta.FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString());
-                    venta.FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString());
-                    venta.FKVentaProducto = int.Parse(CbxFKVentaProducto.SelectedValue.ToString());
-
-                    // Realizamos el registro de la venta
-                    int pkVenta = services.Add(venta); // Insertamos la venta y obtenemos la PKVenta generada
-
-                    if (pkVenta != -1)
+                    Venta venta = new Venta()
                     {
-                        // Ahora agregamos el registro en la tabla VentaProducto con la PKVenta generada
-                        VentaProducto ventaProducto = new VentaProducto()
-                        {
-                            FKVentas = pkVenta
-                            //FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
-                            //Cantidad = int.Parse(txtCantidadVP.Text)
-                        };
-                        VentaProductoServices.Add(ventaProducto);
+                        FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
+                        FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
+                    };
 
-                        MessageBox.Show("Venta y VentaProducto registrada");
-                        GetVentaTable();
-                        txtPKVenta.Clear();
-                        txtTotalVen.Clear();
-                        CbxFKCliente.SelectedValue = null;
-                        CbxFKEmpleado.SelectedValue = null;
-                        CbxFKVentaProducto.SelectedValue = null;
+                    // Calcular el total de la venta y asignarlo a la propiedad Total de la entidad Venta
+                    /*int totalVenta = 0;
+                    foreach (var ventaProducto in venta.VentaProductos)
+                    {
+                        totalVenta += ventaProducto.Cantidad * ventaProducto.Productos.PrecioVenta;
                     }
+                    venta.Total = totalVenta;*/
+
+                    services.Add(venta);
+
+                    MessageBox.Show("Venta y VentaProducto registrada");
+                    GetVentaTable();
+                    txtPKVenta.Clear();
+                    txtTotalVen.Clear();
+                    CbxFKCliente.SelectedValue = null;
+                    CbxFKEmpleado.SelectedValue = null;
+                    CbxFKVentaProducto.SelectedValue = null;
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -78,7 +73,6 @@ namespace CancelTrack.InterfazAdmin
                     Total = int.Parse(txtTotalVen.Text),
                     FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
                     FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
-                    FKVentaProducto = int.Parse(CbxFKVentaProducto.SelectedValue.ToString())
                 };
 
                 services.Update(venta);
@@ -134,12 +128,12 @@ namespace CancelTrack.InterfazAdmin
             CbxFKEmpleado.DisplayMemberPath = "Nombre";
             CbxFKEmpleado.SelectedValuePath = "PKEmpleado";
         }
-        public void GetVentaProducto()
+        /*public void GetVentaProducto()
         {
             CbxFKVentaProducto.ItemsSource = services.GetVentaProductos();
             CbxFKVentaProducto.DisplayMemberPath = "PKVentaProducto";
             CbxFKVentaProducto.SelectedValuePath = "PKVentaProducto";
-        }
+        }*/
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             MenuAdmin admin = new MenuAdmin();

@@ -17,17 +17,17 @@
         <Label Content="ID VentaProducto" HorizontalAlignment="Left" Height="34" Margin="28,302,0,0" VerticalAlignment="Top" Width="172"/>
         <ComboBox x:Name="CbxFKVentaProducto" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="28,337,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
         <Label Content="Total" HorizontalAlignment="Left" Height="33" Margin="29,363,0,0" VerticalAlignment="Top" Width="173"/>
-        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="26" Margin="27,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" IsEnabled="False"/>
+        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="26" Margin="27,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" IsEnabled="True"/>
         <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
         <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="24,432,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
         <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="116,432,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
         <DataGrid x:Name="TablaVenta" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="235,120,67,51">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding PKVenta}" />
-                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Cliente.Nombre}" />
+                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Clientes.Nombre}" />
                 <DataGridTextColumn Header="ID Empleado" Binding="{Binding Empleados.Nombre}" />
                 <DataGridTextColumn Header="ID VentaProducto" Binding="{Binding VentaProductos.PKVentaProducto}" />
-                <DataGridTextColumn Header="Total" Binding="{Binding Descripcion}" />
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}" />
                 <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

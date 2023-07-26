@@ -24,6 +24,7 @@ namespace CancelTrack.Services
                         VentaProducto res = new VentaProducto();
                         res.Cantidad = request.Cantidad;
                         res.FKProducto = request.FKProducto;
+                        res.FKVentas = request.FKVentas;
                         _context.VentaProducto.Add(res);
                         _context.SaveChanges();
                     }
@@ -89,7 +90,7 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<VentaProducto> ventaProductos = _context.VentaProducto.Include(x => x.Productos).ToList();
+                    List<VentaProducto> ventaProductos = _context.VentaProducto.Include(x => x.Productos).Include(x => x.Ventas).ToList();
                     return ventaProductos;
                 }
             }
