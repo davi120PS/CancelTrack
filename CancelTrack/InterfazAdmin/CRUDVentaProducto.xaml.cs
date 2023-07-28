@@ -55,7 +55,7 @@ namespace CancelTrack.InterfazAdmin
                     MessageBox.Show("Producto agregado a la venta");
                     GetVentasProductosTable();
                     txtPKVentaProducto.Clear();
-                    txtCantidadVP.Clear();
+                    txtCantidadVP.Clear();  
                     CbxFKVenta.SelectedValue = null;
                     CbxFKProducto.SelectedValue = null;
                 }
