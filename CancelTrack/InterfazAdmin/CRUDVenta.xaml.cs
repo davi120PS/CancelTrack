@@ -31,6 +31,7 @@ namespace CancelTrack.InterfazAdmin
         }
         VentaServices services = new VentaServices();
         CRUDVentaProducto TablaVentaProducto = new CRUDVentaProducto();
+        VentaProductoServices ventaProductoServices = new VentaProductoServices();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtTotalVen.Text == "")
@@ -41,15 +42,16 @@ namespace CancelTrack.InterfazAdmin
                     {
                         FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
                         FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
+                        VentaProductos = new List<VentaProducto>() // Inicializar la lista de VentaProductos
                     };
 
                     // Calcular el total de la venta y asignarlo a la propiedad Total de la entidad Venta
-                    /*int totalVenta = 0;
+                    int totalVenta = 0;
                     foreach (var ventaProducto in venta.VentaProductos)
                     {
                         totalVenta += ventaProducto.Cantidad * ventaProducto.Productos.PrecioVenta;
                     }
-                    venta.Total = totalVenta;*/
+                    venta.Total = totalVenta;
 
                     services.Add(venta);
 
@@ -59,7 +61,7 @@ namespace CancelTrack.InterfazAdmin
                     txtTotalVen.Clear();
                     CbxFKCliente.SelectedValue = null;
                     CbxFKEmpleado.SelectedValue = null;
-                    CbxFKVentaProducto.SelectedValue = null;
+                    //CbxFKVentaProducto.SelectedValue = null;
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -82,7 +84,7 @@ namespace CancelTrack.InterfazAdmin
                 txtTotalVen.Clear();
                 CbxFKCliente.SelectedValue = null;
                 CbxFKEmpleado.SelectedValue = null;
-                CbxFKVentaProducto.SelectedValue = null;
+                //CbxFKVentaProducto.SelectedValue = null;
             }
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -112,6 +114,7 @@ namespace CancelTrack.InterfazAdmin
             CbxFKEmpleado.SelectedValue = venta.FKEmpleado.ToString();
             txtTotalVen.Text = venta.Total.ToString();
         }
+
         public void GetVentaTable()
         {
             TablaVenta.ItemsSource = services.GetVentas();
@@ -148,7 +151,7 @@ namespace CancelTrack.InterfazAdmin
                 txtTotalVen.Clear();
                 CbxFKCliente.SelectedValue = null;
                 CbxFKEmpleado.SelectedValue = null;
-                CbxFKVentaProducto.SelectedValue = null;
+                //CbxFKVentaProducto.SelectedValue = null;
             }
             catch (Exception ex)
             {

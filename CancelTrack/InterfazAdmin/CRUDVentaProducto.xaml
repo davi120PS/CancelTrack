@@ -22,7 +22,7 @@
         <DataGrid x:Name="TablaVentaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="258,142,89,58">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding PKVentaProducto}" />
-                <DataGridTextColumn Header="ID Venta" Binding="{Binding Venta.FKVenta}" />
+                <DataGridTextColumn Header="ID Venta" Binding="{Binding FKVentas}" />
                 <DataGridTextColumn Header="ID Producto" Binding="{Binding Productos.Nombre}" />
                 <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" />
                 <DataGridTemplateColumn Header="Select">

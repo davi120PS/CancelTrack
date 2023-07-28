@@ -28,12 +28,9 @@ namespace CancelTrack.InterfazAdmin
             GetVenta();
             GetProducto();
         }
-        public DataGrid TablaVentaProductoInstance
-        {
-            get { return TablaVentaProducto; }
-        }
 
         VentaProductoServices services = new VentaProductoServices();
+        //VentaServices VentaServices = new VentaServices(); 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             ProductoServices productoServices = new ProductoServices();
@@ -41,10 +38,12 @@ namespace CancelTrack.InterfazAdmin
             {
                 if (txtCantidadVP.Text != "" || CbxFKProducto.SelectedValue != null)
                 {
-                    VentaProducto ventaProducto = new VentaProducto();
-                    ventaProducto.Cantidad = int.Parse(txtCantidadVP.Text);
-                    ventaProducto.FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString());
-                    ventaProducto.FKVentas = int.Parse(CbxFKVenta.SelectedValue.ToString());
+                    VentaProducto ventaProducto = new VentaProducto()
+                    {
+                        FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
+                        FKVentas = int.Parse(CbxFKVenta.SelectedValue.ToString()),
+                        Cantidad = int.Parse(txtCantidadVP.Text)
+                    };
 
                     services.Add(ventaProducto);
 
@@ -53,10 +52,11 @@ namespace CancelTrack.InterfazAdmin
                     int cantidadVendida = int.Parse(txtCantidadVP.Text);
                     productoServices.UpdateCantidadInventario(productoId, cantidadVendida);
 
-                    MessageBox.Show("Venta del producto registrada");
+                    MessageBox.Show("Producto agregado a la venta");
                     GetVentasProductosTable();
                     txtPKVentaProducto.Clear();
                     txtCantidadVP.Clear();
+                    CbxFKVenta.SelectedValue = null;
                     CbxFKProducto.SelectedValue = null;
                 }
                 else
@@ -123,9 +123,10 @@ namespace CancelTrack.InterfazAdmin
         }
         public void GetVenta()
         {
-            CbxFKProducto.ItemsSource = services.GetVentas();
-            CbxFKProducto.DisplayMemberPath = "PKVenta";// si no sirve entonces es FKVenta
-            CbxFKProducto.SelectedValuePath = "PKVenta";
+            //List<Venta> ventas = VentaServices.GetVentas();
+            CbxFKVenta.ItemsSource = services.GetVentas();
+            CbxFKVenta.DisplayMemberPath = "PKVenta";// si no sirve entonces es FKVenta
+            CbxFKVenta.SelectedValuePath = "PKVenta";
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {

@@ -131,7 +131,7 @@ namespace CancelTrack.Services
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
         }
-        public List<VentaProducto> GetVentaProductos()
+        /*public List<VentaProducto> GetVentaProductos()
         {
             try
             {
@@ -145,6 +145,6 @@ namespace CancelTrack.Services
             {
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
-        }
+        }*/
     }
 }
