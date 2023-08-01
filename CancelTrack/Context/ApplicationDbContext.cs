@@ -24,7 +24,7 @@ namespace CancelTrack.Context
         public DbSet<VentaProducto> VentaProducto { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VentaProducto>()
+            /*modelBuilder.Entity<VentaProducto>()
                 .HasKey(ep => new { ep.FKVentas, ep.FKProducto });
 
             modelBuilder.Entity<VentaProducto>()
@@ -35,7 +35,7 @@ namespace CancelTrack.Context
             modelBuilder.Entity<VentaProducto>()
                 .HasOne(ep => ep.Ventas)
                 .WithMany(p => p.VentaProductos)
-                .HasForeignKey(ep => ep.FKVentas);
+                .HasForeignKey(ep => ep.FKVentas);*/
 
             // Insert para la tabla de Usuarios
             modelBuilder.Entity<Empleado>().HasData(
@@ -164,6 +164,18 @@ namespace CancelTrack.Context
                     FKCliente = 1,
                     FKEmpleado = 2,
                     Total = 7500
+                }
+            );
+            modelBuilder.Entity<Puesto>().HasData(
+                new Puesto
+                {
+                    PKPuesto = 1,
+                    Nombre = "Admin"
+                },
+                new Puesto
+                {
+                    PKPuesto = 2,
+                    Nombre = "Vendedor"
                 }
             );
         }

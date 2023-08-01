@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancelTrack.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230726184356_CancelTrack")]
+    [Migration("20230801135602_CancelTrack")]
     partial class CancelTrack
     {
         /// <inheritdoc />
@@ -306,38 +306,41 @@ namespace CancelTrack.Migrations
 
             modelBuilder.Entity("CancelTrack.Entities.VentaProducto", b =>
                 {
-                    b.Property<int?>("FKVentas")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FKProducto")
+                    b.Property<int>("PKVentaProducto")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int>("PKVentaProducto")
+                    b.Property<int?>("FKProducto")
                         .HasColumnType("int");
 
-                    b.HasKey("FKVentas", "FKProducto");
+                    b.Property<int?>("FKVentas")
+                        .HasColumnType("int");
+
+                    b.HasKey("PKVentaProducto");
 
                     b.HasIndex("FKProducto");
+
+                    b.HasIndex("FKVentas");
 
                     b.ToTable("VentaProducto");
 
                     b.HasData(
                         new
                         {
-                            FKVentas = 1,
-                            FKProducto = 1,
+                            PKVentaProducto = 1,
                             Cantidad = 1,
-                            PKVentaProducto = 1
+                            FKProducto = 1,
+                            FKVentas = 1
                         },
                         new
                         {
-                            FKVentas = 2,
-                            FKProducto = 2,
+                            PKVentaProducto = 2,
                             Cantidad = 3,
-                            PKVentaProducto = 2
+                            FKProducto = 2,
+                            FKVentas = 2
                         });
                 });
 
@@ -393,15 +396,11 @@ namespace CancelTrack.Migrations
                 {
                     b.HasOne("CancelTrack.Entities.Producto", "Productos")
                         .WithMany("VentaProductos")
-                        .HasForeignKey("FKProducto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKProducto");
 
                     b.HasOne("CancelTrack.Entities.Venta", "Ventas")
                         .WithMany("VentaProductos")
-                        .HasForeignKey("FKVentas")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FKVentas");
 
                     b.Navigation("Productos");
 

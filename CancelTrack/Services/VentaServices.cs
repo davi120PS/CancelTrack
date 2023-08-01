@@ -44,6 +44,8 @@ namespace CancelTrack.Services
                 using (var _context = new ApplicationDbContext())
                 {
                     Venta update = _context.Venta.Find(request.PKVenta);
+                    update.FKCliente = request.FKCliente;
+                    update.FKEmpleado = request.FKEmpleado;
                     update.Total = request.Total;
 
                     _context.Venta.Update(update);
@@ -131,20 +133,14 @@ namespace CancelTrack.Services
                 throw new Exception("Ocurrió un error " + ex.Message);
             }
         }
-        /*public List<VentaProducto> GetVentaProductos()
+        public Venta GetVentaById(int ventaId)
         {
-            try
+            using (var context = new ApplicationDbContext())
             {
-                using (var _context = new ApplicationDbContext())
-                {
-                    List<VentaProducto> ventaProductos = _context.VentaProducto.ToList();
-                    return ventaProductos;
-                }
+                // Suponiendo que DbSet "Ventas" representa la tabla de ventas en la base de datos.
+                var venta = context.Venta.Find(ventaId);
+                return venta;
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Ocurrió un error " + ex.Message);
-            }
-        }*/
+        }
     }
 }

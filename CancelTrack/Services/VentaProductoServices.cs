@@ -90,7 +90,10 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<VentaProducto> ventaProductos = _context.VentaProducto.Include(x => x.Productos).Include(x => x.Ventas).ToList();
+                    List<VentaProducto> ventaProductos = _context.VentaProducto
+                        .Include(x => x.Productos)
+                        .Include(x => x.Ventas)
+                        .ToList();
                     return ventaProductos;
                 }
             }

@@ -45,14 +45,6 @@ namespace CancelTrack.InterfazAdmin
                         VentaProductos = new List<VentaProducto>() // Inicializar la lista de VentaProductos
                     };
 
-                    // Calcular el total de la venta y asignarlo a la propiedad Total de la entidad Venta
-                    int totalVenta = 0;
-                    foreach (var ventaProducto in venta.VentaProductos)
-                    {
-                        totalVenta += ventaProducto.Cantidad * ventaProducto.Productos.PrecioVenta;
-                    }
-                    venta.Total = totalVenta;
-
                     services.Add(venta);
 
                     MessageBox.Show("Venta y VentaProducto registrada");
@@ -72,7 +64,6 @@ namespace CancelTrack.InterfazAdmin
                 Venta venta = new Venta()
                 {
                     PKVenta = Id,
-                    Total = int.Parse(txtTotalVen.Text),
                     FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
                     FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
                 };

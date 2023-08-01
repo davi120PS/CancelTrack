@@ -16,6 +16,5 @@ namespace CancelTrack.Entities
         [ForeignKey("Productos")] public int? FKProducto { get; set; }
         public Producto Productos { get; set; }
         public int Cantidad { get; set; }
-        //public int Total { get; set; }
     }
 }

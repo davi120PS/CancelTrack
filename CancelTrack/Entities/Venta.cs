@@ -17,7 +17,12 @@ namespace CancelTrack.Entities
         public Empleado Empleados { get; set; }
         public List<Producto> Productos { get; set; }
         public ICollection<VentaProducto> VentaProductos { get; set; }
-        public int Total { get; set; }
+        private int total;
+        public int Total
+        {
+            get { return total; }
+            set { total = value; }
+        }
         public Venta()
         {
             VentaProductos = new List<VentaProducto>();
