@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancelTrack.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230801135602_CancelTrack")]
-    partial class CancelTrack
+    [Migration("20230802172351_example")]
+    partial class example
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,6 +262,18 @@ namespace CancelTrack.Migrations
                     b.HasKey("PKPuesto");
 
                     b.ToTable("Puesto");
+
+                    b.HasData(
+                        new
+                        {
+                            PKPuesto = 1,
+                            Nombre = "Admin"
+                        },
+                        new
+                        {
+                            PKPuesto = 2,
+                            Nombre = "Vendedor"
+                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.Venta", b =>

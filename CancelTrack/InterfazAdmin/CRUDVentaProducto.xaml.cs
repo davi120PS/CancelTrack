@@ -1,4 +1,5 @@
-﻿using CancelTrack.Entities;
+﻿using CancelTrack.Context;
+using CancelTrack.Entities;
 using CancelTrack.Services;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,7 @@ namespace CancelTrack.InterfazAdmin
     public partial class CRUDVentaProducto : Window
     {
         private readonly VentaProductoServices services = new VentaProductoServices();
-        private readonly ProductoServices productoServices = new ProductoServices();
-
+        ProductoServices productoServices = new ProductoServices();
         public CRUDVentaProducto()
         {
             InitializeComponent();
@@ -35,7 +35,6 @@ namespace CancelTrack.InterfazAdmin
         Venta venta = new Venta();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            ProductoServices productoServices = new ProductoServices();
             if (txtPKVentaProducto.Text == "")
             {
                 if (txtCantidadVP.Text != "" || CbxFKProducto.SelectedValue != null)
@@ -47,11 +46,17 @@ namespace CancelTrack.InterfazAdmin
                         Cantidad = int.Parse(txtCantidadVP.Text)
                     };
                     services.Add(ventaProducto);
-
                     // Recalcular el valor del Total de la venta
-                    Venta venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                    int totalVenta = CalcularTotalVenta(venta);
-                    venta.Total = totalVenta;
+                    venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
+                    Producto producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                    int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
+                    venta.Total += totalVenta;
+                    Venta ventaTotal = new Venta()
+                    {
+                        PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
+                        Total = totalVenta
+                    };
+                    VentaServices.UpdateTotal(ventaTotal);
 
                     // Actualizar la cantidad de inventario del producto
                     int productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
@@ -60,6 +65,7 @@ namespace CancelTrack.InterfazAdmin
 
                     MessageBox.Show("Producto agregado a la venta");
                     GetVentasProductosTable();
+                    
                     txtPKVentaProducto.Clear();
                     txtCantidadVP.Clear();  
                     CbxFKVenta.SelectedValue = null;
@@ -80,8 +86,9 @@ namespace CancelTrack.InterfazAdmin
                 services.Update(ventaProducto);
 
                 // Recalcular el valor del Total de la venta
-                Venta venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                int totalVenta = CalcularTotalVenta(venta);
+                venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
+                Producto producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
                 venta.Total = totalVenta;
 
                 // Actualizar la cantidad de inventario del producto
@@ -96,13 +103,12 @@ namespace CancelTrack.InterfazAdmin
                 CbxFKProducto.SelectedValue = null;
             }
         }
-        private int CalcularTotalVenta(Venta venta)
+        private int CalcularTotalVenta(Venta venta, Producto producto, int ventacant)
         {
             int totalVenta = 0;
-            foreach (var vp in venta.VentaProductos)
-            {
-                totalVenta += vp.Productos.PrecioVenta * vp.Cantidad;
-            }
+
+            totalVenta += producto.PrecioVenta * ventacant;
+            
             return totalVenta;
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -129,13 +135,9 @@ namespace CancelTrack.InterfazAdmin
             VentaProducto ventaProducto = new VentaProducto();
             ventaProducto = (sender as FrameworkElement).DataContext as VentaProducto;
             txtPKVentaProducto.Text = ventaProducto.PKVentaProducto.ToString();
-            CbxFKVenta.SelectedValue = ventaProducto.FKProducto.ToString();
+            CbxFKVenta.SelectedValue = ventaProducto.FKVentas.ToString();
             CbxFKProducto.SelectedValue = ventaProducto.FKProducto.ToString();
             txtCantidadVP.Text = ventaProducto.Cantidad.ToString();
-            // Recalcular el valor del Total de la venta
-            Venta venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-            int totalVenta = CalcularTotalVenta(venta);
-            venta.Total = totalVenta;
         }
         public void GetVentasProductosTable()
         {
