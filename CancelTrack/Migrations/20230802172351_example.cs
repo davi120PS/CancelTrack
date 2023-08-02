@@ -8,7 +8,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CancelTrack.Migrations
 {
     /// <inheritdoc />
-    public partial class CancelTrack : Migration
+    public partial class example : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -202,21 +202,30 @@ namespace CancelTrack.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Empleado",
-                columns: new[] { "PKEmpleado", "Apellido", "Contraseña", "Correo", "Estado", "FKPuesto", "Matricula", "Nombre", "Telefono" },
-                values: new object[,]
-                {
-                    { 1, "Peña", "123", "davi@gmail.com", 1, 1, "davi", "David", 1234 },
-                    { 2, "user1", "s", "diego@gmail.com", 1, 2, "password1", "Usuario 1", 1234 }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Proveedor",
                 columns: new[] { "PKProveedor", "Correo", "Direccion", "Nombre", "Telefono" },
                 values: new object[,]
                 {
                     { 1, "correo1@gmail.com", "Direccion 1", "Proveedor 1", 2524 },
                     { 2, "correo1@gmail.com", "Direccion 2", "Proveedor 2", 2524 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Puesto",
+                columns: new[] { "PKPuesto", "Nombre" },
+                values: new object[,]
+                {
+                    { 1, "Admin" },
+                    { 2, "Vendedor" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Empleado",
+                columns: new[] { "PKEmpleado", "Apellido", "Contraseña", "Correo", "Estado", "FKPuesto", "Matricula", "Nombre", "Telefono" },
+                values: new object[,]
+                {
+                    { 1, "Peña", "123", "davi@gmail.com", 1, 1, "davi", "David", 1234 },
+                    { 2, "user1", "s", "diego@gmail.com", 1, 2, "password1", "Usuario 1", 1234 }
                 });
 
             migrationBuilder.InsertData(

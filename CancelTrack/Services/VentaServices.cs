@@ -57,6 +57,24 @@ namespace CancelTrack.Services
                 throw new Exception("Sucedió un error" + ex.Message);
             }
         }
+        public void UpdateTotal(Venta request)//recibe todos los datos del empleado
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    Venta update = _context.Venta.Find(request.PKVenta);
+                    update.Total = request.Total;
+
+                    _context.Venta.Update(update);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Sucedió un error" + ex.Message);
+            }
+        }
         #endregion
         #region DELETE
         public void Delete(int VentaId)
@@ -142,5 +160,15 @@ namespace CancelTrack.Services
                 return venta;
             }
         }
+        public Producto GetProctoByName(int productoname)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                // Suponiendo que DbSet "Ventas" representa la tabla de ventas en la base de datos.
+                var produc = context.Producto.Find(productoname);
+                return produc;
+            }
+        }
+
     }
 }

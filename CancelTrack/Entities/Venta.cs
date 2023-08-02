@@ -21,7 +21,7 @@ namespace CancelTrack.Entities
         public int Total
         {
             get { return total; }
-            set { total = value; }
+            set { total += value; }
         }
         public Venta()
         {
