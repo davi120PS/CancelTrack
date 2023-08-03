@@ -126,13 +126,13 @@ namespace CancelTrack.Migrations
                         new
                         {
                             PKEmpleado = 2,
-                            Apellido = "user1",
-                            Contraseña = "s",
+                            Apellido = "Cortez",
+                            Contraseña = "123",
                             Correo = "diego@gmail.com",
                             Estado = 1,
                             FKPuesto = 2,
-                            Matricula = "password1",
-                            Nombre = "Usuario 1",
+                            Matricula = "diego",
+                            Nombre = "Diego",
                             Telefono = 1234
                         });
                 });
@@ -279,10 +279,10 @@ namespace CancelTrack.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKCliente")
+                    b.Property<int>("FKCliente")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKEmpleado")
+                    b.Property<int>("FKEmpleado")
                         .HasColumnType("int");
 
                     b.Property<int>("Total")
@@ -295,22 +295,6 @@ namespace CancelTrack.Migrations
                     b.HasIndex("FKEmpleado");
 
                     b.ToTable("Venta");
-
-                    b.HasData(
-                        new
-                        {
-                            PKVenta = 1,
-                            FKCliente = 1,
-                            FKEmpleado = 2,
-                            Total = 2000
-                        },
-                        new
-                        {
-                            PKVenta = 2,
-                            FKCliente = 1,
-                            FKEmpleado = 2,
-                            Total = 7500
-                        });
                 });
 
             modelBuilder.Entity("CancelTrack.Entities.VentaProducto", b =>
@@ -322,10 +306,10 @@ namespace CancelTrack.Migrations
                     b.Property<int>("Cantidad")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKProducto")
+                    b.Property<int>("FKProducto")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FKVentas")
+                    b.Property<int>("FKVentas")
                         .HasColumnType("int");
 
                     b.HasKey("PKVentaProducto");
@@ -335,22 +319,6 @@ namespace CancelTrack.Migrations
                     b.HasIndex("FKVentas");
 
                     b.ToTable("VentaProducto");
-
-                    b.HasData(
-                        new
-                        {
-                            PKVentaProducto = 1,
-                            Cantidad = 1,
-                            FKProducto = 1,
-                            FKVentas = 1
-                        },
-                        new
-                        {
-                            PKVentaProducto = 2,
-                            Cantidad = 3,
-                            FKProducto = 2,
-                            FKVentas = 2
-                        });
                 });
 
             modelBuilder.Entity("ProductoVenta", b =>
@@ -390,11 +358,15 @@ namespace CancelTrack.Migrations
                 {
                     b.HasOne("CancelTrack.Entities.Cliente", "Clientes")
                         .WithMany()
-                        .HasForeignKey("FKCliente");
+                        .HasForeignKey("FKCliente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("CancelTrack.Entities.Empleado", "Empleados")
                         .WithMany()
-                        .HasForeignKey("FKEmpleado");
+                        .HasForeignKey("FKEmpleado")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Clientes");
 
@@ -405,11 +377,15 @@ namespace CancelTrack.Migrations
                 {
                     b.HasOne("CancelTrack.Entities.Producto", "Productos")
                         .WithMany("VentaProductos")
-                        .HasForeignKey("FKProducto");
+                        .HasForeignKey("FKProducto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CancelTrack.Entities.Venta", "Ventas")
                         .WithMany("VentaProductos")
-                        .HasForeignKey("FKVentas");
+                        .HasForeignKey("FKVentas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Productos");
 

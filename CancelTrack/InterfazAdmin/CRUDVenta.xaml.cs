@@ -36,7 +36,7 @@ namespace CancelTrack.InterfazAdmin
         {
             if (txtTotalVen.Text == "")
             {
-                if (CbxFKCliente.SelectedValue != null || CbxFKEmpleado.SelectedValue != null)
+                if (CbxFKCliente.SelectedValue != null && CbxFKEmpleado.SelectedValue != null)
                 {
                     Venta venta = new Venta()
                     {
@@ -44,7 +44,6 @@ namespace CancelTrack.InterfazAdmin
                         FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
                         VentaProductos = new List<VentaProducto>() // Inicializar la lista de VentaProductos
                     };
-
                     services.Add(venta);
 
                     MessageBox.Show("Venta y VentaProducto registrada");
@@ -67,8 +66,8 @@ namespace CancelTrack.InterfazAdmin
                     FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
                     FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
                 };
-
                 services.Update(venta);
+
                 MessageBox.Show("Venta actualizada");
                 GetVentaTable();
                 txtPKVenta.Clear();
@@ -81,9 +80,7 @@ namespace CancelTrack.InterfazAdmin
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKVenta.Text == "")
-            {
                 MessageBox.Show("Selecciona un venta");
-            }
             else
             {
                 int Id = Convert.ToInt32(txtPKVenta.Text);
@@ -122,12 +119,6 @@ namespace CancelTrack.InterfazAdmin
             CbxFKEmpleado.DisplayMemberPath = "Nombre";
             CbxFKEmpleado.SelectedValuePath = "PKEmpleado";
         }
-        /*public void GetVentaProducto()
-        {
-            CbxFKVentaProducto.ItemsSource = services.GetVentaProductos();
-            CbxFKVentaProducto.DisplayMemberPath = "PKVentaProducto";
-            CbxFKVentaProducto.SelectedValuePath = "PKVentaProducto";
-        }*/
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             MenuAdmin admin = new MenuAdmin();
@@ -142,7 +133,6 @@ namespace CancelTrack.InterfazAdmin
                 txtTotalVen.Clear();
                 CbxFKCliente.SelectedValue = null;
                 CbxFKEmpleado.SelectedValue = null;
-                //CbxFKVentaProducto.SelectedValue = null;
             }
             catch (Exception ex)
             {

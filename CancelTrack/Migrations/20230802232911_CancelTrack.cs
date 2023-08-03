@@ -8,7 +8,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CancelTrack.Migrations
 {
     /// <inheritdoc />
-    public partial class example : Migration
+    public partial class CancelTrack : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -121,8 +121,8 @@ namespace CancelTrack.Migrations
                 {
                     PKVenta = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FKCliente = table.Column<int>(type: "int", nullable: true),
-                    FKEmpleado = table.Column<int>(type: "int", nullable: true),
+                    FKCliente = table.Column<int>(type: "int", nullable: false),
+                    FKEmpleado = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -132,12 +132,14 @@ namespace CancelTrack.Migrations
                         name: "FK_Venta_Cliente_FKCliente",
                         column: x => x.FKCliente,
                         principalTable: "Cliente",
-                        principalColumn: "PKCliente");
+                        principalColumn: "PKCliente",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Venta_Empleado_FKEmpleado",
                         column: x => x.FKEmpleado,
                         principalTable: "Empleado",
-                        principalColumn: "PKEmpleado");
+                        principalColumn: "PKEmpleado",
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -172,8 +174,8 @@ namespace CancelTrack.Migrations
                 {
                     PKVentaProducto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    FKVentas = table.Column<int>(type: "int", nullable: true),
-                    FKProducto = table.Column<int>(type: "int", nullable: true),
+                    FKVentas = table.Column<int>(type: "int", nullable: false),
+                    FKProducto = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -183,12 +185,14 @@ namespace CancelTrack.Migrations
                         name: "FK_VentaProducto_Producto_FKProducto",
                         column: x => x.FKProducto,
                         principalTable: "Producto",
-                        principalColumn: "PKProducto");
+                        principalColumn: "PKProducto",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VentaProducto_Venta_FKVentas",
                         column: x => x.FKVentas,
                         principalTable: "Venta",
-                        principalColumn: "PKVenta");
+                        principalColumn: "PKVenta",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -225,7 +229,7 @@ namespace CancelTrack.Migrations
                 values: new object[,]
                 {
                     { 1, "Peña", "123", "davi@gmail.com", 1, 1, "davi", "David", 1234 },
-                    { 2, "user1", "s", "diego@gmail.com", 1, 2, "password1", "Usuario 1", 1234 }
+                    { 2, "Cortez", "123", "diego@gmail.com", 1, 2, "diego", "Diego", 1234 }
                 });
 
             migrationBuilder.InsertData(
@@ -236,24 +240,6 @@ namespace CancelTrack.Migrations
                     { 1, 200, "Descripcion 1", 1, "Producto 1", 1500, 2000 },
                     { 2, 200, "Descripcion 2", 1, "Producto 2", 2000, 2500 },
                     { 3, 200, "Descripcion 3", 2, "Producto 3", 1800, 2200 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Venta",
-                columns: new[] { "PKVenta", "FKCliente", "FKEmpleado", "Total" },
-                values: new object[,]
-                {
-                    { 1, 1, 2, 2000 },
-                    { 2, 1, 2, 7500 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "VentaProducto",
-                columns: new[] { "PKVentaProducto", "Cantidad", "FKProducto", "FKVentas" },
-                values: new object[,]
-                {
-                    { 1, 1, 1, 1 },
-                    { 2, 3, 2, 2 }
                 });
 
             migrationBuilder.CreateIndex(

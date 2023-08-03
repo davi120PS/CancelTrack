@@ -33,11 +33,12 @@ namespace CancelTrack.InterfazAdmin
         }
         VentaServices VentaServices = new VentaServices();
         Venta venta = new Venta();
+        Producto producto = new Producto();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKVentaProducto.Text == "")
             {
-                if (txtCantidadVP.Text != "" || CbxFKProducto.SelectedValue != null)
+                if (txtCantidadVP.Text != "" && CbxFKProducto.SelectedValue != null && CbxFKVenta.SelectedValue != null)
                 {
                     VentaProducto ventaProducto = new VentaProducto()
                     {   //Agrega los datos ingresados a la base de datos
@@ -46,11 +47,13 @@ namespace CancelTrack.InterfazAdmin
                         Cantidad = int.Parse(txtCantidadVP.Text)
                     };
                     services.Add(ventaProducto);
+
                     // Recalcular el valor del Total de la venta
                     venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                    Producto producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                    producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
                     int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
                     venta.Total += totalVenta;
+
                     Venta ventaTotal = new Venta()
                     {
                         PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
@@ -80,16 +83,23 @@ namespace CancelTrack.InterfazAdmin
                 VentaProducto ventaProducto = new VentaProducto()
                 {
                     PKVentaProducto = Id,
-                    Cantidad = int.Parse(txtCantidadVP.Text),
-                    FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString())
+                    FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
+                    Cantidad = int.Parse(txtCantidadVP.Text)
                 };
                 services.Update(ventaProducto);
 
                 // Recalcular el valor del Total de la venta
                 venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                Producto producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
                 int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
-                venta.Total = totalVenta;
+                venta.Total += totalVenta;
+
+                Venta ventaTotal = new Venta()
+                {
+                    PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
+                    Total = totalVenta
+                };
+                VentaServices.UpdateTotal(ventaTotal);
 
                 // Actualizar la cantidad de inventario del producto
                 int productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
@@ -106,9 +116,7 @@ namespace CancelTrack.InterfazAdmin
         private int CalcularTotalVenta(Venta venta, Producto producto, int ventacant)
         {
             int totalVenta = 0;
-
             totalVenta += producto.PrecioVenta * ventacant;
-            
             return totalVenta;
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -121,11 +129,6 @@ namespace CancelTrack.InterfazAdmin
                 VentaProducto venta = new VentaProducto();
                 venta.PKVentaProducto = Id;
                 services.Delete(Id);
-
-                /*// Recalcular el valor del Total de la venta
-                Venta venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                int totalVenta = CalcularTotalVenta(venta);
-                venta.Total = totalVenta;*/
                 MessageBox.Show("Venta del producto Eliminada");
                 GetVentasProductosTable();
             }

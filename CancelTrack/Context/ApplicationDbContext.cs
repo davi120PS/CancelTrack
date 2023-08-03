@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using CancelTrack.Entities;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CancelTrack.Context
 {
@@ -24,18 +23,33 @@ namespace CancelTrack.Context
         public DbSet<VentaProducto> VentaProducto { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /*modelBuilder.Entity<VentaProducto>()
-                .HasKey(ep => new { ep.FKVentas, ep.FKProducto });
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Venta>()
+                .HasMany(v => v.VentaProductos)
+                .WithOne(vp => vp.Ventas)
+                .HasForeignKey(vp => vp.FKVentas)
+                .OnDelete(DeleteBehavior.Cascade); // ON DELETE CASCADE
+
+            modelBuilder.Entity<Venta>()
+                .HasOne(v => v.Clientes)
+                .WithMany()
+                .HasForeignKey(v => v.FKCliente)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Venta>()
+                .HasOne(v => v.Empleados)
+                .WithMany()
+                .HasForeignKey(v => v.FKEmpleado)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<VentaProducto>()
-                .HasOne(ep => ep.Productos)
-                .WithMany(e => e.VentaProductos)
-                .HasForeignKey(ep => ep.FKProducto);
-
-            modelBuilder.Entity<VentaProducto>()
-                .HasOne(ep => ep.Ventas)
-                .WithMany(p => p.VentaProductos)
-                .HasForeignKey(ep => ep.FKVentas);*/
+                .HasOne(vp => vp.Ventas)
+                .WithMany(v => v.VentaProductos)
+                .HasForeignKey(vp => vp.FKVentas)
+                .OnDelete(DeleteBehavior.Cascade) // ON DELETE CASCADE
+                .HasPrincipalKey(v => v.PKVenta) // Clave principal de Venta
+                .IsRequired();
 
             // Insert para la tabla de Usuarios
             modelBuilder.Entity<Empleado>().HasData(
@@ -54,10 +68,10 @@ namespace CancelTrack.Context
                 new Empleado
                 {
                     PKEmpleado = 2,
-                    Nombre = "Usuario 1",
-                    Apellido = "user1",
-                    Matricula = "password1",
-                    Contraseña = "s",
+                    Nombre = "Diego",
+                    Apellido = "Cortez",
+                    Matricula = "diego",
+                    Contraseña = "123",
                     FKPuesto = 2,
                     Telefono = 1234,
                     Correo = "diego@gmail.com",
@@ -134,7 +148,7 @@ namespace CancelTrack.Context
                     CantidadInventario = 200
                 }
             );
-            modelBuilder.Entity<VentaProducto>().HasData(
+            /*modelBuilder.Entity<VentaProducto>().HasData(
                 new VentaProducto
                 {
                     PKVentaProducto = 1,
@@ -165,7 +179,7 @@ namespace CancelTrack.Context
                     FKEmpleado = 2,
                     Total = 7500
                 }
-            );
+            );*/
             modelBuilder.Entity<Puesto>().HasData(
                 new Puesto
                 {

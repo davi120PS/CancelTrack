@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace CancelTrack.Entities
     public class Venta
     {
         [Key] public int PKVenta { get; set; }
-        [ForeignKey("Clientes")] public int? FKCliente { get; set; }
+        [ForeignKey("Clientes")] public int FKCliente { get; set; }
         public Cliente Clientes { get; set; }
-        [ForeignKey("Empleados")] public int? FKEmpleado { get; set; }
+        [ForeignKey("Empleados")] public int FKEmpleado { get; set; }
         public Empleado Empleados { get; set; }
         public List<Producto> Productos { get; set; }
         public ICollection<VentaProducto> VentaProductos { get; set; }
@@ -26,6 +27,10 @@ namespace CancelTrack.Entities
         public Venta()
         {
             VentaProductos = new List<VentaProducto>();
+        }
+        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+        public sealed class OneToManyCascadeDeleteAttribute : Attribute
+        {
         }
     }
 }
