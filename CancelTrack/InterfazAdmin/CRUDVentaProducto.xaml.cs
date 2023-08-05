@@ -1,6 +1,8 @@
 ﻿using CancelTrack.Context;
 using CancelTrack.Entities;
 using CancelTrack.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,11 @@ namespace CancelTrack.InterfazAdmin
     public partial class CRUDVentaProducto : Window
     {
         private readonly VentaProductoServices services = new VentaProductoServices();
-        ProductoServices productoServices = new ProductoServices();
+        private readonly ProductoServices productoServices = new ProductoServices();
+        private readonly VentaServices VentaServices = new VentaServices();
+        Venta venta = new Venta();
+        Producto producto = new Producto();
+
         public CRUDVentaProducto()
         {
             InitializeComponent();
@@ -31,48 +37,46 @@ namespace CancelTrack.InterfazAdmin
             GetVenta();
             GetProducto();
         }
-        VentaServices VentaServices = new VentaServices();
-        Venta venta = new Venta();
-        Producto producto = new Producto();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKVentaProducto.Text == "")
             {
-                if (txtCantidadVP.Text != "" && CbxFKProducto.SelectedValue != null && CbxFKVenta.SelectedValue != null)
+                if (!string.IsNullOrEmpty(txtCantidadVP.Text) && CbxFKProducto.SelectedValue != null && CbxFKVenta.SelectedValue != null &&
+                    int.TryParse(txtCantidadVP.Text, out int cantidad))
                 {
-                    VentaProducto ventaProducto = new VentaProducto()
+                    var ventaProducto = new VentaProducto()
                     {   //Agrega los datos ingresados a la base de datos
                         FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
                         FKVentas = int.Parse(CbxFKVenta.SelectedValue.ToString()),
-                        Cantidad = int.Parse(txtCantidadVP.Text)
+                        Cantidad = cantidad
                     };
                     services.Add(ventaProducto);
 
                     // Recalcular el valor del Total de la venta
                     venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
                     producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
-                    int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
+                    int totalVenta = CalcularTotalVenta(producto.PrecioVenta, cantidad);
+
+                    // Sumar el valor calculado al Total existente
                     venta.Total += totalVenta;
 
                     Venta ventaTotal = new Venta()
                     {
                         PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
-                        Total = totalVenta
+                        Total = venta.Total
                     };
                     VentaServices.UpdateTotal(ventaTotal);
 
                     // Actualizar la cantidad de inventario del producto
-                    int productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
+                    productoServices.UpdateCantidadInventario(ventaProducto.FKProducto, -ventaProducto.Cantidad);
+                    /* productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
                     int cantidadVendida = int.Parse(txtCantidadVP.Text);
-                    productoServices.UpdateCantidadInventario(productoId, cantidadVendida);
+                    
+                    productoServices.UpdateCantidadInventario(productoId, cantidadVendida);*/
 
                     MessageBox.Show("Producto agregado a la venta");
                     GetVentasProductosTable();
-                    
-                    txtPKVentaProducto.Clear();
-                    txtCantidadVP.Clear();  
-                    CbxFKVenta.SelectedValue = null;
-                    CbxFKProducto.SelectedValue = null;
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -80,6 +84,42 @@ namespace CancelTrack.InterfazAdmin
             else
             {
                 int Id = Convert.ToInt32(txtPKVentaProducto.Text);
+                if (int.TryParse(txtCantidadVP.Text, out int cantidad))
+                {
+                    VentaProducto ventaProducto = new VentaProducto
+                    {
+                        PKVentaProducto = Id,
+                        FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
+                        Cantidad = cantidad
+                    };
+                    services.Update(ventaProducto);
+
+                    /*// Recalcular el valor del Total de la venta
+                    venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
+                    producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                    int totalVenta = CalcularTotalVenta(producto.PrecioVenta, cantidad);
+
+                    // Sumar el valor calculado al Total existente
+                    venta.Total += totalVenta;
+
+                    Venta ventaTotal = new Venta()
+                    {
+                        PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
+                        Total = venta.Total
+                    };
+                    VentaServices.UpdateTotal(ventaTotal);*/
+
+                    productoServices.UpdateCantidadInventario(ventaProducto.FKProducto, -ventaProducto.Cantidad);
+
+                    MessageBox.Show("Venta del producto actualizada");
+                    GetVentasProductosTable();
+                    LimpiarCampos();
+                }
+                else
+                {
+                    MessageBox.Show("El formato de cantidad es incorrecto.");
+                }
+                /*int Id = Convert.ToInt32(txtPKVentaProducto.Text);
                 VentaProducto ventaProducto = new VentaProducto()
                 {
                     PKVentaProducto = Id,
@@ -92,12 +132,14 @@ namespace CancelTrack.InterfazAdmin
                 venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
                 producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
                 int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
+
+                // Sumar el valor calculado al Total existente
                 venta.Total += totalVenta;
 
                 Venta ventaTotal = new Venta()
                 {
                     PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
-                    Total = totalVenta
+                    Total = venta.Total
                 };
                 VentaServices.UpdateTotal(ventaTotal);
 
@@ -111,28 +153,80 @@ namespace CancelTrack.InterfazAdmin
                 txtPKVentaProducto.Clear();
                 txtCantidadVP.Clear();
                 CbxFKProducto.SelectedValue = null;
+                CbxFKVenta.SelectedValue = null;*/
             }
         }
-        private int CalcularTotalVenta(Venta venta, Producto producto, int ventacant)
+        private int CalcularTotalVenta(int precioVenta, int cantidad)
+        {
+            return precioVenta * cantidad;
+        }
+        /*private int CalcularTotalVenta(Venta venta, Producto producto, int ventacant)
         {
             int totalVenta = 0;
             totalVenta += producto.PrecioVenta * ventacant;
             return totalVenta;
-        }
+        }*/
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKVentaProducto.Text == "")
-                MessageBox.Show("Selecciona un venta del producto");
+            {
+                MessageBox.Show("Selecciona una venta del producto");
+            }
             else
             {
-                int Id = Convert.ToInt32(txtPKVentaProducto.Text);
-                VentaProducto venta = new VentaProducto();
-                venta.PKVentaProducto = Id;
-                services.Delete(Id);
-                MessageBox.Show("Venta del producto Eliminada");
-                GetVentasProductosTable();
+                try
+                {
+                    int ventaProductoId = int.Parse(txtPKVentaProducto.Text);
+                    VentaProducto ventaProducto = services.GetVentaProductos().FirstOrDefault(vp => vp.PKVentaProducto == ventaProductoId);
+
+                    if (ventaProducto != null)
+                    {
+                        int ventaId = ventaProducto.FKVentas;
+                        Producto producto = ventaProducto.Productos;
+                        int cantidadEliminada = ventaProducto.Cantidad;
+
+                        services.Delete(ventaProductoId); // Eliminar la VentaProducto
+
+                        // Actualizar el Total y el Inventario
+                        VentaServices.UpdateTotalAndInventoryAfterDeletion(ventaId, new List<VentaProducto> { ventaProducto });
+
+                        MessageBox.Show("Venta del producto eliminada y Total e Inventario actualizados");
+                        GetVentasProductosTable();
+                        LimpiarCampos();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontró la venta del producto");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al eliminar la venta del producto: " + ex.Message);
+                }
             }
         }
+        /*private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtPKVentaProducto.Text == "")
+                MessageBox.Show("Selecciona una venta del producto");
+            else
+            {
+                int ventaId = Convert.ToInt32(CbxFKVenta.SelectedValue);
+                List<VentaProducto> productos = services.GetVentaProductosByVentaId(ventaId);
+
+                if (productos != null && productos.Any())
+                {
+                    services.Delete(ventaId);
+                    VentaServices.UpdateTotalAndInventoryAfterDeletion(ventaId, productos);
+
+                    MessageBox.Show("Venta del producto eliminada y Total e Inventario actualizados");
+                    GetVentasProductosTable();
+                    LimpiarCampos();
+                }
+                else
+                    MessageBox.Show("No se encontraron productos para la venta");
+            }
+        }*/
         public void EditItem(object sender, RoutedEventArgs e)
         {
             VentaProducto ventaProducto = new VentaProducto();
@@ -168,17 +262,17 @@ namespace CancelTrack.InterfazAdmin
         }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKVentaProducto.Clear();
-                txtCantidadVP.Clear();
-                CbxFKProducto.SelectedValue = null;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKVentaProducto.Clear();
+            txtCantidadVP.Clear();
+            CbxFKProducto.SelectedValue = null;
+            CbxFKVenta.SelectedValue = null;
+        }
+        public void LimpiarCampos()
+        {
+            txtPKVentaProducto.Clear();
+            txtCantidadVP.Clear();
+            CbxFKProducto.SelectedValue = null;
+            CbxFKVenta.SelectedValue = null;
         }
     }
 }

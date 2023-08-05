@@ -1,4 +1,5 @@
 ﻿using CancelTrack.Entities;
+using CancelTrack.InterfazAdmin;
 using CancelTrack.Services;
 using System;
 using System.Collections.Generic;
@@ -25,77 +26,106 @@ namespace CancelTrack.InterfazVendedor
         {
             InitializeComponent();
             GetVentaTable();
+            GetCliente();
+            GetEmpleado();
+            //GetVentaProducto();
         }
         VentaServices services = new VentaServices();
+        CRUDVentaProducto TablaVentaProducto = new CRUDVentaProducto();
+        VentaProductoServices ventaProductoServices = new VentaProductoServices();
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (txtPKVenta.Text == "")
+            if (txtTotalVen.Text == "")
             {
-                Venta venta = new Venta();
-                //FKCliente = int.Parse(txtFKCliente.Text),
-                //FKEmpleado = int.Parse(txtFKEmpleado.Text),
-                venta.Total = int.Parse(txtTotal.Text);
+                if (CbxFKCliente.SelectedValue != null && CbxFKEmpleado.SelectedValue != null)
+                {
+                    Venta venta = new Venta()
+                    {
+                        FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
+                        FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
+                        VentaProductos = new List<VentaProducto>() // Inicializar la lista de VentaProductos
+                    };
+                    services.Add(venta);
 
-                services.Add(venta);
-                MessageBox.Show("Venta registrada");
-                txtFKCliente.Clear();
-                txtFKEmpleado.Clear();
-                txtTotal.Clear();
-                GetVentaTable();
+                    MessageBox.Show("Venta registrada");
+                    GetVentaTable();
+                    txtPKVenta.Clear();
+                    txtTotalVen.Clear();
+                    CbxFKCliente.SelectedValue = null;
+                    CbxFKEmpleado.SelectedValue = null;
+                    //CbxFKVentaProducto.SelectedValue = null;
+                }
+                else
+                    MessageBox.Show("Faltan datos por llenar");
             }
             else
             {
                 int Id = Convert.ToInt32(txtPKVenta.Text);
-
                 Venta venta = new Venta()
                 {
                     PKVenta = Id,
-                    FKCliente = int.Parse(txtFKCliente.Text),
-                    FKEmpleado = int.Parse(txtFKEmpleado.Text),
-                    Total = int.Parse(txtTotal.Text)
+                    FKCliente = int.Parse(CbxFKCliente.SelectedValue.ToString()),
+                    FKEmpleado = int.Parse(CbxFKEmpleado.SelectedValue.ToString()),
                 };
-                MessageBox.Show("Venta actualizado");
                 services.Update(venta);
+
+                MessageBox.Show("Venta actualizada");
+                GetVentaTable();
                 txtPKVenta.Clear();
-                txtFKCliente.Clear();
-                txtFKEmpleado.Clear();
-                txtTotal.Clear();
-                GetVentaTable();
-            }
-        }
-        private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtPKVenta.Text == "")
-            {
-                MessageBox.Show("Selecciona un proveedor");
-            }
-            else
-            {
-                int Id = Convert.ToInt32(txtPKVenta.Text);
-                Proveedor proveedor = new Proveedor();
-                proveedor.PKProveedor = Id;
-                services.Delete(Id);
-                MessageBox.Show("Proveedor Eliminado");
-                GetVentaTable();
+                txtTotalVen.Clear();
+                CbxFKCliente.SelectedValue = null;
+                CbxFKEmpleado.SelectedValue = null;
+                //CbxFKVentaProducto.SelectedValue = null;
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
         {
             Venta venta = new Venta();
+
             venta = (sender as FrameworkElement).DataContext as Venta;
+
             txtPKVenta.Text = venta.PKVenta.ToString();
-            txtFKCliente.Text = venta.FKCliente.ToString();
-            txtFKEmpleado.Text = venta.FKEmpleado.ToString();
-            txtTotal.Text = venta.Total.ToString();
+            CbxFKCliente.SelectedValue = venta.FKCliente.ToString();
+            CbxFKEmpleado.SelectedValue = venta.FKEmpleado.ToString();
+            txtTotalVen.Text = venta.Total.ToString();
         }
+
         public void GetVentaTable()
         {
-            VentaTable.ItemsSource = services.GetVentas();
+            TablaVenta.ItemsSource = services.GetVentas();
         }
-        private void UserTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void GetCliente()
         {
-
+            CbxFKCliente.ItemsSource = services.GetClientes();
+            CbxFKCliente.DisplayMemberPath = "Nombre";
+            CbxFKCliente.SelectedValuePath = "PKCliente";
         }
+        public void GetEmpleado()
+        {
+            CbxFKEmpleado.ItemsSource = services.GetEmpleados();
+            CbxFKEmpleado.DisplayMemberPath = "Nombre";
+            CbxFKEmpleado.SelectedValuePath = "PKEmpleado";
+        }
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MenuAdmin admin = new MenuAdmin();
+            admin.Show();
+            Close();
+        }
+        private void BtnClear_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                txtPKVenta.Clear();
+                txtTotalVen.Clear();
+                CbxFKCliente.SelectedValue = null;
+                CbxFKEmpleado.SelectedValue = null;
+            }
+            catch (Exception ex)
+            {
 
+                throw new Exception("ERROR: " + ex.Message);
+            }
+        }
     }
 }

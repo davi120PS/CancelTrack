@@ -24,25 +24,26 @@ namespace CancelTrack.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+        // Cuando se elimina una venta, tambien se eliminan las ventas del producto relacionadas
             modelBuilder.Entity<Venta>()
                 .HasMany(v => v.VentaProductos)
                 .WithOne(vp => vp.Ventas)
                 .HasForeignKey(vp => vp.FKVentas)
                 .OnDelete(DeleteBehavior.Cascade); // ON DELETE CASCADE
-
+                //.OnUpdate(DeleteBehavior.Cascade);
+            // Cuando se elimina una cliente, tambien se elimina solo una venta relacionada
             modelBuilder.Entity<Venta>()
                 .HasOne(v => v.Clientes)
                 .WithMany()
                 .HasForeignKey(v => v.FKCliente)
                 .OnDelete(DeleteBehavior.Restrict);
-
+        // Cuando se elimina un empleado, tambien se elimina solo una venta relacionada
             modelBuilder.Entity<Venta>()
                 .HasOne(v => v.Empleados)
                 .WithMany()
                 .HasForeignKey(v => v.FKEmpleado)
                 .OnDelete(DeleteBehavior.Restrict);
-
+        // Cuando se elimina una ventaproducto, tambien se eliminan las ventas relacionadas
             modelBuilder.Entity<VentaProducto>()
                 .HasOne(vp => vp.Ventas)
                 .WithMany(v => v.VentaProductos)

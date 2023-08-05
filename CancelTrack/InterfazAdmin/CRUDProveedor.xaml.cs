@@ -32,7 +32,7 @@ namespace CancelTrack.InterfazAdmin
         {
             if (txtPKProveedor.Text == "")
             {
-                if (txtNombreProv.Text != "" || txtDireccionProv.Text != "" && txtTelefonoProv.Text != "" && txtCorreoProv.Text != "")
+                if (txtNombreProv.Text != "" && txtDireccionProv.Text != "" && txtTelefonoProv.Text != "" && txtCorreoProv.Text != "")
                 {
                     Proveedor proveedor = new Proveedor()
                     {

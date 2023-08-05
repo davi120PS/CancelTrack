@@ -5,31 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.InterfazVendedor"
         mc:Ignorable="d"
-        Title="CRUVenta" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Margin="42,301,0,0" VerticalAlignment="Top" Width="100" Height="50" FontSize="16" Click="BtnAdd_Click"/>
-        <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Margin="32,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="14" Background="#FFFFC5C5" IsEnabled="False"/>
-        <TextBox x:Name="txtFKCliente" HorizontalAlignment="Left" Margin="32,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFFFC5C5" IsEnabled="False"/>
-        <TextBox x:Name="txtFKEmpleado" HorizontalAlignment="Left" Margin="32,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFFFC5C5" IsEnabled="False"/>
-        <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Margin="32,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FFFFC5C5"/>
-        <Label Content="Contenido de Ventas" HorizontalAlignment="Left" Margin="32,56,0,0" VerticalAlignment="Top"/>
-
-        <DataGrid x:Name="VentaTable" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="183,127,44,59" SelectionChanged="UserTable_SelectionChanged">
+        Title="CRUVenta" Height="532" Width="1086">
+    <Grid HorizontalAlignment="Left" Width="1084" Margin="0,0,0,-2">
+        <Label FontSize="50" Content="Ventas" HorizontalAlignment="Left" Height="100" Margin="526,14,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5"/>
+        <Label Content="ID Venta" HorizontalAlignment="Left" Height="28" Margin="31,123,0,0" VerticalAlignment="Top" Width="126"/>
+        <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Height="21" Margin="28,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" IsEnabled="False"/>
+        <Label Content="ID Cliente" HorizontalAlignment="Left" Height="32" Margin="28,177,0,0" VerticalAlignment="Top" Width="173"/>
+        <ComboBox x:Name="CbxFKCliente" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="28,211,0,0" VerticalAlignment="Top" Width="173" Height="24"/>
+        <Label Content="ID Empleado" HorizontalAlignment="Left" Height="34" Margin="26,238,0,0" VerticalAlignment="Top" Width="172"/>
+        <ComboBox x:Name="CbxFKEmpleado" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="26,273,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
+        <Label Content="Total" HorizontalAlignment="Left" Height="33" Margin="28,301,0,0" VerticalAlignment="Top" Width="173"/>
+        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="26" Margin="26,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" IsEnabled="False"/>
+        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
+        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="24,381,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
+        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="116,381,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
+        <DataGrid x:Name="TablaVenta" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="235,120,67,51">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding PKVenta}" />
-                <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente.Nombre}" />
-                <DataGridTextColumn Header="Empleado" Binding="{Binding Empleado.Nombre}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding PKVenta}" />
+                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Clientes.Nombre}" />
+                <DataGridTextColumn Header="ID Empleado" Binding="{Binding Empleados.Nombre}" />
+                <!--<DataGridTextColumn Header="ID VentaProducto" Binding="{Binding VentaProductos.PKVentaProducto}" />-->
                 <DataGridTextColumn Header="Total" Binding="{Binding Total}" />
-
-                <DataGridTemplateColumn Header="Editar">
+                <DataGridTemplateColumn Header="Select">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Select" Click="EditItem" />
+                            <Button Content="Select" Click="EditItem"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-
         </DataGrid>
     </Grid>
 </Window>

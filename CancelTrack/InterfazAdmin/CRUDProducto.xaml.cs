@@ -32,7 +32,7 @@ namespace CancelTrack.InterfazAdmin
         {
             if (txtPKProducto.Text == "")
             {
-                if (txtNombreProd.Text != "" || txtDescripcionProd.Text != "" || txtPrecioVenta.Text != "" || txtPrecioCompra.Text != "" || txtCantInvenProd.Text != "" || CbxFKProv.SelectedValue != null)
+                if (txtNombreProd.Text != "" && txtDescripcionProd.Text != "" && txtPrecioVenta.Text != "" && txtPrecioCompra.Text != "" && txtCantInvenProd.Text != "" && CbxFKProv.SelectedValue != null)
                 {
                     Producto producto = new Producto();
                     producto.Nombre = txtNombreProd.Text;

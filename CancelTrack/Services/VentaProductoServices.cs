@@ -12,6 +12,7 @@ namespace CancelTrack.Services
 {
     public class VentaProductoServices
     {
+        VentaServices ventaServices = new VentaServices();
         #region ADD
         public void Add(VentaProducto request)
         {
@@ -37,18 +38,35 @@ namespace CancelTrack.Services
         }
         #endregion
         #region UPDATE
-        public void Update(VentaProducto request)//recibe todos los datos del VentaProducto
+        public void Update(VentaProducto request)
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
                     VentaProducto update = _context.VentaProducto.Find(request.PKVentaProducto);
+                    int cantidadAnterior = update.Cantidad; // Almacena la cantidad anterior para calcular la diferencia
+                    
                     update.Cantidad = request.Cantidad;
                     update.FKProducto = request.FKProducto;
 
                     //_context.Entry(update).State = EntityState.Modified;
                     _context.VentaProducto.Update(update);
+                    _context.SaveChanges();
+
+                    // Actualizar el Total de la venta
+                    Venta venta = _context.Venta.Find(update.FKVentas);
+                    Producto producto = _context.Producto.Find(update.FKProducto);
+                    int totalVenta = CalcularTotalVenta(venta, producto, request.Cantidad - cantidadAnterior);
+                    
+                    // Sumar el valor calculado al Total existente
+                    venta.Total += totalVenta;
+                    Venta totalCambiado = new Venta
+                    {
+                        PKVenta = update.FKVentas,
+                        Total = venta.Total
+                    };
+                    ventaServices.UpdateTotal(totalCambiado);
                     _context.SaveChanges();
                 }
             }
@@ -58,6 +76,12 @@ namespace CancelTrack.Services
             }
         }
         #endregion
+        // Método para calcular el total de una venta después de cambios en VentaProducto
+        private int CalcularTotalVenta(Venta venta, Producto producto, int cantidadCambiar)
+        {
+            int totalVenta = producto.PrecioVenta * cantidadCambiar;
+            return totalVenta;
+        }
         #region DELETE
         public void Delete(int VentaProductoId)
         {
@@ -84,6 +108,23 @@ namespace CancelTrack.Services
             }
         }
         #endregion
+        public List<VentaProducto> GetVentaProductosByVentaId(int ventaId)
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    return _context.VentaProducto
+                        .Include(vp => vp.Productos)
+                        .Where(vp => vp.FKVentas == ventaId)
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener los productos de la venta: " + ex.Message);
+            }
+        }
         public List<VentaProducto> GetVentaProductos()
         {
             try
@@ -92,7 +133,7 @@ namespace CancelTrack.Services
                 {
                     List<VentaProducto> ventaProductos = _context.VentaProducto
                         .Include(x => x.Productos)
-                        .Include(x => x.Ventas)
+                        //.Include(x => x.Ventas)
                         .ToList();
                     return ventaProductos;
                 }

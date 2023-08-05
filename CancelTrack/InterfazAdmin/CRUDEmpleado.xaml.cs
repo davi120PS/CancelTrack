@@ -35,7 +35,7 @@ namespace CancelTrack.InterfazAdmin
         {
             if (txtPKEmpleado.Text == "")
             {
-                if (txtNombre.Text != "" || txtApellido.Text != "" || txtMatricula.Text != "" || txtContraseña.Text != "" || txtTelefono.Text != "" || txtCorreo.Text != "" || CbxPuesto.SelectedValue != null)
+                if (txtNombre.Text != "" && txtApellido.Text != "" && txtMatricula.Text != "" && txtContraseña.Text != "" && txtTelefono.Text != "" && txtCorreo.Text != "" && CbxPuesto.SelectedValue != null)
                 {
                     Empleado empleado = new Empleado();
                     empleado.Nombre = txtNombre.Text;

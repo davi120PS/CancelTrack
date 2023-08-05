@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CancelTrack.Services
 {
     public class VentaServices
     {
+        ProductoServices productoServices = new ProductoServices();
         #region ADD
         public void Add(Venta request) // Modificamos el retorno para devolver la PKVenta generada
         {
@@ -73,6 +75,35 @@ namespace CancelTrack.Services
             catch (Exception ex)
             {
                 throw new Exception("Sucedió un error" + ex.Message);
+            }
+        }
+        public void UpdateTotalAndInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    Venta venta = _context.Venta.Find(ventaId);
+
+                    if (venta != null && productos != null && productos.Any())
+                    {
+                        int totalReduction = 0;
+                        foreach (var producto in productos)
+                        {
+                            totalReduction += producto.Productos.PrecioVenta * producto.Cantidad;
+                            productoServices.UpdateCantidadInventario(producto.FKProducto, -producto.Cantidad);
+                        }
+
+                        venta.Total -= totalReduction;
+                        //UpdateTotal(venta); // Actualizar el Total de la venta
+                        _context.Venta.Update(venta);
+                        _context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el Total y el Inventario: " + ex.Message);
             }
         }
         #endregion
@@ -142,7 +173,10 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    List<Empleado> empleados = _context.Empleado.ToList();
+                    List<Empleado> empleados = _context.Empleado
+                        .Where(x=>x.FKPuesto == 2)
+                        .Where(x=>x.Estado == 1)
+                        .ToList();
                     return empleados;
                 }
             }

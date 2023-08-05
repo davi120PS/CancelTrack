@@ -85,6 +85,24 @@ namespace CancelTrack.Services
                 throw new Exception("Sucedió un error" + ex.Message);
             }
         }
+        public void UpdateEstado(Empleado request)//recibe todos los datos del empleado
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    Empleado update = _context.Empleado.Find(request.PKEmpleado);
+                    update.Estado = request.Estado;
+
+                    _context.Empleado.Update(update);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Sucedió un error" + ex.Message);
+            }
+        }   
         #endregion
         #region DELETE
         public void Delete(int EmpleadoId)

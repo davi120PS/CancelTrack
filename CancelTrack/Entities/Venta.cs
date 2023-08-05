@@ -22,15 +22,11 @@ namespace CancelTrack.Entities
         public int Total
         {
             get { return total; }
-            set { total += value; }
+            set { total = value; }
         }
         public Venta()
         {
             VentaProductos = new List<VentaProducto>();
-        }
-        [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-        public sealed class OneToManyCascadeDeleteAttribute : Attribute
-        {
         }
     }
 }

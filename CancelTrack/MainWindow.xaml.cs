@@ -32,10 +32,7 @@ namespace CancelTrack
         EmpleadoServices services = new EmpleadoServices();
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            MenuAdmin sistema = new MenuAdmin();
-            sistema.Show();
-            Close();
-            /*string user = txtUserName.Text;
+            string user = txtUserName.Text;
             string pass = txtPassword.Password;
 
             var response = services.Login(user, pass);
@@ -52,9 +49,10 @@ namespace CancelTrack
                             {
                                 Empleado empleado = new Empleado()
                                 {
+                                    PKEmpleado = response.PKEmpleado,
                                     Estado = 1
                                 };
-                                services.Update(empleado);
+                                services.UpdateEstado(empleado);
                             }
                         }
                         catch (Exception ex)
@@ -68,17 +66,16 @@ namespace CancelTrack
                     }
                     if (response.Puestos.Nombre == "Vendedor")
                     {
-
                         MenuVendedor sistema = new MenuVendedor();
                         sistema.Show();
                         Close();
                     }
                 }
+                else
+                    MessageBox.Show("Cuenta no encontrada/existe");
             }
             else
-            {
                 MessageBox.Show("Ingresa los datos");
-            }*/
         }
     }
 }

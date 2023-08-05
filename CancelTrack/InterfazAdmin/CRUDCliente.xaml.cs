@@ -32,7 +32,7 @@ namespace CancelTrack.InterfazAdmin
         {
             if (txtPKCliente.Text == "")
             {
-                if (txtNombreCli.Text != "" || txtApellidoCli.Text != "" || txtDireccionCli.Text != "" && txtTelefonoCli.Text != "" && txtCorreoCli.Text != "")
+                if (txtNombreCli.Text != "" && txtApellidoCli.Text != "" && txtDireccionCli.Text != "" && txtTelefonoCli.Text != "" && txtCorreoCli.Text != "")
                 {
                     Cliente usuario = new Cliente()
                     {

@@ -46,7 +46,7 @@ namespace CancelTrack.InterfazAdmin
                     };
                     services.Add(venta);
 
-                    MessageBox.Show("Venta y VentaProducto registrada");
+                    MessageBox.Show("Venta registrada");
                     GetVentaTable();
                     txtPKVenta.Clear();
                     txtTotalVen.Clear();
@@ -89,6 +89,10 @@ namespace CancelTrack.InterfazAdmin
                 services.Delete(Id);
                 MessageBox.Show("Venta eliminada");
                 GetVentaTable();
+                txtPKVenta.Clear();
+                txtTotalVen.Clear();
+                CbxFKCliente.SelectedValue = null;
+                CbxFKEmpleado.SelectedValue = null;
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -127,18 +131,10 @@ namespace CancelTrack.InterfazAdmin
         }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKVenta.Clear();
-                txtTotalVen.Clear();
-                CbxFKCliente.SelectedValue = null;
-                CbxFKEmpleado.SelectedValue = null;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKVenta.Clear();
+            txtTotalVen.Clear();
+            CbxFKCliente.SelectedValue = null;
+            CbxFKEmpleado.SelectedValue = null;
         }
     }
 }
