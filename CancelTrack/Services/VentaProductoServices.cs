@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CancelTrack.Services
 {
     public class VentaProductoServices
     {
         VentaServices ventaServices = new VentaServices();
+        private readonly ProductoServices productoServices = new ProductoServices();
         #region ADD
         public void Add(VentaProducto request)
         {
@@ -28,6 +30,10 @@ namespace CancelTrack.Services
                         res.FKVentas = request.FKVentas;
                         _context.VentaProducto.Add(res);
                         _context.SaveChanges();
+
+                        // Actualizar la cantidad de inventario del producto
+                        productoServices.UpdateCantidadInventario(request.FKProducto, request.Cantidad);
+
                     }
                 }
             }
@@ -45,12 +51,12 @@ namespace CancelTrack.Services
                 using (var _context = new ApplicationDbContext())
                 {
                     VentaProducto update = _context.VentaProducto.Find(request.PKVentaProducto);
-                    int cantidadAnterior = update.Cantidad; // Almacena la cantidad anterior para calcular la diferencia
+                    // Almacena la cantidad anterior para calcular la diferencia
+                    int cantidadAnterior = update.Cantidad; 
                     
                     update.Cantidad = request.Cantidad;
                     update.FKProducto = request.FKProducto;
 
-                    //_context.Entry(update).State = EntityState.Modified;
                     _context.VentaProducto.Update(update);
                     _context.SaveChanges();
 
@@ -58,7 +64,10 @@ namespace CancelTrack.Services
                     Venta venta = _context.Venta.Find(update.FKVentas);
                     Producto producto = _context.Producto.Find(update.FKProducto);
                     int totalVenta = CalcularTotalVenta(venta, producto, request.Cantidad - cantidadAnterior);
-                    
+
+                    // Actualizar la cantidad de inventario del producto
+                    productoServices.UpdateCantidadInventario(request.FKProducto, -cantidadAnterior + request.Cantidad);
+
                     // Sumar el valor calculado al Total existente
                     venta.Total += totalVenta;
                     Venta totalCambiado = new Venta

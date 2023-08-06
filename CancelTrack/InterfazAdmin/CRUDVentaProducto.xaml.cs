@@ -3,6 +3,7 @@ using CancelTrack.Entities;
 using CancelTrack.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,13 +68,6 @@ namespace CancelTrack.InterfazAdmin
                     };
                     VentaServices.UpdateTotal(ventaTotal);
 
-                    // Actualizar la cantidad de inventario del producto
-                    productoServices.UpdateCantidadInventario(ventaProducto.FKProducto, -ventaProducto.Cantidad);
-                    /* productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
-                    int cantidadVendida = int.Parse(txtCantidadVP.Text);
-                    
-                    productoServices.UpdateCantidadInventario(productoId, cantidadVendida);*/
-
                     MessageBox.Show("Producto agregado a la venta");
                     GetVentasProductosTable();
                     LimpiarCampos();
@@ -94,84 +88,22 @@ namespace CancelTrack.InterfazAdmin
                     };
                     services.Update(ventaProducto);
 
-                    /*// Recalcular el valor del Total de la venta
-                    venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                    producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
-                    int totalVenta = CalcularTotalVenta(producto.PrecioVenta, cantidad);
-
-                    // Sumar el valor calculado al Total existente
-                    venta.Total += totalVenta;
-
-                    Venta ventaTotal = new Venta()
-                    {
-                        PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
-                        Total = venta.Total
-                    };
-                    VentaServices.UpdateTotal(ventaTotal);*/
-
-                    productoServices.UpdateCantidadInventario(ventaProducto.FKProducto, -ventaProducto.Cantidad);
-
                     MessageBox.Show("Venta del producto actualizada");
                     GetVentasProductosTable();
                     LimpiarCampos();
                 }
                 else
-                {
                     MessageBox.Show("El formato de cantidad es incorrecto.");
-                }
-                /*int Id = Convert.ToInt32(txtPKVentaProducto.Text);
-                VentaProducto ventaProducto = new VentaProducto()
-                {
-                    PKVentaProducto = Id,
-                    FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),
-                    Cantidad = int.Parse(txtCantidadVP.Text)
-                };
-                services.Update(ventaProducto);
-
-                // Recalcular el valor del Total de la venta
-                venta = VentaServices.GetVentaById(int.Parse(CbxFKVenta.SelectedValue.ToString()));
-                producto = VentaServices.GetProctoByName(int.Parse(CbxFKProducto.SelectedValue.ToString()));
-                int totalVenta = CalcularTotalVenta(venta, producto, int.Parse(txtCantidadVP.Text));
-
-                // Sumar el valor calculado al Total existente
-                venta.Total += totalVenta;
-
-                Venta ventaTotal = new Venta()
-                {
-                    PKVenta = int.Parse(CbxFKVenta.SelectedValue.ToString()),
-                    Total = venta.Total
-                };
-                VentaServices.UpdateTotal(ventaTotal);
-
-                // Actualizar la cantidad de inventario del producto
-                int productoId = int.Parse(CbxFKProducto.SelectedValue.ToString());
-                int cantidadVendida = int.Parse(txtCantidadVP.Text);
-                productoServices.UpdateCantidadInventario(productoId, cantidadVendida);
-
-                MessageBox.Show("Venta del producto actualizada");
-                GetVentasProductosTable();
-                txtPKVentaProducto.Clear();
-                txtCantidadVP.Clear();
-                CbxFKProducto.SelectedValue = null;
-                CbxFKVenta.SelectedValue = null;*/
             }
         }
         private int CalcularTotalVenta(int precioVenta, int cantidad)
         {
             return precioVenta * cantidad;
         }
-        /*private int CalcularTotalVenta(Venta venta, Producto producto, int ventacant)
-        {
-            int totalVenta = 0;
-            totalVenta += producto.PrecioVenta * ventacant;
-            return totalVenta;
-        }*/
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKVentaProducto.Text == "")
-            {
                 MessageBox.Show("Selecciona una venta del producto");
-            }
             else
             {
                 try
@@ -195,9 +127,7 @@ namespace CancelTrack.InterfazAdmin
                         LimpiarCampos();
                     }
                     else
-                    {
                         MessageBox.Show("No se encontró la venta del producto");
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -205,28 +135,6 @@ namespace CancelTrack.InterfazAdmin
                 }
             }
         }
-        /*private void BtnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtPKVentaProducto.Text == "")
-                MessageBox.Show("Selecciona una venta del producto");
-            else
-            {
-                int ventaId = Convert.ToInt32(CbxFKVenta.SelectedValue);
-                List<VentaProducto> productos = services.GetVentaProductosByVentaId(ventaId);
-
-                if (productos != null && productos.Any())
-                {
-                    services.Delete(ventaId);
-                    VentaServices.UpdateTotalAndInventoryAfterDeletion(ventaId, productos);
-
-                    MessageBox.Show("Venta del producto eliminada y Total e Inventario actualizados");
-                    GetVentasProductosTable();
-                    LimpiarCampos();
-                }
-                else
-                    MessageBox.Show("No se encontraron productos para la venta");
-            }
-        }*/
         public void EditItem(object sender, RoutedEventArgs e)
         {
             VentaProducto ventaProducto = new VentaProducto();

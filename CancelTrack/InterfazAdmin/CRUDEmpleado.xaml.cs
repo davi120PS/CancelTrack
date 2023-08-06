@@ -29,7 +29,6 @@ namespace CancelTrack.InterfazAdmin
             GetEmpleadosTable();
             GetPuesto();
         }
-        static int estado = 0;
         EmpleadoServices services = new EmpleadoServices();
         private void BtnAddEmp_Click(object sender, RoutedEventArgs e)
         {
@@ -49,16 +48,8 @@ namespace CancelTrack.InterfazAdmin
 
                     services.Add(empleado);
                     MessageBox.Show("Empleado registrado");
-
-                    txtPKEmpleado.Clear();
-                    txtNombre.Clear();
-                    txtApellido.Clear();
-                    txtMatricula.Clear();
-                    txtContraseña.Clear();
-                    txtTelefono.Clear();
-                    txtCorreo.Clear();
-                    CbxPuesto.SelectedItem = null;
                     GetEmpleadosTable();
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -81,14 +72,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Update(empleado);
                 MessageBox.Show("Empleado actualizado");
                 GetEmpleadosTable();
-                txtPKEmpleado.Clear();
-                txtNombre.Clear();
-                txtApellido.Clear();
-                txtMatricula.Clear();
-                txtContraseña.Clear();
-                txtTelefono.Clear();
-                txtCorreo.Clear();
-                CbxPuesto.SelectedItem = null;
+                LimpiarCampos();
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -118,6 +102,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Delete(userId);
                 MessageBox.Show("Usuario Eliminado");
                 GetEmpleadosTable();
+                LimpiarCampos();
             }
         }
 
@@ -149,14 +134,7 @@ namespace CancelTrack.InterfazAdmin
                         services.Update(empleado);
                         MessageBox.Show("Empleado dado de baja");
                         GetEmpleadosTable();
-                        txtPKEmpleado.Clear();
-                        txtNombre.Clear();
-                        txtApellido.Clear();
-                        txtMatricula.Clear();
-                        txtContraseña.Clear();
-                        txtTelefono.Clear();
-                        txtCorreo.Clear();
-                        CbxPuesto.SelectedItem = null;
+                        LimpiarCampos();
                     }
                 }
             }
@@ -181,25 +159,27 @@ namespace CancelTrack.InterfazAdmin
             admin.Show();
             Close();
         }
-
+        public void LimpiarCampos()
+        {
+            txtPKEmpleado.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtMatricula.Clear();
+            txtContraseña.Clear();
+            txtTelefono.Clear();
+            txtCorreo.Clear();
+            CbxPuesto.SelectedValue = null;
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKEmpleado.Clear();
-                txtNombre.Clear();
-                txtApellido.Clear();
-                txtMatricula.Clear();
-                txtContraseña.Clear();
-                txtTelefono.Clear();
-                txtCorreo.Clear();
-                CbxPuesto.SelectedValue = null;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKEmpleado.Clear();
+            txtNombre.Clear();
+            txtApellido.Clear();
+            txtMatricula.Clear();
+            txtContraseña.Clear();
+            txtTelefono.Clear();
+            txtCorreo.Clear();
+            CbxPuesto.SelectedValue = null;
         }
     }
 }

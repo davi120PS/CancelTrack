@@ -108,16 +108,23 @@ namespace CancelTrack.Services
         }
         #endregion
         #region DELETE
-        public void Delete(int VentaId)
+        public void Delete(int ventaId)
         {
             try
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    Venta usuario = _context.Venta.Find(VentaId);
-                    if (usuario != null)
+                    /*Venta venta = _context.Venta.Include(v => v.VentaProductos).FirstOrDefault(v => v.PKVenta == ventaId);
+                    if (venta != null)
                     {
-                        _context.Remove(usuario);
+                        // Eliminar las ventas de producto relacionadas
+                        _context.VentaProducto.RemoveRange(venta.VentaProductos);*/
+ 
+                    
+                    Venta venta = _context.Venta.Find(ventaId);
+                    if (venta != null)
+                    {
+                        _context.Remove(venta);
                         _context.SaveChanges();
                     }
                     else

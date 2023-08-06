@@ -45,6 +45,7 @@ namespace CancelTrack.InterfazAdmin
                     services.Add(proveedor);
                     MessageBox.Show("Proveedor registrado");
                     GetProveedorTable();
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -64,11 +65,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Update(proveedor);
             }
             GetProveedorTable();
-            txtPKProveedor.Clear();
-            txtNombreProv.Clear();
-            txtDireccionProv.Clear();
-            txtTelefonoProv.Clear();
-            txtCorreoProv.Clear();
+            LimpiarCampos();
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -84,6 +81,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Delete(Id);
                 MessageBox.Show("Proveedor Eliminado");
                 GetProveedorTable();
+                LimpiarCampos();
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -109,22 +107,21 @@ namespace CancelTrack.InterfazAdmin
             admin.Show();
             Close();
         }
-
+        public void LimpiarCampos()
+        {
+            txtPKProveedor.Clear();
+            txtNombreProv.Clear();
+            txtDireccionProv.Clear();
+            txtTelefonoProv.Clear();
+            txtCorreoProv.Clear();
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKProveedor.Clear();
-                txtNombreProv.Clear();
-                txtDireccionProv.Clear();
-                txtTelefonoProv.Clear();
-                txtCorreoProv.Clear();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKProveedor.Clear();
+            txtNombreProv.Clear();
+            txtDireccionProv.Clear();
+            txtTelefonoProv.Clear(); 
+            txtCorreoProv.Clear();
         }
     }
 }

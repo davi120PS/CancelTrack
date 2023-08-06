@@ -46,12 +46,7 @@ namespace CancelTrack.InterfazAdmin
                     services.Add(usuario);
                     MessageBox.Show("Cliente registrado");
                     GetClientesTable();
-                    txtPKCliente.Clear();
-                    txtNombreCli.Clear();
-                    txtApellidoCli.Clear();
-                    txtDireccionCli.Clear();
-                    txtTelefonoCli.Clear();
-                    txtCorreoCli.Clear();
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -72,12 +67,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Update(usuario);
             }
             GetClientesTable();
-            txtPKCliente.Clear();
-            txtNombreCli.Clear();
-            txtApellidoCli.Clear();
-            txtDireccionCli.Clear();
-            txtTelefonoCli.Clear();
-            txtCorreoCli.Clear();
+            LimpiarCampos();
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
@@ -93,6 +83,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Delete(Id);
                 MessageBox.Show("Cliente Eliminado");
                 GetClientesTable();
+                LimpiarCampos();
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -119,23 +110,23 @@ namespace CancelTrack.InterfazAdmin
             admin.Show();
             Close();
         }
-
+        public void LimpiarCampos()
+        {
+            txtPKCliente.Clear();
+            txtNombreCli.Clear();
+            txtApellidoCli.Clear();
+            txtDireccionCli.Clear();
+            txtTelefonoCli.Clear();
+            txtCorreoCli.Clear();
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKCliente.Clear();
-                txtNombreCli.Clear();
-                txtApellidoCli.Clear();
-                txtDireccionCli.Clear();
-                txtTelefonoCli.Clear();
-                txtCorreoCli.Clear();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKCliente.Clear();
+            txtNombreCli.Clear();
+            txtApellidoCli.Clear();
+            txtDireccionCli.Clear();
+            txtTelefonoCli.Clear();
+            txtCorreoCli.Clear();
         }
     }
 }

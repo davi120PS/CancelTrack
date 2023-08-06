@@ -74,9 +74,23 @@ namespace CancelTrack.Services
                     Producto producto = _context.Producto.Find(productoId);
                     if (producto != null)
                     {
-                        // Disminuir la cantidad en inventario del producto según la cantidad vendida
-                        producto.CantidadInventario -= cantidadVendida;
-                        _context.SaveChanges();
+                        if (producto.CantidadInventario == 0)
+                        {
+                            MessageBox.Show("No hay productos disponibles en el inventario");
+                            return;
+                        }
+                        else if (cantidadVendida > producto.CantidadInventario)
+                        {
+                            MessageBox.Show("La cantidad excede el total del inventario");
+                            return;
+                        }
+                        else
+                        {
+                            // Disminuir la cantidad en inventario del producto según la cantidad vendida
+                            producto.CantidadInventario -= cantidadVendida;
+                            _context.Producto.Update(producto);
+                            _context.SaveChanges();
+                        }
                     }
                 }
             }

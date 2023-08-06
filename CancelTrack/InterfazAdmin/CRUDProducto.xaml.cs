@@ -44,14 +44,8 @@ namespace CancelTrack.InterfazAdmin
 
                     services.Add(producto);
                     MessageBox.Show("Producto registrado");
-                    txtPKProducto.Clear();
-                    txtNombreProd.Clear();
-                    txtDescripcionProd.Clear();
-                    txtPrecioVenta.Clear();
-                    txtPrecioCompra.Clear();
-                    txtCantInvenProd.Clear();
-                    CbxFKProv.SelectedValue = null;
                     GetProductoTable();
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -72,13 +66,7 @@ namespace CancelTrack.InterfazAdmin
                 services.Update(producto);
                 MessageBox.Show("Producto actualizado");
                 GetProductoTable();
-                txtPKProducto.Clear();
-                txtNombreProd.Clear();
-                txtDescripcionProd.Clear();
-                txtPrecioVenta.Clear();
-                txtPrecioCompra.Clear();
-                txtCantInvenProd.Clear();
-                CbxFKProv.SelectedValue = null;
+                LimpiarCampos();
             }
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -127,24 +115,25 @@ namespace CancelTrack.InterfazAdmin
             admin.Show();
             Close();
         }
-
+        public void LimpiarCampos()
+        {
+            txtPKProducto.Clear();
+            txtNombreProd.Clear();
+            txtDescripcionProd.Clear();
+            txtPrecioVenta.Clear();
+            txtPrecioCompra.Clear();
+            txtCantInvenProd.Clear();
+            CbxFKProv.SelectedValue = null;
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKProducto.Clear();
-                txtNombreProd.Clear();
-                txtDescripcionProd.Clear();
-                txtPrecioVenta.Clear();
-                txtPrecioCompra.Clear();
-                txtCantInvenProd.Clear();
-                CbxFKProv.SelectedValue = null;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKProducto.Clear();
+            txtNombreProd.Clear();
+            txtDescripcionProd.Clear();
+            txtPrecioVenta.Clear();
+            txtPrecioCompra.Clear();
+            txtCantInvenProd.Clear();
+            CbxFKProv.SelectedValue = null;
         }
     }
 }
