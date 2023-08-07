@@ -9,8 +9,8 @@
     <Grid Margin="0,0,10,-1">
         <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Center" Height="91" Margin="0,41,0,0" VerticalAlignment="Top" Width="758"/>
         <Button x:Name="BtnCliente" Content="Clientes" HorizontalAlignment="Center" Height="109" Margin="0,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnCliente_Click"/>
-        <Button x:Name="BtnVentaProducto" Content="Venta-Producto" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF"/>
-        <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0" Background="#FF06B5FF"/>
+        <Button x:Name="BtnVentaProducto" Content="Venta-Producto" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnVentaProducto_Click"/>
+        <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0" Background="#FF06B5FF" Click="BtnVenta_Click"/>
         <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="40,57,0,0" VerticalAlignment="Top" Height="43" Width="130" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
     </Grid>
 </Window>
