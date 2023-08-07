@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CancelTrack.InterfazAdmin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,7 @@ namespace CancelTrack.InterfazVendedor
         {
             CRUCliente VendedorCliente = new CRUCliente();
             VendedorCliente.Show();
-            Close();
+            Hide();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -36,6 +37,20 @@ namespace CancelTrack.InterfazVendedor
             MainWindow Login = new MainWindow();
             Login.Show();
             Close();
+        }
+
+        private void BtnVentaProducto_Click(object sender, RoutedEventArgs e)
+        {
+            CRUDVentaProducto VendedorVP = new CRUDVentaProducto();
+            VendedorVP.Show();
+            Hide();
+        }
+
+        private void BtnVenta_Click(object sender, RoutedEventArgs e)
+        {
+            CRUVenta VendedorVenta = new CRUVenta();
+            VendedorVenta.Show();
+            Hide();
         }
     }
 }

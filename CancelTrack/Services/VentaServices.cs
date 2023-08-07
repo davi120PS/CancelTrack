@@ -78,7 +78,7 @@ namespace CancelTrack.Services
             }
         }
         public void UpdateInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
-        {
+        {       // Solo actualiza el inventario cuando eliminas desde la Tabla Venta
             try
             {
                 using (var _context = new ApplicationDbContext())
@@ -100,8 +100,8 @@ namespace CancelTrack.Services
                 throw new Exception("Error al actualizar el Inventario: " + ex.Message);
             }
         }
-            public void UpdateTotalAndInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
-        {
+        public void UpdateTotalAndInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
+        {       // Actualiza el Total e Inventario cuando eliminas desde la Tabla VentaProducto
             try
             {
                 using (var _context = new ApplicationDbContext())
@@ -117,8 +117,8 @@ namespace CancelTrack.Services
                             productoServices.UpdateCantidadInventario(producto.FKProducto, -producto.Cantidad);
                         }
 
+                        // Actualizar el Total de la venta
                         venta.Total -= totalReduction;
-                        //UpdateTotal(venta); // Actualizar el Total de la venta
                         _context.Venta.Update(venta);
                         _context.SaveChanges();
                     }
@@ -152,7 +152,6 @@ namespace CancelTrack.Services
             }
             catch (Exception ex)
             {
-
                 throw new Exception("ERROR: " + ex.Message);
             }
         }
@@ -213,7 +212,7 @@ namespace CancelTrack.Services
         {
             using (var context = new ApplicationDbContext())
             {
-                // Suponiendo que DbSet "Ventas" representa la tabla de ventas en la base de datos.
+                // Suponiendo que DbSet "Venta" representa la tabla de ventas en la base de datos.
                 var venta = context.Venta.Find(ventaId);
                 return venta;
             }
@@ -222,7 +221,7 @@ namespace CancelTrack.Services
         {
             using (var context = new ApplicationDbContext())
             {
-                // Suponiendo que DbSet "Ventas" representa la tabla de ventas en la base de datos.
+                // Suponiendo que DbSet "Producto" representa la tabla de productos en la base de datos.
                 var produc = context.Producto.Find(productoname);
                 return produc;
             }

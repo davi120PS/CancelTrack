@@ -27,7 +27,6 @@ namespace CancelTrack.InterfazAdmin
             GetVentaTable();
             GetCliente();
             GetEmpleado();
-            //GetVentaProducto();
         }
         VentaServices services = new VentaServices();
         CRUDVentaProducto TablaVentaProducto = new CRUDVentaProducto();
@@ -83,13 +82,9 @@ namespace CancelTrack.InterfazAdmin
 
                 // Actualizar el Total y el Inventario
                 if (productosVendidos != null && productosVendidos.Any())
-                {
-                    services.UpdateInventoryAfterDeletion(Id, productosVendidos);
-                }
+                    services.UpdateInventoryAfterDeletion(Id, productosVendidos);       //Si no funciona entonces usar corchetes
 
                 services.Delete(Id);
-
-                
 
                 MessageBox.Show("Venta eliminada");
                 GetVentaTable();
@@ -107,7 +102,6 @@ namespace CancelTrack.InterfazAdmin
             CbxFKEmpleado.SelectedValue = venta.FKEmpleado.ToString();
             txtTotalVen.Text = venta.Total.ToString();
         }
-
         public void GetVentaTable()
         {
             TablaVenta.ItemsSource = services.GetVentas();

@@ -99,21 +99,12 @@ namespace CancelTrack.InterfazAdmin
                 services.Delete(Id);
                 MessageBox.Show("Empleado Eliminado");
                 GetEmpleadosTable();
-
-                /*/ Aplicar filtro para mostrar solo los productos relacionados a ventas de empleados activos
-                var ventaProductosFiltrados = ventaProductoServices.GetVentaProductos()
-                    .Where(vp => vp.Ventas.Empleados.Estado == 1)
-                    .ToList();
-
-                // Actualiza la tabla "VentaProducto" con la nueva lista filtrada
-                TablaVentaProducto.ItemsSource = ventaProductosFiltrados;*/
-
                 LimpiarCampos();
             }
         }
 
         private void BtnDarBaja_Click(object sender, RoutedEventArgs e)
-        {
+        {       // FUNCION DAR DE BAJA para punto extra
             try
             {
                 if (txtPKEmpleado.Text == "")

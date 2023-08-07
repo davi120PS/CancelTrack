@@ -1,7 +1,6 @@
 ﻿using CancelTrack.Context;
 using CancelTrack.Entities;
 using Microsoft.EntityFrameworkCore;
-//using MySqlX.XDevAPI.Relational;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,7 +105,7 @@ namespace CancelTrack.Services
         #endregion
         #region DELETE
         public void Delete(int EmpleadoId)
-        {           //AÑADIR BOTON Y FUNCION DAR DE BAJA para punto extra
+        {
             try
             {
                 using (var _context = new ApplicationDbContext())

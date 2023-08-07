@@ -23,33 +23,32 @@ namespace CancelTrack.InterfazAdmin
         {
             InitializeComponent();
         }
-
         private void BtnEmpleados_Click(object sender, RoutedEventArgs e)
         {
             CRUDEmpleado vista = new CRUDEmpleado();
             vista.Show();
-            Close();
+            Hide();
         }
 
         private void BtnClientes_Click(object sender, RoutedEventArgs e)
         {
             CRUDCliente vista = new CRUDCliente();
             vista.Show();
-            Close();
+            Hide();
         }
 
         private void BtnProductos_Click(object sender, RoutedEventArgs e)
         {
             CRUDProducto vista = new CRUDProducto();
             vista.Show();
-            Close();
+            Hide();
         }
 
         private void BtnVentas_Click(object sender, RoutedEventArgs e)
         {
             CRUDVenta vista = new CRUDVenta();
             vista.Show();
-            Close();
+            Hide();
         }
 
         private void BtnSalir(object sender, RoutedEventArgs e)
@@ -63,14 +62,14 @@ namespace CancelTrack.InterfazAdmin
         {
             CRUDProveedor vista = new CRUDProveedor();
             vista.Show();
-            Close();
+            Hide();
         }
 
         private void txtVentasProducto_Click(object sender, RoutedEventArgs e)
         {
             CRUDVentaProducto vista = new CRUDVentaProducto();
             vista.Show();
-            Close();
+            Hide();
         }
     }
 }

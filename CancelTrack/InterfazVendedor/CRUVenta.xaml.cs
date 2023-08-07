@@ -28,7 +28,6 @@ namespace CancelTrack.InterfazVendedor
             GetVentaTable();
             GetCliente();
             GetEmpleado();
-            //GetVentaProducto();
         }
         VentaServices services = new VentaServices();
         CRUDVentaProducto TablaVentaProducto = new CRUDVentaProducto();
@@ -49,11 +48,7 @@ namespace CancelTrack.InterfazVendedor
 
                     MessageBox.Show("Venta registrada");
                     GetVentaTable();
-                    txtPKVenta.Clear();
-                    txtTotalVen.Clear();
-                    CbxFKCliente.SelectedValue = null;
-                    CbxFKEmpleado.SelectedValue = null;
-                    //CbxFKVentaProducto.SelectedValue = null;
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -71,11 +66,7 @@ namespace CancelTrack.InterfazVendedor
 
                 MessageBox.Show("Venta actualizada");
                 GetVentaTable();
-                txtPKVenta.Clear();
-                txtTotalVen.Clear();
-                CbxFKCliente.SelectedValue = null;
-                CbxFKEmpleado.SelectedValue = null;
-                //CbxFKVentaProducto.SelectedValue = null;
+                LimpiarCampos();
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -112,20 +103,19 @@ namespace CancelTrack.InterfazVendedor
             admin.Show();
             Close();
         }
+        public void LimpiarCampos()
+        {
+            txtPKVenta.Clear();
+            txtTotalVen.Clear();
+            CbxFKCliente.SelectedValue = null;
+            CbxFKEmpleado.SelectedValue = null;
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKVenta.Clear();
-                txtTotalVen.Clear();
-                CbxFKCliente.SelectedValue = null;
-                CbxFKEmpleado.SelectedValue = null;
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKVenta.Clear();
+            txtTotalVen.Clear();
+            CbxFKCliente.SelectedValue = null;
+            CbxFKEmpleado.SelectedValue = null;
         }
     }
 }

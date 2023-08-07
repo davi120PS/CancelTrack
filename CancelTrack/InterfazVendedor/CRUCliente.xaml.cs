@@ -32,7 +32,7 @@ namespace CancelTrack.InterfazVendedor
         {
             if (txtPKCliente.Text == "")
             {
-                if (txtNombreCli.Text != "" || txtApellidoCli.Text != "" || txtDireccionCli.Text != "" && txtTelefonoCli.Text != "" && txtCorreoCli.Text != "")
+                if (txtNombreCli.Text != "" && txtApellidoCli.Text != "" && txtDireccionCli.Text != "" && txtTelefonoCli.Text != "" && txtCorreoCli.Text != "")
                 {
                     Cliente usuario = new Cliente()
                     {
@@ -46,17 +46,10 @@ namespace CancelTrack.InterfazVendedor
                     services.Add(usuario);
                     MessageBox.Show("Cliente registrado");
                     GetClientesTable();
-                    txtPKCliente.Clear();
-                    txtNombreCli.Clear();
-                    txtApellidoCli.Clear();
-                    txtDireccionCli.Clear();
-                    txtTelefonoCli.Clear();
-                    txtCorreoCli.Clear();
+                    LimpiarCampos();
                 }
                 else
-                {
                     MessageBox.Show("Faltan datos por llenar");
-                }
             }
             else
             {
@@ -74,12 +67,7 @@ namespace CancelTrack.InterfazVendedor
                 services.Update(usuario);
             }
             GetClientesTable();
-            txtPKCliente.Clear();
-            txtNombreCli.Clear();
-            txtApellidoCli.Clear();
-            txtDireccionCli.Clear();
-            txtTelefonoCli.Clear();
-            txtCorreoCli.Clear();
+            LimpiarCampos();
         }
         public void EditItem(object sender, RoutedEventArgs e)
         {
@@ -105,23 +93,23 @@ namespace CancelTrack.InterfazVendedor
             admin.Show();
             Close();
         }
-
+        public void LimpiarCampos()
+        {
+            txtPKCliente.Clear();
+            txtNombreCli.Clear();
+            txtApellidoCli.Clear();
+            txtDireccionCli.Clear();
+            txtTelefonoCli.Clear();
+            txtCorreoCli.Clear();
+        }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                txtPKCliente.Clear();
-                txtNombreCli.Clear();
-                txtApellidoCli.Clear();
-                txtDireccionCli.Clear();
-                txtTelefonoCli.Clear();
-                txtCorreoCli.Clear();
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception("ERROR: " + ex.Message);
-            }
+            txtPKCliente.Clear();
+            txtNombreCli.Clear();
+            txtApellidoCli.Clear();
+            txtDireccionCli.Clear();
+            txtTelefonoCli.Clear();
+            txtCorreoCli.Clear();
         }
     }
 }

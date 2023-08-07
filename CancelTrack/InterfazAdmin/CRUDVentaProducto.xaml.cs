@@ -147,13 +147,6 @@ namespace CancelTrack.InterfazAdmin
         public void GetVentasProductosTable()
         {
             TablaVentaProducto.ItemsSource = services.GetVentaProductos();
-            /*/ Obtener la lista de productos relacionados a ventas de empleados activos
-            var ventaProductosFiltrados = services.GetVentaProductos()
-                .Where(vp => vp.Ventas.Empleados.Estado == 1)
-                .ToList();
-
-            // Asignar la lista filtrada a la propiedad ItemsSource de la tabla
-            TablaVentaProducto.ItemsSource = ventaProductosFiltrados;*/
         }
         public void GetProducto()
         {
