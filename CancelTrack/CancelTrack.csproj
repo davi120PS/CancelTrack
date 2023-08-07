@@ -11,6 +11,13 @@
     <None Remove="Images\AluminioFondo.jpg" />
     <None Remove="Images\AluminioFondo2.jpg" />
     <None Remove="Images\AluminioFondo3.jpg" />
+    <None Remove="Images\fondo.jpg" />
+    <None Remove="Images\llave.png" />
+    <None Remove="Images\Login.jpg" />
+    <None Remove="Images\Logo.jpg" />
+    <None Remove="Images\regresar.png" />
+    <None Remove="Images\usuario.png" />
+    <None Remove="Images\volver.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\AluminioFondo.jpg" />
-    <Resource Include="Images\AluminioFondo2.jpg" />
     <Resource Include="Images\AluminioFondo3.jpg" />
+    <Resource Include="Images\fondo.jpg" />
+    <Resource Include="Images\llave.png" />
+    <Resource Include="Images\Login.jpg" />
+    <Resource Include="Images\Logo.jpg" />
+    <Resource Include="Images\regresar.png" />
+    <Resource Include="Images\usuario.png" />
+    <Resource Include="Images\volver.png" />
   </ItemGroup>
 
   <ItemGroup>

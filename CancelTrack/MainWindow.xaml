@@ -5,24 +5,235 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="/Images/AluminioFondo3.jpg"/>
-        </Grid.Background>
-        <Label Content="CANCELTRACK" HorizontalAlignment="Center" Height="118" Margin="0,58,0,0" VerticalAlignment="Top" Width="476" FontSize="90" FontWeight="Bold" FontFamily="squealer">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF530101" Offset="0.126"/>
-                    <GradientStop Color="#FF726B0B" Offset="0.905"/>
-                </LinearGradientBrush>
-            </Label.Foreground>
-        </Label>
-        <Label Content="Matricula" HorizontalAlignment="Left" Height="40" Margin="350,187,0,0" VerticalAlignment="Top" Width="85" FontSize="18"/>
-        <TextBox x:Name="txtUserName" FontSize="15" HorizontalAlignment="Left" Height="29" Margin="335,219,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="122" Background="White"/>
-        <Label Content="Contraseña" HorizontalAlignment="Left" Height="40" Margin="342,251,0,0" VerticalAlignment="Top" Width="100" FontSize="18"/>
-        <PasswordBox x:Name="txtPassword" FontSize="15" HorizontalAlignment="Left" Margin="336,289,0,0" VerticalAlignment="Top" Width="120" Background="White"/>
-        <Button x:Name="btnLogin" Content="Ingresar" HorizontalAlignment="Left" Height="41" Margin="329,342,0,0" Width="136" VerticalAlignment="Top" Click="btnLogin_Click" Background="#FFAFB7C3"/>
+        Title="MainWindow" Height="720" Width="1280"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown">
 
-    </Grid>
+
+    <Border CornerRadius="50">
+        <Border.Background>
+            <ImageBrush ImageSource="\Images\Login.jpg"
+                        Stretch="Fill"/>
+        </Border.Background>
+        <Border CornerRadius="50"
+            Background="Black"
+            BorderThickness="5"
+            Opacity="0.75">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Yellow" Offset="0"/>
+                    <GradientStop Color="DarkGoldenrod" Offset="0.75"/>
+                    <GradientStop Color="Yellow" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="LOG_IN"
+                               Foreground="White"
+                               FontSize="10"
+                               FontFamily="Cancel"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="40,0,0,0"/>
+
+                    <Button x:Name="btnMinimizar"
+                            BorderThickness="0"
+                            Content="_"
+                            Foreground="Black"
+                            FontSize="16"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="DarkSlateBlue"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="32" Height="30"
+                                        CornerRadius="15"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+
+                    </Button>
+
+                    <Button x:Name="btnCerrar"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            FontSize="12"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnCerrar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="OrangeRed"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="32" Height="30"
+                                        CornerRadius="15"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="-40,0,360,0">
+
+                    <Image Source="\Images\Logo.jpg"
+                           Width="200" Height="200" OpacityMask="White"/>
+
+                    <TextBlock Text="CancelTrack"
+                               Foreground="White"
+                               FontSize="30"
+                               FontWeight="Medium"
+                               FontFamily="Cancel"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Metal para todos los propósitos"
+                               Foreground="White"
+                               FontSize="25"
+                               FontWeight="Medium"
+                               FontFamily="Cancel"
+                               TextAlignment="Center"
+                               Margin="0,15,0,0" Width="492"/>
+
+                    <TextBlock Text="Usuario"
+                               Foreground="DarkCyan"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               FontFamily="Cancel"
+                               TextAlignment="Center"
+                               Margin="0,35,0,0"/>
+
+                    <TextBox x:Name="txtUserName"
+                             FontSize="20"
+                             FontFamily="Cancel"
+                            
+                             Foreground="White"
+                             CaretBrush="LightBlue"
+                             BorderBrush="White"
+                             BorderThickness="0,0,0,1.5"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0" Width="205"
+                             Padding="30,0,0,0">
+                        <TextBox.Background>
+                            <ImageBrush ImageSource="\Images\usuario.png"
+                                        Stretch="Uniform"
+                                        AlignmentX="Left"/>
+                        </TextBox.Background>
+                    </TextBox>
+
+
+                    <TextBlock Text="Contraseña"
+                               Foreground="DarkCyan"
+                               FontSize="20"
+                               FontWeight="Medium"
+                               FontFamily="Cancel"
+                               TextAlignment="Center"
+                               Margin="0,25,0,0"/>
+
+                    <PasswordBox x:Name="txtPassword"
+                             FontSize="15"
+                             FontFamily="Cancel"
+                            
+                             Foreground="White"
+                             CaretBrush="LightBlue"
+                             BorderBrush="White"
+                             BorderThickness="0,0,0,1.5"
+                             Height="28"
+                             VerticalContentAlignment="Center"
+                             Margin="0,5,0,0" Width="205"
+                             Padding="40,0,0,0">
+                        <PasswordBox.Background>
+                            <ImageBrush ImageSource="\Images\llave.png"
+                                        Stretch="Uniform"
+                                        AlignmentX="Left"/>
+                        </PasswordBox.Background>
+                    </PasswordBox>
+
+                    <Button x:Name="btnLogin"
+                            BorderThickness="0"
+                            Content="INGRESAR"
+                            Foreground="Black"
+                            FontSize="15"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Margin="0,45,0,0"
+                            Click="btnLogin_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="DarkGray"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Gray"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+
+
+        </Border>
+    </Border>
 </Window>

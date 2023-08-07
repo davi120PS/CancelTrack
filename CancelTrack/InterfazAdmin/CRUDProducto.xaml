@@ -5,54 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
         mc:Ignorable="d"
-        Title="CRUDProducto" Height="607" Width="1066">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="284*"/>
-            <RowDefinition Height="307*"/>
-        </Grid.RowDefinitions>
-        <Label FontSize="50" Content="Productos" HorizontalAlignment="Left" Height="100" Margin="444,23,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="ID Producto" HorizontalAlignment="Left" Height="25" Margin="33,122,0,0" VerticalAlignment="Top" Width="128"/>
-        <TextBox x:Name="txtPKProducto" HorizontalAlignment="Left" Height="21" Margin="30,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsEnabled="False"/>
-        <Label Content="Nombre" HorizontalAlignment="Left" Height="39" Margin="30,172,0,0" VerticalAlignment="Top" Width="160"/>
-        <TextBox x:Name="txtNombreProd" HorizontalAlignment="Left" Height="25" Margin="30,203,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176"/>
-        <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="30" Margin="30,2,0,0" VerticalAlignment="Top" Width="176" Grid.Row="1"/>
-        <ComboBox x:Name="CbxFKProv" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="32,33,0,0" VerticalAlignment="Top" Width="176" Height="23" Grid.Row="1"/>
-        <Label Content="Descripcion" HorizontalAlignment="Left" Height="29" Margin="30,231,0,0" VerticalAlignment="Top" Width="176"/>
-        <TextBox x:Name="txtDescripcionProd" HorizontalAlignment="Left" Height="25" Margin="29,260,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.RowSpan="2"/>
-        <Label Content="Precio de Venta" HorizontalAlignment="Left" Height="31" Margin="38,60,0,0" VerticalAlignment="Top" Width="106" Grid.Row="1"/>
-        <TextBox x:Name="txtPrecioVenta" HorizontalAlignment="Left" Height="22" Margin="32,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1"/>
-        <Label Content="Precio de Compra" HorizontalAlignment="Left" Height="31" Margin="34,115,0,0" VerticalAlignment="Top" Width="116" Grid.Row="1"/>
-        <TextBox x:Name="txtPrecioCompra" HorizontalAlignment="Left" Height="22" Margin="34,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1"/>
-        <Label Content="Cantidad en Inventario" HorizontalAlignment="Left" Height="29" Margin="32,178,0,0" VerticalAlignment="Top" Width="135" Grid.Row="1"/>
-        <TextBox x:Name="txtCantInvenProd" HorizontalAlignment="Left" Height="25" Margin="32,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1"/>
-        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
-        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="25,242,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click" Grid.Row="1"/>
-        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="115,242,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Grid.Row="1"/>
-        <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="229,150,39,77" Grid.RowSpan="2">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
-                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" />
-                <DataGridTextColumn Header="ID Proveedor" Binding="{Binding Proveedor.Nombre}" />
-                <DataGridTextColumn Header="Precio de venta" Binding="{Binding PrecioVenta}" />
-                <DataGridTextColumn Header="Precio de compra" Binding="{Binding PrecioCompra}" />
-                <DataGridTextColumn Header="CantidadInvent" Binding="{Binding CantidadInventario}" />
-                <DataGridTemplateColumn Header="Select">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Select" Click="EditItem"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete" Click="BtnDelete_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        Title="CRUDProducto" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown">
+
+    <Border CornerRadius="50"
+            BorderThickness="5">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="Yellow" Offset="0"/>
+                <GradientStop Color="DarkGoldenrod" Offset="0.75"/>
+                <GradientStop Color="Yellow" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <ImageBrush ImageSource="\Images\fondo.jpg"
+                        Stretch="Fill"/>
+        </Border.Background>
+        <Grid Margin="34,2,-34,-2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="284*"/>
+                <RowDefinition Height="307*"/>
+            </Grid.RowDefinitions>
+            <Label FontSize="50" Content="Productos" HorizontalAlignment="Left" Height="100" Margin="534,55,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Foreground="White"/>
+            <Label Content="ID Producto" HorizontalAlignment="Left" Height="25" Margin="43,164,0,0" VerticalAlignment="Top" Width="128" Foreground="White"/>
+            <TextBox x:Name="txtPKProducto" HorizontalAlignment="Left" Height="21" Margin="43,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsEnabled="False" Style="{DynamicResource Borde}"/>
+            <Label Content="Nombre" HorizontalAlignment="Left" Height="39" Margin="43,226,0,0" VerticalAlignment="Top" Width="160" Foreground="White"/>
+            <TextBox x:Name="txtNombreProd" HorizontalAlignment="Left" Height="25" Margin="43,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+            <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="30" Margin="43,16,0,0" VerticalAlignment="Top" Width="176" Grid.Row="1" Foreground="White"/>
+            <ComboBox x:Name="CbxFKProv" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="43,49,0,0" VerticalAlignment="Top" Width="176" Height="23" Grid.Row="1"/>
+            <Label Content="Descripcion" HorizontalAlignment="Left" Height="29" Margin="43,289,0,0" VerticalAlignment="Top" Width="176" Foreground="White"/>
+            <TextBox x:Name="txtDescripcionProd" HorizontalAlignment="Left" Height="25" Margin="43,320,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.RowSpan="2" Style="{DynamicResource Borde}"/>
+            <Label Content="Precio de Venta" HorizontalAlignment="Left" Height="31" Margin="43,74,0,0" VerticalAlignment="Top" Width="106" Grid.Row="1" Foreground="White"/>
+            <TextBox x:Name="txtPrecioVenta" HorizontalAlignment="Left" Height="22" Margin="43,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1" Style="{DynamicResource Borde}"/>
+            <Label Content="Precio de Compra" HorizontalAlignment="Left" Height="31" Margin="43,135,0,0" VerticalAlignment="Top" Width="116" Grid.Row="1" Foreground="White"/>
+            <TextBox x:Name="txtPrecioCompra" HorizontalAlignment="Left" Height="22" Margin="43,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1" Style="{DynamicResource Borde}"/>
+            <Label Content="Cantidad en Inventario" HorizontalAlignment="Left" Height="29" Margin="43,202,0,0" VerticalAlignment="Top" Width="135" Grid.Row="1" Foreground="White"/>
+            <TextBox x:Name="txtCantInvenProd" HorizontalAlignment="Left" Height="25" Margin="43,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Grid.Row="1" Style="{DynamicResource Borde}"/>
+            <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="43,286,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click" Grid.Row="1" Style="{DynamicResource BordeButt}"/>
+            <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="134,286,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Grid.Row="1" Style="{DynamicResource BordeButt}"/>
+            <DataGrid x:Name="TablaProducto" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="231,180,114,82" Grid.RowSpan="2" Style="{DynamicResource bordeTab}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding PKProducto}" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
+                    <DataGridTextColumn Header="Descripcion" Binding="{Binding Descripcion}" />
+                    <DataGridTextColumn Header="ID Proveedor" Binding="{Binding Proveedor.Nombre}" />
+                    <DataGridTextColumn Header="Precio de venta" Binding="{Binding PrecioVenta}" />
+                    <DataGridTextColumn Header="Precio de compra" Binding="{Binding PrecioCompra}" />
+                    <DataGridTextColumn Header="CantidadInvent" Binding="{Binding CantidadInventario}" />
+                    <DataGridTemplateColumn Header="Select">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Select" Click="EditItem"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="BtnDelete_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="BtnBack"
+                        BorderThickness="0"
+                        Content="Regresar"
+                        Foreground="Black"
+                        FontSize="16"
+                        FontFamily="Cancel"
+                        Cursor="Hand"
+                        Click="BtnBack_Click" Margin="44,43,1052,174">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/regresar.png"/>
+                </Button.Background>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
+                                <ContentPresenter.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
 </Window>

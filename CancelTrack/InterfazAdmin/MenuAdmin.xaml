@@ -5,15 +5,116 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
         mc:Ignorable="d"
-        Title="MenuAdmin" Height="697" Width="1280">
-    <Grid Margin="0,0,10,0" Height="680" VerticalAlignment="Top">
-        <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="282,87,0,0" VerticalAlignment="Top" Width="758"/>
-        <Button x:Name="BtnClientes" Content="Clientes" HorizontalAlignment="Left" Height="81" Margin="655,261,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnClientes_Click"/>
-        <Button x:Name="BtnProductos" Content="Productos" HorizontalAlignment="Left" Height="81" Margin="306,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProductos_Click"/>
-        <Button x:Name="BtnProveedores" Content="Proveedores" HorizontalAlignment="Left" Height="81" Margin="655,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProveedores_Click"/>
-        <Button x:Name="BtnEmpleados" Content="Empleados" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,261,0,0" Click="BtnEmpleados_Click"/>
-        <Button x:Name="BtnVentas" Content="Ventas" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,452,0,0" Click="BtnVentas_Click"/>
-        <Button x:Name="BtnVentasProducto" Content="VentaProducto" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="655,451,0,0" Click="txtVentasProducto_Click"/>
-        <Button Content="Salir" FontSize="24" HorizontalAlignment="Left" Height="41" Margin="51,56,0,0" VerticalAlignment="Top" Width="160" Click="BtnSalir"/>
-    </Grid>
+        Title="MenuAdmin" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    
+    <Border CornerRadius="50"
+            BorderThickness="5">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="Yellow" Offset="0"/>
+                <GradientStop Color="DarkGoldenrod" Offset="0.75"/>
+                <GradientStop Color="Yellow" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <ImageBrush ImageSource="\Images\fondo.jpg"
+                        Stretch="Fill"/>
+        </Border.Background>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Menú"
+                               Foreground="White"
+                               FontSize="20"
+                               FontFamily="Cancel"
+                               Grid.Column="0"
+                               VerticalAlignment="Top"
+                               Margin="35,5,5,0" Height="25"/>
+            <Button x:Name="btnMinimizar"
+                            BorderThickness="0"
+                            Content="_"
+                            Foreground="Black"
+                            FontSize="16"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click" Margin="7,-7,53,677" Grid.ColumnSpan="2">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="DarkGray"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+            <Button x:Name="btnCerrar"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            FontSize="12"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnCerrar_Click" Margin="37,-12,13,672" Grid.ColumnSpan="2">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="OrangeRed"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <Grid Margin="0,0,10,0" Height="680" VerticalAlignment="Top">
+                <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="282,87,0,0" VerticalAlignment="Top" Width="758" Foreground="#FFBF9A50"/>
+                <Button x:Name="txtClientes" Content="Clientes" HorizontalAlignment="Left" Height="81" Margin="655,261,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnClientes_Click"/>
+                <Button x:Name="txtProductos" Content="Productos" HorizontalAlignment="Left" Height="81" Margin="306,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProductos_Click"/>
+                <Button x:Name="txtProveedores" Content="Proveedores" HorizontalAlignment="Left" Height="81" Margin="655,357,0,0" VerticalAlignment="Top" Width="335" FontSize="48" Click="BtnProveedores_Click"/>
+                <Button x:Name="txtEmpleados" Content="Empleados" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,261,0,0" Click="BtnEmpleados_Click"/>
+                <Button x:Name="txtVentas" Content="Ventas" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="306,452,0,0" Click="BtnVentas_Click"/>
+                <Button x:Name="txtVentasProducto" Content="VentaProducto" HorizontalAlignment="Left" Height="81" VerticalAlignment="Top" Width="335" FontSize="48" Margin="655,451,0,0" Click="txtVentasProducto_Click"/>
+                <Button Content="Salir" FontSize="24" HorizontalAlignment="Left" Height="41" Margin="51,56,0,0" VerticalAlignment="Top" Width="160" Click="BtnSalir"/>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

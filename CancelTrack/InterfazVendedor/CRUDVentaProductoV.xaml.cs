@@ -1,9 +1,6 @@
-﻿using CancelTrack.Context;
-using CancelTrack.Entities;
+﻿using CancelTrack.Entities;
+using CancelTrack.InterfazAdmin;
 using CancelTrack.Services;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +15,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CancelTrack.InterfazAdmin
+namespace CancelTrack.InterfazVendedor
 {
     /// <summary>
-    /// Lógica de interacción para CRUDVentaProducto.xaml
+    /// Lógica de interacción para CRUDVentaProductoV.xaml
     /// </summary>
-    public partial class CRUDVentaProducto : Window
+    public partial class CRUDVentaProductoV : Window
     {
         private readonly VentaProductoServices services = new VentaProductoServices();
         private readonly ProductoServices productoServices = new ProductoServices();
@@ -31,7 +28,7 @@ namespace CancelTrack.InterfazAdmin
         Venta venta = new Venta();
         Producto producto = new Producto();
 
-        public CRUDVentaProducto()
+        public CRUDVentaProductoV()
         {
             InitializeComponent();
             GetVentasProductosTable();
@@ -162,7 +159,7 @@ namespace CancelTrack.InterfazAdmin
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            MenuAdmin admin = new MenuAdmin();
+            MenuVendedor admin = new MenuVendedor();
             admin.Show();
             Close();
         }

@@ -5,42 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CancelTrack.InterfazAdmin"
         mc:Ignorable="d"
-        Title="CRUDVenta" Height="532" Width="1086">
-    <Grid HorizontalAlignment="Left" Width="1084" Margin="0,0,0,-2">
-        <Label FontSize="50" Content="Ventas" HorizontalAlignment="Left" Height="100" Margin="526,14,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5"/>
-        <Label Content="ID Venta" HorizontalAlignment="Left" Height="28" Margin="31,123,0,0" VerticalAlignment="Top" Width="126"/>
-        <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Height="21" Margin="28,152,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" IsEnabled="False"/>
-        <Label Content="ID Cliente" HorizontalAlignment="Left" Height="32" Margin="28,177,0,0" VerticalAlignment="Top" Width="173"/>
-        <ComboBox x:Name="CbxFKCliente" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="28,211,0,0" VerticalAlignment="Top" Width="173" Height="24"/>
-        <Label Content="ID Empleado" HorizontalAlignment="Left" Height="34" Margin="26,238,0,0" VerticalAlignment="Top" Width="172"/>
-        <ComboBox x:Name="CbxFKEmpleado" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="26,273,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
-        <Label Content="Total" HorizontalAlignment="Left" Height="33" Margin="28,301,0,0" VerticalAlignment="Top" Width="173"/>
-        <TextBox x:Name="txtTotalVen" HorizontalAlignment="Left" Height="26" Margin="26,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" IsEnabled="False"/>
-        <Button x:Name="BtnBack" Content="Regresar" HorizontalAlignment="Left" Margin="64,49,0,0" VerticalAlignment="Top" Height="41" Width="116" Background="#FFFFF506" FontSize="20" Click="BtnBack_Click"/>
-        <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="24,381,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click"/>
-        <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="116,381,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click"/>
-        <DataGrid x:Name="TablaVenta" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="235,120,67,51">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding PKVenta}" />
-                <DataGridTextColumn Header="ID Cliente" Binding="{Binding Clientes.Nombre}" />
-                <DataGridTextColumn Header="ID Empleado" Binding="{Binding Empleados.Nombre}" />
-                <!--<DataGridTextColumn Header="ID VentaProducto" Binding="{Binding VentaProductos.PKVentaProducto}" />-->
-                <DataGridTextColumn Header="Total" Binding="{Binding Total}" />
-                <DataGridTemplateColumn Header="Select">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Select" Click="EditItem"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Delete">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Content="Delete" Click="BtnDelete_Click"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+        Title="CRUDVenta" Height="720" Width="1280"
+                WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
+    
+    <Border CornerRadius="50"
+            BorderThickness="5">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="Yellow" Offset="0"/>
+                <GradientStop Color="DarkGoldenrod" Offset="0.75"/>
+                <GradientStop Color="Yellow" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        <Border.Background>
+            <ImageBrush ImageSource="\Images\fondo.jpg"
+                        Stretch="Fill"/>
+        </Border.Background>
+        <Grid HorizontalAlignment="Left" Width="1084" Margin="0,0,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <Label FontSize="50" Content="Ventas" HorizontalAlignment="Left" Height="100" Margin="559,30,0,0" VerticalAlignment="Top" Width="168" RenderTransformOrigin="0.5,0.5" Foreground="White"/>
+            <Label Content="ID Venta" HorizontalAlignment="Left" Height="28" Margin="113,175,0,0" VerticalAlignment="Top" Width="126" Foreground="#FFE4E4E4"/>
+            <TextBox x:Name="txtPKVenta" HorizontalAlignment="Left" Height="21" Margin="113,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" IsEnabled="False" Style="{DynamicResource Borde}"/>
+            <Label Content="ID Cliente" HorizontalAlignment="Left" Height="32" Margin="113,288,0,0" VerticalAlignment="Top" Width="173" Foreground="#FFE0E0E0"/>
+            <ComboBox x:Name="CbxFKCliente" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="113,321,0,0" VerticalAlignment="Top" Width="173" Height="24"/>
+            <Label Content="ID Empleado" HorizontalAlignment="Left" Height="34" Margin="113,380,0,0" VerticalAlignment="Top" Width="172" Foreground="White"/>
+            <ComboBox x:Name="CbxFKEmpleado" DisplayMemberPath="Nombre" HorizontalAlignment="Left" Margin="113,414,0,0" VerticalAlignment="Top" Width="172" Height="24"/>
+            <Label Content="Total" HorizontalAlignment="Left" Height="34" Margin="113,476,0,0" VerticalAlignment="Top" Width="173" Foreground="White"/>
+            <TextBox x:Name="txtTotalVen" Height="26" Margin="113,511,853,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Style="{DynamicResource Borde}"/>
+            <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="113,584,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click" Style="{DynamicResource BordeButt}"/>
+            <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="217,584,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}"/>
+            <DataGrid x:Name="TablaVenta" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="337,205,-78,120" Style="{DynamicResource bordeTab}" Grid.ColumnSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding PKVenta}" />
+                    <DataGridTextColumn Header="ID Cliente" Binding="{Binding Clientes.Nombre}" />
+                    <DataGridTextColumn Header="ID Empleado" Binding="{Binding Empleados.Nombre}" />
+                    <!--<DataGridTextColumn Header="ID VentaProducto" Binding="{Binding VentaProductos.PKVentaProducto}" />-->
+                    <DataGridTextColumn Header="Total" Binding="{Binding Total}" />
+                    <DataGridTemplateColumn Header="Select">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Select" Click="EditItem"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Click="BtnDelete_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="BtnBack"
+                        BorderThickness="0"
+                        Content="Regresar"
+                        Foreground="Black"
+                        FontSize="16"
+                        FontFamily="Cancel"
+                        Cursor="Hand"
+                        Click="BtnBack_Click" Margin="85,46,804,528">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Images/regresar.png"/>
+                </Button.Background>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Black"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
+                                <ContentPresenter.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
 </Window>
