@@ -33,7 +33,6 @@ namespace CancelTrack.Services
 
                         // Actualizar la cantidad de inventario del producto
                         productoServices.UpdateCantidadInventario(request.FKProducto, request.Cantidad);
-
                     }
                 }
             }
@@ -142,7 +141,8 @@ namespace CancelTrack.Services
                 {
                     List<VentaProducto> ventaProductos = _context.VentaProducto
                         .Include(x => x.Productos)
-                        //.Include(x => x.Ventas)
+                        .Include(x => x.Ventas.Empleados) // Incluir Empleados sin filtrar por Estado
+                        .Where(e => e.Ventas.Empleados.Estado == 1) // Filtrar empleados por Estado
                         .ToList();
                     return ventaProductos;
                 }

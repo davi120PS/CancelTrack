@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancelTrack.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230806183253_canceltrack")]
-    partial class canceltrack
+    [Migration("20230806195010_CancelTrack")]
+    partial class CancelTrack
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -387,7 +387,7 @@ namespace CancelTrack.Migrations
                     b.HasOne("CancelTrack.Entities.Venta", "Ventas")
                         .WithMany("VentaProductos")
                         .HasForeignKey("FKVentas")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Productos");

@@ -384,7 +384,7 @@ namespace CancelTrack.Migrations
                     b.HasOne("CancelTrack.Entities.Venta", "Ventas")
                         .WithMany("VentaProductos")
                         .HasForeignKey("FKVentas")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Productos");

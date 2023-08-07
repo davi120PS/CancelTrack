@@ -29,7 +29,7 @@ namespace CancelTrack.Context
                 .HasMany(v => v.VentaProductos)
                 .WithOne(vp => vp.Ventas)
                 .HasForeignKey(vp => vp.FKVentas)
-                .OnDelete(DeleteBehavior.Cascade); // ON DELETE CASCADE
+                .OnDelete(DeleteBehavior.Restrict); // ON DELETE CASCADE
                 //.OnUpdate(DeleteBehavior.Cascade);
             // Cuando se elimina una cliente, tambien se elimina solo una venta relacionada
             modelBuilder.Entity<Venta>()
@@ -43,14 +43,14 @@ namespace CancelTrack.Context
                 .WithMany()
                 .HasForeignKey(v => v.FKEmpleado)
                 .OnDelete(DeleteBehavior.Restrict);
-        // Cuando se elimina una ventaproducto, tambien se eliminan las ventas relacionadas
-            modelBuilder.Entity<VentaProducto>()
+            // Cuando se elimina una ventaproducto, tambien se eliminan las ventas relacionadas
+            /*modelBuilder.Entity<VentaProducto>()
                 .HasOne(vp => vp.Ventas)
-                .WithMany(v => v.VentaProductos)
+                .WithMany()//(v => v.VentaProductos)
                 .HasForeignKey(vp => vp.FKVentas)
-                .OnDelete(DeleteBehavior.Cascade) // ON DELETE CASCADE
-                .HasPrincipalKey(v => v.PKVenta) // Clave principal de Venta
-                .IsRequired();
+                .OnDelete(DeleteBehavior.Cascade); // ON DELETE CASCADE*/
+              //.HasPrincipalKey(v => v.PKVenta) // Clave principal de Venta
+              //.IsRequired
 
             // Insert para la tabla de Usuarios
             modelBuilder.Entity<Empleado>().HasData(

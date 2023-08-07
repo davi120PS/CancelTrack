@@ -8,7 +8,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CancelTrack.Migrations
 {
     /// <inheritdoc />
-    public partial class canceltrack : Migration
+    public partial class CancelTrack : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -192,7 +192,7 @@ namespace CancelTrack.Migrations
                         column: x => x.FKVentas,
                         principalTable: "Venta",
                         principalColumn: "PKVenta",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 

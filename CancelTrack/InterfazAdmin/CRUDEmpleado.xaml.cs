@@ -30,6 +30,7 @@ namespace CancelTrack.InterfazAdmin
             GetPuesto();
         }
         EmpleadoServices services = new EmpleadoServices();
+        VentaProductoServices ventaProductoServices = new VentaProductoServices();
         private void BtnAddEmp_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKEmpleado.Text == "")
@@ -91,17 +92,22 @@ namespace CancelTrack.InterfazAdmin
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             if (txtPKEmpleado.Text == "")
-            {
-                MessageBox.Show("Selecciona un usuario");
-            }
+                MessageBox.Show("Selecciona un empleado");
             else
             {
-                int userId = Convert.ToInt32(txtPKEmpleado.Text);
-                Empleado empleados = new Empleado();
-                empleados.PKEmpleado = userId;
-                services.Delete(userId);
-                MessageBox.Show("Usuario Eliminado");
+                int Id = Convert.ToInt32(txtPKEmpleado.Text);
+                services.Delete(Id);
+                MessageBox.Show("Empleado Eliminado");
                 GetEmpleadosTable();
+
+                /*/ Aplicar filtro para mostrar solo los productos relacionados a ventas de empleados activos
+                var ventaProductosFiltrados = ventaProductoServices.GetVentaProductos()
+                    .Where(vp => vp.Ventas.Empleados.Estado == 1)
+                    .ToList();
+
+                // Actualiza la tabla "VentaProducto" con la nueva lista filtrada
+                TablaVentaProducto.ItemsSource = ventaProductosFiltrados;*/
+
                 LimpiarCampos();
             }
         }
@@ -112,7 +118,7 @@ namespace CancelTrack.InterfazAdmin
             {
                 if (txtPKEmpleado.Text == "")
                 {
-                    MessageBox.Show("Selecciona un usuario");
+                    MessageBox.Show("Selecciona un empleado");
                 }
                 else
                 {

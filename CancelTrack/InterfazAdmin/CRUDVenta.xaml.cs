@@ -48,11 +48,7 @@ namespace CancelTrack.InterfazAdmin
 
                     MessageBox.Show("Venta registrada");
                     GetVentaTable();
-                    txtPKVenta.Clear();
-                    txtTotalVen.Clear();
-                    CbxFKCliente.SelectedValue = null;
-                    CbxFKEmpleado.SelectedValue = null;
-                    //CbxFKVentaProducto.SelectedValue = null;
+                    LimpiarCampos();
                 }
                 else
                     MessageBox.Show("Faltan datos por llenar");
@@ -70,11 +66,7 @@ namespace CancelTrack.InterfazAdmin
 
                 MessageBox.Show("Venta actualizada");
                 GetVentaTable();
-                txtPKVenta.Clear();
-                txtTotalVen.Clear();
-                CbxFKCliente.SelectedValue = null;
-                CbxFKEmpleado.SelectedValue = null;
-                //CbxFKVentaProducto.SelectedValue = null;
+                LimpiarCampos();
             }
         }
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -86,13 +78,22 @@ namespace CancelTrack.InterfazAdmin
                 int Id = Convert.ToInt32(txtPKVenta.Text);
                 Venta venta = new Venta();
                 venta.PKVenta = Id;
+
+                List<VentaProducto> productosVendidos = ventaProductoServices.GetVentaProductosByVentaId(Id);
+
+                // Actualizar el Total y el Inventario
+                if (productosVendidos != null && productosVendidos.Any())
+                {
+                    services.UpdateInventoryAfterDeletion(Id, productosVendidos);
+                }
+
                 services.Delete(Id);
+
+                
+
                 MessageBox.Show("Venta eliminada");
                 GetVentaTable();
-                txtPKVenta.Clear();
-                txtTotalVen.Clear();
-                CbxFKCliente.SelectedValue = null;
-                CbxFKEmpleado.SelectedValue = null;
+                LimpiarCampos();
             }
         }
         public void EditItem(object sender, RoutedEventArgs e)
@@ -128,6 +129,13 @@ namespace CancelTrack.InterfazAdmin
             MenuAdmin admin = new MenuAdmin();
             admin.Show();
             Close();
+        }
+        public void LimpiarCampos()
+        {
+            txtPKVenta.Clear();
+            txtTotalVen.Clear();
+            CbxFKCliente.SelectedValue = null;
+            CbxFKEmpleado.SelectedValue = null;
         }
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {

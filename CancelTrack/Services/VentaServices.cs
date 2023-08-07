@@ -77,7 +77,30 @@ namespace CancelTrack.Services
                 throw new Exception("Sucedió un error" + ex.Message);
             }
         }
-        public void UpdateTotalAndInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
+        public void UpdateInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
+        {
+            try
+            {
+                using (var _context = new ApplicationDbContext())
+                {
+                    Venta venta = _context.Venta.Find(ventaId);
+
+                    if (venta != null && productos != null && productos.Any())
+                    {
+                        foreach (var producto in productos)
+                        {
+                            productoServices.UpdateCantidadInventario(producto.FKProducto, -producto.Cantidad);
+                        }
+                        _context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el Inventario: " + ex.Message);
+            }
+        }
+            public void UpdateTotalAndInventoryAfterDeletion(int ventaId, List<VentaProducto> productos)
         {
             try
             {
@@ -114,23 +137,17 @@ namespace CancelTrack.Services
             {
                 using (var _context = new ApplicationDbContext())
                 {
-                    /*Venta venta = _context.Venta.Include(v => v.VentaProductos).FirstOrDefault(v => v.PKVenta == ventaId);
+                    Venta venta = _context.Venta.Include(v => v.VentaProductos).FirstOrDefault(v => v.PKVenta == ventaId);
                     if (venta != null)
                     {
-                        // Eliminar las ventas de producto relacionadas
-                        _context.VentaProducto.RemoveRange(venta.VentaProductos);*/
- 
-                    
-                    Venta venta = _context.Venta.Find(ventaId);
-                    if (venta != null)
-                    {
+                       
+                        _context.VentaProducto.RemoveRange(venta.VentaProductos);
+
                         _context.Remove(venta);
                         _context.SaveChanges();
                     }
                     else
-                    {
                         MessageBox.Show("NO HAY REGISTRO");
-                    }
                 }
             }
             catch (Exception ex)
