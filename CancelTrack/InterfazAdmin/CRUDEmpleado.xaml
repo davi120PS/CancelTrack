@@ -108,25 +108,25 @@
             <Grid Margin="70,57,40,40" Grid.ColumnSpan="3">
                 <Label FontSize="50" Content="Empleados" HorizontalAlignment="Left" Height="100" Margin="444,23,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.5,0.5" Foreground="White" FontFamily="Segoe UI Black"/>
                 <Label Content="ID Empleado" HorizontalAlignment="Left" Height="30" Margin="19,107,0,0" VerticalAlignment="Top" Width="101" FontSize="15" Foreground="White"/>
-                <TextBox x:Name="txtPKEmpleado" HorizontalAlignment="Left" Height="30" Margin="19,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" IsEnabled="False" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtPKEmpleado" HorizontalAlignment="Left" Height="30" Margin="-21,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" IsEnabled="False" Style="{DynamicResource Borde}"/>
                 <Label Content="Nombre" Foreground="White" HorizontalAlignment="Left" Height="34" Margin="19,157,0,0" VerticalAlignment="Top" Width="102" FontSize="15"/>
-                <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="30" Margin="19,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtNombre" HorizontalAlignment="Left" Height="30" Margin="-21,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
                 <Label Content="Apellido" Foreground="White" HorizontalAlignment="Left" Height="27" Margin="19,212,0,0" VerticalAlignment="Top" Width="69" FontSize="15"/>
-                <TextBox x:Name="txtApellido" HorizontalAlignment="Left" Height="30" Margin="19,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtApellido" HorizontalAlignment="Left" Height="30" Margin="-21,241,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
                 <Label Content="Matricula" Foreground="White" HorizontalAlignment="Left" Height="30" Margin="19,268,0,0" VerticalAlignment="Top" Width="86" FontSize="15"/>
-                <TextBox x:Name="txtMatricula" HorizontalAlignment="Left" Height="30" Margin="19,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtMatricula" HorizontalAlignment="Left" Height="30" Margin="-21,294,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
                 <Label Content="Contraseña" Foreground="White" HorizontalAlignment="Left" Height="27" Margin="19,320,0,0" VerticalAlignment="Top" Width="176" FontSize="15"/>
-                <TextBox x:Name="txtContraseña" HorizontalAlignment="Left" Height="30" Margin="19,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtContraseña" HorizontalAlignment="Left" Height="30" Margin="-21,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
                 <Label Content="Puesto" Foreground="White" HorizontalAlignment="Left" Height="27" Margin="19,376,0,0" VerticalAlignment="Top" Width="176" FontSize="15"/>
-                <ComboBox x:Name="CbxPuesto" HorizontalAlignment="Left" Height="30" Margin="19,403,0,0" VerticalAlignment="Top" Width="176"/>
+                <ComboBox x:Name="CbxPuesto" HorizontalAlignment="Left" Height="30" Margin="-21,403,0,0" VerticalAlignment="Top" Width="240"/>
                 <Label Content="Telefono" Foreground="White" HorizontalAlignment="Left" Height="27" Margin="19,430,0,0" VerticalAlignment="Top" Width="176" FontSize="15"/>
-                <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="30" Margin="19,457,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
+                <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="30" Margin="-21,457,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
                 <Label Content="Correo" Foreground="White" HorizontalAlignment="Left" Height="30" Margin="19,484,0,0" VerticalAlignment="Top" Width="176" FontSize="15"/>
-                <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="30" Margin="19,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="176" Style="{DynamicResource Borde}"/>
-                <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="20,552,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAddEmp_Click" Style="{DynamicResource BordeButt}"/>
-                
-                <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="110,552,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}"/>
-                <DataGrid x:Name="TablaEmpleado" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="223,131,22,69" Style="{DynamicResource bordeTab}">
+                <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="30" Margin="-21,510,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
+                <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="14,552,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAddEmp_Click" Style="{DynamicResource BordeButt}"/>
+
+                <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="124,552,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}"/>
+                <DataGrid x:Name="TablaEmpleado" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="241,131,4,69" Style="{DynamicResource bordeTab}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding PKEmpleado}" />
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />

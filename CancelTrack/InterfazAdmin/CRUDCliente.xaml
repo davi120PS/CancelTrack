@@ -102,24 +102,25 @@
 
             <Grid Margin="77,10,33,-10" Grid.ColumnSpan="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="281*"/>
+                    <RowDefinition Height="155*"/>
+                    <RowDefinition Height="126*"/>
                     <RowDefinition Height="429*"/>
                 </Grid.RowDefinitions>
                 <Label FontSize="72" Content="Cliente" HorizontalAlignment="Center" Height="91" Margin="0,61,0,0" VerticalAlignment="Top" Width="260" Foreground="White" FontFamily="Segoe UI Black" FontWeight="Bold"/>
-                <Label Content="ID Cliente" HorizontalAlignment="Left" Height="35" Margin="32,149,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="#FFFFF1F1"/>
-                <TextBox Style="{DynamicResource Borde}" x:Name="txtPKCliente" HorizontalAlignment="Left" Height="30" Margin="32,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" IsEnabled="False"/>
-                <Label Content="Nombre" HorizontalAlignment="Left" Height="35" Margin="32,220,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White"/>
-                <TextBox x:Name="txtNombreCli" HorizontalAlignment="Left" Height="30" Margin="32,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.RowSpan="2"/>
-                <Label Content="Apellido" HorizontalAlignment="Left" Height="35" Margin="32,9,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="1"/>
-                <TextBox x:Name="txtApellidoCli" HorizontalAlignment="Left" Height="30" Margin="32,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="1"/>
-                <Label Content="Direccion" HorizontalAlignment="Left" Height="35" Margin="32,79,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="1"/>
-                <TextBox x:Name="txtDireccionCli" HorizontalAlignment="Left" Height="30" Margin="32,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="1"/>
-                <Label Content="Telefono" HorizontalAlignment="Left" Height="35" Margin="32,149,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="1"/>
-                <TextBox x:Name="txtTelefonoCli" HorizontalAlignment="Left" Height="30" Margin="32,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="1"/>
-                <Label Content="Correo" HorizontalAlignment="Left" Height="35" Margin="32,219,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="1"/>
-                <TextBox x:Name="txtCorreoCli" HorizontalAlignment="Left" Height="30" Margin="32,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="1"/>
-                <Button Style="{DynamicResource BordeButt}" x:Name="BtnAddCli" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="36,304,0,0" VerticalAlignment="Top" Width="100" Background="#FF96E486" Click="BtnAddCli_Click" Grid.Row="1"/>
-                <DataGrid Style="{DynamicResource bordeTab}" x:Name="TablaCliente" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="300,182,43,91" Grid.RowSpan="2">
+                <Label Content="ID Cliente" HorizontalAlignment="Left" Height="35" Margin="32,149,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="#FFFFF1F1" Grid.RowSpan="2"/>
+                <TextBox Style="{DynamicResource Borde}" x:Name="txtPKCliente" HorizontalAlignment="Left" Height="30" Margin="32,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" IsEnabled="False" Grid.Row="1"/>
+                <Label Content="Nombre" HorizontalAlignment="Left" Height="35" Margin="32,65,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="1"/>
+                <TextBox x:Name="txtNombreCli" HorizontalAlignment="Left" Height="30" Margin="32,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.RowSpan="2" Grid.Row="1"/>
+                <Label Content="Apellido" HorizontalAlignment="Left" Height="35" Margin="32,9,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="2"/>
+                <TextBox x:Name="txtApellidoCli" HorizontalAlignment="Left" Height="30" Margin="32,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="2"/>
+                <Label Content="Direccion" HorizontalAlignment="Left" Height="35" Margin="32,79,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="2"/>
+                <TextBox x:Name="txtDireccionCli" HorizontalAlignment="Left" Height="30" Margin="32,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="2"/>
+                <Label Content="Telefono" HorizontalAlignment="Left" Height="35" Margin="32,149,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="2"/>
+                <TextBox x:Name="txtTelefonoCli" HorizontalAlignment="Left" Height="30" Margin="32,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="2"/>
+                <Label Content="Correo" HorizontalAlignment="Left" Height="35" Margin="32,219,0,0" VerticalAlignment="Top" Width="178" FontSize="20" Foreground="White" Grid.Row="2"/>
+                <TextBox x:Name="txtCorreoCli" HorizontalAlignment="Left" Height="30" Margin="32,254,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}" Grid.Row="2"/>
+                <Button Style="{DynamicResource BordeButt}" x:Name="BtnAddCli" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="36,304,0,0" VerticalAlignment="Top" Width="100" Background="#FF96E486" Click="BtnAddCli_Click" Grid.Row="2"/>
+                <DataGrid Style="{DynamicResource bordeTab}" x:Name="TablaCliente" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="300,27,43,91" Grid.RowSpan="2" Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding PKCliente}" />
                         <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
@@ -150,7 +151,7 @@
                         FontSize="16"
                         FontFamily="Cancel"
                         Cursor="Hand"
-                        Click="BtnBack_Click" Margin="29,38,921,133">
+                        Click="BtnBack_Click" Margin="29,38,921,7">
                     <Button.Background>
                         <ImageBrush ImageSource="/Images/regresar.png"/>
                     </Button.Background>
@@ -186,7 +187,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="170,304,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}" Grid.Row="1"/>
+                <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="170,304,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}" Grid.Row="2"/>
             </Grid>
         </Grid>
     </Border>

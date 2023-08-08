@@ -27,61 +27,69 @@
             <ImageBrush ImageSource="\Images\fondo.jpg"
                         Stretch="Fill"/>
         </Border.Background>
-        <Grid Margin="22,0,36,0">
-            <Label FontSize="50" Content="Proveedores" HorizontalAlignment="Left" Height="84" Margin="439,33,0,0" VerticalAlignment="Top" Width="288" RenderTransformOrigin="0.5,0.5" Foreground="#FFEFEFEF"/>
-            <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="25" Margin="44,189,0,0" VerticalAlignment="Top" Width="142" Foreground="#FFE0E0E0"/>
-            <TextBox x:Name="txtPKProveedor" HorizontalAlignment="Left" Height="20" Margin="43,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" IsEnabled="False" Style="{DynamicResource Borde}"/>
-            <Label Content="Nombre" HorizontalAlignment="Left" Height="37" Margin="43,256,0,0" VerticalAlignment="Top" Width="112" Foreground="White"/>
-            <TextBox x:Name="txtNombreProv" HorizontalAlignment="Left" Height="25" Margin="43,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Style="{DynamicResource Borde}"/>
-            <Label Content="Dirección" HorizontalAlignment="Left" Height="29" Margin="43,332,0,0" VerticalAlignment="Top" Width="169" Foreground="White"/>
-            <TextBox x:Name="txtDireccionProv" HorizontalAlignment="Left" Height="24" Margin="43,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Style="{DynamicResource Borde}"/>
-            <Label Content="Telefono" HorizontalAlignment="Left" Height="30" Margin="44,402,0,0" VerticalAlignment="Top" Width="170" Foreground="White"/>
-            <TextBox x:Name="txtTelefonoProv" HorizontalAlignment="Left" Height="22" Margin="44,436,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Style="{DynamicResource Borde}"/>
-            <Label Content="Correo" HorizontalAlignment="Left" Height="28" Margin="44,473,0,0" VerticalAlignment="Top" Width="170" Foreground="White"/>
-            <TextBox x:Name="txtCorreoProv" HorizontalAlignment="Left" Height="24" Margin="44,503,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Style="{DynamicResource Borde}"/>
-            <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="43,600,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click" Style="{DynamicResource BordeButt}"/>
-            <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="143,600,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}"/>
-            <DataGrid x:Name="TablaProveedor" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="251,165,100,73" Style="{DynamicResource bordeTab}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding PKProveedor}" />
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
-                    <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}" />
-                    <DataGridTextColumn Header="Telefono" Binding="{Binding Telefono}" />
-                    <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" />
-                    <DataGridTemplateColumn Header="Select">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Select" Click="EditItem" Background="Green"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Delete">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Delete" Click="BtnDelete_Click" Background="Red"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Button x:Name="BtnBack"
-                        BorderThickness="0"
-                        Content="Regresar"
-                        Foreground="Black"
-                        FontSize="16"
-                        FontFamily="Cancel"
-                        Cursor="Hand"
-                        Click="BtnBack_Click" Margin="45,46,984,528">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Images/regresar.png"/>
-                </Button.Background>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Proveedores"
+                               Foreground="White"
+                               FontSize="20"
+                               FontFamily="Cancel"
+                               Grid.Column="0"
+                               VerticalAlignment="Top"
+                               Margin="35,5,5,0" Height="25"/>
+            <Button x:Name="btnMinimizar"
+                            BorderThickness="0"
+                            Content="_"
+                            Foreground="Black"
+                            FontSize="16"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click" Margin="7,-7,53,677" Grid.ColumnSpan="3">
                 <Button.Style>
                     <Style TargetType="Button">
-                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Background" Value="DarkGray"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
+            <Button x:Name="btnCerrar"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            FontSize="12"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnCerrar_Click" Margin="2,-12,13,672" Grid.ColumnSpan="2">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="OrangeRed"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -89,24 +97,98 @@
 
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border
-                                    CornerRadius="9"
-                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="Center"
-                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
-                                <ContentPresenter.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
+                                                      HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+
+            <Grid Margin="22,0,36,0">
+                <Label FontSize="50" Content="Proveedores" HorizontalAlignment="Left" Height="84" Margin="439,33,0,0" VerticalAlignment="Top" Width="288" RenderTransformOrigin="0.5,0.5" Foreground="#FFEFEFEF"/>
+                <Label Content="ID Proveedor" HorizontalAlignment="Left" Height="25" Margin="20,189,0,0" VerticalAlignment="Top" Width="142" Foreground="#FFE0E0E0"/>
+                <TextBox x:Name="txtPKProveedor" HorizontalAlignment="Left" Height="30" Margin="21,215,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" IsEnabled="False" Style="{DynamicResource Borde}"/>
+                <Label Content="Nombre" HorizontalAlignment="Left" Height="37" Margin="21,256,0,0" VerticalAlignment="Top" Width="112" Foreground="White"/>
+                <TextBox x:Name="txtNombreProv" HorizontalAlignment="Left" Height="30" Margin="21,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
+                <Label Content="Dirección" HorizontalAlignment="Left" Height="29" Margin="21,332,0,0" VerticalAlignment="Top" Width="169" Foreground="White"/>
+                <TextBox x:Name="txtDireccionProv" HorizontalAlignment="Left" Height="30" Margin="21,365,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
+                <Label Content="Telefono" HorizontalAlignment="Left" Height="30" Margin="20,402,0,0" VerticalAlignment="Top" Width="170" Foreground="White"/>
+                <TextBox x:Name="txtTelefonoProv" HorizontalAlignment="Left" Height="30" Margin="22,435,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
+                <Label Content="Correo" HorizontalAlignment="Left" Height="28" Margin="20,473,0,0" VerticalAlignment="Top" Width="170" Foreground="White"/>
+                <TextBox x:Name="txtCorreoProv" HorizontalAlignment="Left" Height="30" Margin="21,500,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Style="{DynamicResource Borde}"/>
+                <Button x:Name="BtnAdd" Content="Agregar" HorizontalAlignment="Left" Height="30" Margin="41,600,0,0" VerticalAlignment="Top" Width="84" Background="#FF96E486" Click="BtnAdd_Click" Style="{DynamicResource BordeButt}"/>
+                <Button x:Name="BtnClear" Content="Limpiar" HorizontalAlignment="Left" Margin="159,600,0,0" VerticalAlignment="Top" Width="84" Height="30" Background="#FF00D6FF" Click="BtnClear_Click" Style="{DynamicResource BordeButt}"/>
+                <DataGrid x:Name="TablaProveedor" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" ColumnWidth="*" IsSynchronizedWithCurrentItem="True" Margin="375,165,-106,73" Style="{DynamicResource bordeTab}" Width="NaN">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding PKProveedor}" />
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" />
+                        <DataGridTextColumn Header="Direccion" Binding="{Binding Direccion}" />
+                        <DataGridTextColumn Header="Telefono" Binding="{Binding Telefono}" />
+                        <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" />
+                        <DataGridTemplateColumn Header="Select">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Select" Click="EditItem" Background="Green"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Click="BtnDelete_Click" Background="Red"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="BtnBack"
+                        BorderThickness="0"
+                        Content="Regresar"
+                        Foreground="Black"
+                        FontSize="16"
+                        FontFamily="Cancel"
+                        Cursor="Hand"
+                        Click="BtnBack_Click" Margin="29,38,864,560" Width="NaN" Height="NaN">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/regresar.png"/>
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
+                                    <ContentPresenter.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Grid>
     </Border>
 </Window>

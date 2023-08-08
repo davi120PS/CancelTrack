@@ -26,29 +26,68 @@
                         Stretch="Fill"/>
         </Border.Background>
 
-        <Grid Margin="0,0,10,-1">
-            <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="255,57,0,0" VerticalAlignment="Top" Width="758" Foreground="White"/>
-            <Button x:Name="BtnCliente" Content="Clientes" HorizontalAlignment="Center" Height="109" Margin="0,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnCliente_Click"/>
-            <Button x:Name="BtnVentaProducto" Content="VentaProducto" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnVentaProducto_Click"/>
-            <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0" Background="#FF06B5FF" Click="BtnVenta_Click"/>
-            <Button x:Name="BtnBack"
-                        BorderThickness="0"
-                        Content="Regresar"
-                        Foreground="Black"
-                        FontSize="16"
-                        FontFamily="Cancel"
-                        Cursor="Hand"
-                        Click="BtnBack_Click" Margin="38,49,1078,555">
-                <Button.Background>
-                    <ImageBrush ImageSource="/Images/regresar.png"/>
-                </Button.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="40"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Menú_Vendedor"
+                               Foreground="White"
+                               FontSize="20"
+                               FontFamily="Cancel"
+                               Grid.Column="0"
+                               VerticalAlignment="Top"
+                               Margin="35,5,5,0" Height="25"/>
+            <Button x:Name="btnMinimizar"
+                            BorderThickness="0"
+                            Content="_"
+                            Foreground="Black"
+                            FontSize="16"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="1"
+                            Click="btnMinimizar_Click" Margin="7,-7,53,677" Grid.ColumnSpan="3">
                 <Button.Style>
                     <Style TargetType="Button">
-                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Background" Value="DarkGray"/>
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Background" Value="Gray"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
 
+            <Button x:Name="btnCerrar"
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="Black"
+                            FontSize="12"
+                            FontFamily="Cancel"
+                            Cursor="Hand"
+                            Grid.Column="2"
+                            Click="btnCerrar_Click" Margin="2,-12,13,672" Grid.ColumnSpan="2">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="OrangeRed"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -56,24 +95,65 @@
 
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border
-                                    CornerRadius="9"
-                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                        <Border Width="20" Height="25"
+                                        CornerRadius="12.5"
+                                        Background="{TemplateBinding Background}">
                             <ContentPresenter VerticalAlignment="Center"
-                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
-                                <ContentPresenter.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleX="-1" ScaleY="-1"/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </ContentPresenter.RenderTransform>
-                            </ContentPresenter>
+                                                      HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
+
+            <Grid Margin="0,0,10,-1">
+                <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="255,57,0,0" VerticalAlignment="Top" Width="758" Foreground="White"/>
+                <Button x:Name="BtnCliente" Content="Clientes" HorizontalAlignment="Center" Height="109" Margin="0,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnCliente_Click"/>
+                <Button x:Name="BtnVentaProducto" Content="VentaProducto" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnVentaProducto_Click"/>
+                <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0" Background="#FF06B5FF" Click="BtnVenta_Click"/>
+                <Button x:Name="BtnBack"
+                        BorderThickness="0"
+                        Content="Regresar"
+                        Foreground="Black"
+                        FontSize="16"
+                        FontFamily="Cancel"
+                        Cursor="Hand"
+                        Click="BtnBack_Click" Margin="29,38,909,562" Width="NaN" Height="NaN">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Images/regresar.png"/>
+                    </Button.Background>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="White"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Black"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                    CornerRadius="9"
+                                    Background="{TemplateBinding Background}" Margin="45,20,40,5">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                  HorizontalAlignment="Center" Height="5" RenderTransformOrigin="0.5,0.5" Width="6">
+                                    <ContentPresenter.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="-1" ScaleY="-1"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Grid>
     </Border>
 </Window>
