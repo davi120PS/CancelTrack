@@ -8,7 +8,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace CancelTrack.Migrations
 {
     /// <inheritdoc />
-    public partial class CancelTrack : Migration
+    public partial class CancelTrack2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

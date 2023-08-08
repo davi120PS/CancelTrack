@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CancelTrack.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230806195010_CancelTrack")]
-    partial class CancelTrack
+    [Migration("20230808145528_CancelTrack2")]
+    partial class CancelTrack2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

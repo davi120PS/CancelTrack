@@ -84,5 +84,12 @@ namespace CancelTrack.InterfazAdmin
         {
             Application.Current.Shutdown();
         }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow vista = new MainWindow();
+            vista.Show();
+            Close();
+        }
     }
 }

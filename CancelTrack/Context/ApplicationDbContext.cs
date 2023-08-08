@@ -12,7 +12,7 @@ namespace CancelTrack.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            options.UseMySQL("server=localhost; database=CancelTrack; user=root; password=");
+            options.UseMySQL("server=localhost; database=CancelTrack2; user=root; password=");
         }
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Empleado> Empleado { get; set; }
