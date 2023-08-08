@@ -53,8 +53,8 @@
                             FontSize="16"
                             FontFamily="Cancel"
                             Cursor="Hand"
-                            Grid.Column="1"
-                            Click="btnMinimizar_Click" Margin="7,-7,53,677" Grid.ColumnSpan="3">
+                            Grid.Column="4"
+                            Click="btnMinimizar_Click" Margin="45,-7,-55,677">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="DarkGray"/>
@@ -84,8 +84,8 @@
                             FontSize="12"
                             FontFamily="Cancel"
                             Cursor="Hand"
-                            Grid.Column="2"
-                            Click="btnCerrar_Click" Margin="2,-12,13,672" Grid.ColumnSpan="2">
+                            Grid.Column="4"
+                            Click="btnCerrar_Click" Margin="99,-12,-119,672">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Background" Value="OrangeRed"/>

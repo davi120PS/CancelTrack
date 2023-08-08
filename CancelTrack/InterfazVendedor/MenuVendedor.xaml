@@ -106,10 +106,10 @@
             </Button>
 
             <Grid Margin="0,0,10,-1">
-                <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="255,57,0,0" VerticalAlignment="Top" Width="758" Foreground="White"/>
-                <Button x:Name="BtnCliente" Content="Clientes" HorizontalAlignment="Center" Height="109" Margin="0,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnCliente_Click"/>
-                <Button x:Name="BtnVentaProducto" Content="VentaProducto" HorizontalAlignment="Center" Height="109" Margin="0,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="#FF06B5FF" Click="BtnVentaProducto_Click"/>
-                <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Center" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="0,531,0,0" Background="#FF06B5FF" Click="BtnVenta_Click"/>
+                <Label FontSize="72" Content="Bienvenido al sistema" HorizontalAlignment="Left" Height="91" Margin="307,57,0,0" VerticalAlignment="Top" Width="712" Foreground="#FFBF9A50"/>
+                <Button x:Name="BtnCliente" Content="Clientes" HorizontalAlignment="Left" Height="109" Margin="431,254,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="Black" Click="BtnCliente_Click" BorderBrush="#FF8D7135" BorderThickness="3,3,3,3" Foreground="#FFBF9A50" Style="{DynamicResource BordeButt}"/>
+                <Button x:Name="BtnVentaProducto" Content="Venta de productos" HorizontalAlignment="Left" Height="109" Margin="432,390,0,0" VerticalAlignment="Top" Width="468" FontSize="48" Background="Black" Click="BtnVentaProducto_Click" BorderBrush="#FF8D7135" BorderThickness="3,3,3,3" Foreground="#FFBF9A50" Style="{DynamicResource BordeButt}"/>
+                <Button x:Name="BtnVenta" Content="Ventas" HorizontalAlignment="Left" Height="109" VerticalAlignment="Top" Width="468" FontSize="48" Margin="433,530,0,0" Background="Black" Click="BtnVenta_Click" BorderBrush="#FF8D7135" BorderThickness="3,3,3,3" Foreground="#FFBF9A50" Style="{DynamicResource BordeButt}"/>
                 <Button x:Name="BtnBack"
                         BorderThickness="0"
                         Content="Regresar"

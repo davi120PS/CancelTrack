@@ -24,6 +24,25 @@ namespace CancelTrack.Services
                 {
                     using (var _context = new ApplicationDbContext())
                     {
+                        /*Producto producto = _context.Producto.Find(request.FKProducto);
+                        if (producto == null)
+                        {
+                            MessageBox.Show("El producto no existe");
+                            return;
+                        }
+
+                        if (request.Cantidad <= 0)
+                        {
+                            MessageBox.Show("La cantidad debe ser mayor que cero.");
+                            return;
+                        }
+
+                        if (request.Cantidad > producto.CantidadInventario)
+                        {
+                            MessageBox.Show("La cantidad excede el total del inventario.");
+                            return;
+                        }*/
+
                         VentaProducto res = new VentaProducto();
                         res.Cantidad = request.Cantidad;
                         res.FKProducto = request.FKProducto;

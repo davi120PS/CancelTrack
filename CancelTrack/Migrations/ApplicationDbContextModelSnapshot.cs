@@ -52,20 +52,20 @@ namespace CancelTrack.Migrations
                         new
                         {
                             PKCliente = 1,
-                            Apellido = "Apellido",
+                            Apellido = "Walker",
                             Correo = "correo1@gmail.com",
-                            Direccion = "Direccion 1",
-                            Nombre = "Cliente 1",
-                            Telefono = 2524
+                            Direccion = "2453 Goldcliff Circle",
+                            Nombre = "Johny",
+                            Telefono = 252464
                         },
                         new
                         {
                             PKCliente = 2,
-                            Apellido = "Apellido",
+                            Apellido = "Herrera",
                             Correo = "correo1@gmail.com",
-                            Direccion = "Direccion 2",
-                            Nombre = "Cliente 2",
-                            Telefono = 3452
+                            Direccion = "1235 Filbert Street",
+                            Nombre = "Carolina",
+                            Telefono = 345642
                         });
                 });
 
@@ -115,11 +115,11 @@ namespace CancelTrack.Migrations
                         {
                             PKEmpleado = 1,
                             Apellido = "Peña",
-                            Contraseña = "123",
+                            Contraseña = "12345",
                             Correo = "davi@gmail.com",
                             Estado = 1,
                             FKPuesto = 1,
-                            Matricula = "davi",
+                            Matricula = "davi120",
                             Nombre = "David",
                             Telefono = 1234
                         },
@@ -127,12 +127,24 @@ namespace CancelTrack.Migrations
                         {
                             PKEmpleado = 2,
                             Apellido = "Cortez",
-                            Contraseña = "123",
+                            Contraseña = "12345",
                             Correo = "diego@gmail.com",
                             Estado = 1,
                             FKPuesto = 2,
-                            Matricula = "diego",
+                            Matricula = "dieguitocraft",
                             Nombre = "Diego",
+                            Telefono = 1234
+                        },
+                        new
+                        {
+                            PKEmpleado = 3,
+                            Apellido = "De Los Santos",
+                            Contraseña = "12345",
+                            Correo = "diego@gmail.com",
+                            Estado = 1,
+                            FKPuesto = 2,
+                            Matricula = "simulador",
+                            Nombre = "Jorge",
                             Telefono = 1234
                         });
                 });
@@ -174,19 +186,19 @@ namespace CancelTrack.Migrations
                         {
                             PKProducto = 1,
                             CantidadInventario = 200,
-                            Descripcion = "Descripcion 1",
+                            Descripcion = "Aluminio color negro",
                             FKProveedor = 1,
-                            Nombre = "Producto 1",
-                            PrecioCompra = 1500,
-                            PrecioVenta = 2000
+                            Nombre = "Perfil de aluminio Serie 8000",
+                            PrecioCompra = 2500,
+                            PrecioVenta = 3500
                         },
                         new
                         {
                             PKProducto = 2,
                             CantidadInventario = 200,
-                            Descripcion = "Descripcion 2",
+                            Descripcion = "Aluminio color natural",
                             FKProveedor = 1,
-                            Nombre = "Producto 2",
+                            Nombre = "Perfil de aluminio Serie 5000",
                             PrecioCompra = 2000,
                             PrecioVenta = 2500
                         },
@@ -194,9 +206,9 @@ namespace CancelTrack.Migrations
                         {
                             PKProducto = 3,
                             CantidadInventario = 200,
-                            Descripcion = "Descripcion 3",
+                            Descripcion = "Aluminio color negro",
                             FKProveedor = 2,
-                            Nombre = "Producto 3",
+                            Nombre = "Perfil de aluminio Serie 3000",
                             PrecioCompra = 1800,
                             PrecioVenta = 2200
                         });
@@ -231,18 +243,18 @@ namespace CancelTrack.Migrations
                         new
                         {
                             PKProveedor = 1,
-                            Correo = "correo1@gmail.com",
-                            Direccion = "Direccion 1",
-                            Nombre = "Proveedor 1",
-                            Telefono = 2524
+                            Correo = "jp21@gmail.com",
+                            Direccion = "4090 Olen Thomas Drive",
+                            Nombre = "Juan Perez",
+                            Telefono = 252534
                         },
                         new
                         {
                             PKProveedor = 2,
-                            Correo = "correo1@gmail.com",
-                            Direccion = "Direccion 2",
-                            Nombre = "Proveedor 2",
-                            Telefono = 2524
+                            Correo = "rm41@gmail.com",
+                            Direccion = "3224 Calico Drive",
+                            Nombre = "Ronnie Morales",
+                            Telefono = 633524
                         });
                 });
 

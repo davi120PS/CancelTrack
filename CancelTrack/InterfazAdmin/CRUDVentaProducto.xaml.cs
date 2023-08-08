@@ -45,6 +45,24 @@ namespace CancelTrack.InterfazAdmin
                 if (!string.IsNullOrEmpty(txtCantidadVP.Text) && CbxFKProducto.SelectedValue != null && CbxFKVenta.SelectedValue != null &&
                     int.TryParse(txtCantidadVP.Text, out int cantidad))
                 {
+                    Producto producto = productoServices.GetProductoById(int.Parse(CbxFKProducto.SelectedValue.ToString()));
+                    if (producto == null)
+                    {
+                        MessageBox.Show("El producto seleccionado no existe.");
+                        return;
+                    }
+                    if (cantidad <= 0)
+                    {
+                        MessageBox.Show("La cantidad debe ser mayor que cero.");
+                        return;
+                    }
+
+                    if (cantidad > producto.CantidadInventario)
+                    {
+                        MessageBox.Show("La cantidad excede el total del inventario.");
+                        return;
+                    }
+
                     var ventaProducto = new VentaProducto()
                     {   //Agrega los datos ingresados a la base de datos
                         FKProducto = int.Parse(CbxFKProducto.SelectedValue.ToString()),

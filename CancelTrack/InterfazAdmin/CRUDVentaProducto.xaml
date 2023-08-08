@@ -107,7 +107,7 @@
 
 
             <Grid>
-                <Label FontSize="50" Content="Venta-Productos" HorizontalAlignment="Left" Height="100" Margin="441,25,0,0" VerticalAlignment="Top" Width="412" RenderTransformOrigin="0.5,0.5" Foreground="White"/>
+                <Label FontSize="50" Content="Venta de Productos" HorizontalAlignment="Left" Height="100" Margin="441,25,0,0" VerticalAlignment="Top" Width="443" RenderTransformOrigin="0.5,0.5" Foreground="White"/>
                 <Label Content="ID VentaProducto" HorizontalAlignment="Left" Height="33" Margin="51,165,0,0" VerticalAlignment="Top" Width="181" FontSize="20" Foreground="White"/>
                 <TextBox x:Name="txtPKVentaProducto" HorizontalAlignment="Left" Height="29" Margin="51,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" IsEnabled="False" Style="{DynamicResource Borde}"/>
                 <Label Content="ID Venta" HorizontalAlignment="Left" Height="41" Margin="51,247,0,0" VerticalAlignment="Top" Width="209" FontSize="20" Foreground="White"/>

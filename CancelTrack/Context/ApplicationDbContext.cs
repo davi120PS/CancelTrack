@@ -59,8 +59,8 @@ namespace CancelTrack.Context
                     PKEmpleado = 1,
                     Nombre = "David",
                     Apellido = "Peña",
-                    Matricula = "davi",
-                    Contraseña = "123",
+                    Matricula = "davi120",
+                    Contraseña = "12345",
                     FKPuesto = 1,
                     Telefono = 1234,
                     Correo = "davi@gmail.com",
@@ -71,8 +71,20 @@ namespace CancelTrack.Context
                     PKEmpleado = 2,
                     Nombre = "Diego",
                     Apellido = "Cortez",
-                    Matricula = "diego",
-                    Contraseña = "123",
+                    Matricula = "dieguitocraft",
+                    Contraseña = "12345",
+                    FKPuesto = 2,
+                    Telefono = 1234,
+                    Correo = "diego@gmail.com",
+                    Estado = 1
+                },
+                new Empleado
+                {
+                    PKEmpleado = 3,
+                    Nombre = "Jorge",
+                    Apellido = "De Los Santos",
+                    Matricula = "simulador",
+                    Contraseña = "12345",
                     FKPuesto = 2,
                     Telefono = 1234,
                     Correo = "diego@gmail.com",
@@ -83,19 +95,19 @@ namespace CancelTrack.Context
                 new Cliente
                 {
                     PKCliente = 1,
-                    Nombre = "Cliente 1",
-                    Apellido = "Apellido",
-                    Direccion = "Direccion 1",
-                    Telefono = 2524,
+                    Nombre = "Johny",
+                    Apellido = "Walker",
+                    Direccion = "2453 Goldcliff Circle",
+                    Telefono = 252464,
                     Correo = "correo1@gmail.com"
                 },
                 new Cliente
                 {
                     PKCliente = 2,
-                    Nombre = "Cliente 2",
-                    Apellido = "Apellido",
-                    Direccion = "Direccion 2",
-                    Telefono = 3452,
+                    Nombre = "Carolina",
+                    Apellido = "Herrera",
+                    Direccion = "1235 Filbert Street",
+                    Telefono = 345642,
                     Correo = "correo1@gmail.com"
                 }
             );
@@ -103,36 +115,36 @@ namespace CancelTrack.Context
                 new Proveedor
                 {
                     PKProveedor = 1,
-                    Nombre = "Proveedor 1",
-                    Direccion = "Direccion 1",
-                    Telefono = 2524,
-                    Correo = "correo1@gmail.com"
+                    Nombre = "Juan Perez",
+                    Direccion = "4090 Olen Thomas Drive",
+                    Telefono = 252534,
+                    Correo = "jp21@gmail.com"
                 },
                 new Proveedor
                 {
                     PKProveedor = 2,
-                    Nombre = "Proveedor 2",
-                    Direccion = "Direccion 2",
-                    Telefono = 2524,
-                    Correo = "correo1@gmail.com"
+                    Nombre = "Ronnie Morales",
+                    Direccion = "3224 Calico Drive",
+                    Telefono = 633524,
+                    Correo = "rm41@gmail.com"
                 }
             );
             modelBuilder.Entity<Producto>().HasData(
                 new Producto
                 {
                     PKProducto = 1,
-                    Nombre = "Producto 1",
-                    Descripcion = "Descripcion 1",
+                    Nombre = "Perfil de aluminio Serie 8000",
+                    Descripcion = "Aluminio color negro",
                     FKProveedor = 1,
-                    PrecioVenta = 2000,
-                    PrecioCompra = 1500,
+                    PrecioVenta = 3500,
+                    PrecioCompra = 2500,
                     CantidadInventario = 200
                 },
                 new Producto
                 {
                     PKProducto = 2,
-                    Nombre = "Producto 2",
-                    Descripcion = "Descripcion 2",
+                    Nombre = "Perfil de aluminio Serie 5000",
+                    Descripcion = "Aluminio color natural",
                     FKProveedor = 1,
                     PrecioVenta = 2500,
                     PrecioCompra = 2000,
@@ -141,8 +153,8 @@ namespace CancelTrack.Context
                 new Producto
                 {
                     PKProducto = 3,
-                    Nombre = "Producto 3",
-                    Descripcion = "Descripcion 3",
+                    Nombre = "Perfil de aluminio Serie 3000",
+                    Descripcion = "Aluminio color negro",
                     FKProveedor = 2,
                     PrecioVenta = 2200,
                     PrecioCompra = 1800,
